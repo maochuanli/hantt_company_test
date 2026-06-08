@@ -1,0 +1,84 @@
+---
+- name: Configure Nginx with SSL on Windows
+  hosts: all
+
+  tasks:
+    - name: Install Chocolatey
+      ansible.windows.win_powershell:
+        script: |
+          if (-not (Test-Path "C:\ProgramData\chocolatey\bin\choco.exe")) {
+            [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+            $progressPreference = 'SilentlyContinue'
+            iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+          }
+
+    - name: Install Nginx and NSSM
+      win_chocolatey:
+        name:
+          - nginx
+          - nssm
+        state: present
+
+    - name: Find nginx install directory
+      ansible.windows.win_powershell:
+        script: |
+          $dir = (Get-ChildItem "C:\tools" -Filter "nginx-*" -Directory | Sort-Object Name -Descending | Select-Object -First 1).FullName
+          if (-not $dir) { throw "nginx dir not found under C:\tools" }
+          $Ansible.Result = $dir
+      register: nginx_dir_result
+
+    - name: Set nginx dir fact
+      set_fact:
+        nginx_dir: "{{ nginx_dir_result.result }}"
+
+    - name: Create SSL directory
+      win_file:
+        path: "{{ nginx_dir }}\\ssl"
+        state: directory
+
+    - name: Upload SSL certificate
+      win_copy:
+        src: "{{ playbook_dir }}/../../shared/ssl/server.crt"
+        dest: "{{ nginx_dir }}\\ssl\\server.crt"
+
+    - name: Upload SSL private key
+      win_copy:
+        src: "{{ playbook_dir }}/../../shared/ssl/server.key"
+        dest: "{{ nginx_dir }}\\ssl\\server.key"
+
+    - name: Deploy Nginx HTTPS config
+      win_template:
+        src: templates/nginx.conf.j2
+        dest: "{{ nginx_dir }}\\conf\\nginx.conf"
+
+    - name: Deploy welcome page
+      win_template:
+        src: templates/index.html.j2
+        dest: "{{ nginx_dir }}\\html\\index.html"
+
+    - name: Stop nginx if already running
+      win_service:
+        name: nginx
+        state: stopped
+      ignore_errors: true
+
+    - name: Register nginx as Windows service via NSSM if not already registered
+      ansible.windows.win_powershell:
+        script: |
+          $nginxDir = '{{ nginx_dir }}'
+          $svc = Get-Service -Name nginx -ErrorAction SilentlyContinue
+          if (-not $svc) {
+            & nssm install nginx "$nginxDir\nginx.exe"
+            & nssm set nginx AppDirectory "$nginxDir"
+          }
+
+    - name: Start nginx service
+      win_service:
+        name: nginx
+        state: started
+        start_mode: auto
+
+    - name: Open firewall for HTTPS
+      ansible.windows.win_powershell:
+        script: |
+          netsh advfirewall firewall add rule name="Nginx-HTTPS" protocol=TCP dir=in localport=443 action=allow

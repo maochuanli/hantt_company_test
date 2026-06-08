@@ -1,0 +1,7 @@
+# Terraform provider binaries (large, re-downloaded by terraform init)
+**/.terraform/
+
+# Intermediary state files used between scripts
+logs/linux-ami-id.txt
+logs/windows-ami-id.txt
+logs/nlb-dns.txt

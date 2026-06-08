@@ -1,0 +1,100 @@
+============================================================
+  Packer: Build Linux (Amazon Linux 2023) Nginx HTTPS AMI
+  2026-06-08 08:57:41 UTC
+============================================================
+
+=== Refreshing OIDC token ===
+Token written to /home/ansible/secrets/azure-aws/oidc-token
+
+=== packer init ===
+
+=== packer build ===
+[1;32mhantt-nginx-linux.amazon-ebs.linux: output will be in this color.[0m
+
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Prevalidating any provided VPC information[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Prevalidating AMI Name: hantt-nginx-linux-20260608-085751[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Found Image ID: ami-0b25d8dbd4bc145d9[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Setting public IP address to true on instance without a subnet ID[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: No VPC ID provided, Packer will use the default VPC[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Inferring subnet from the selected VPC "vpc-0f01c48f2e72dff4a"[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Set subnet as "subnet-04f91d9d0cf91798c"[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Creating temporary keypair: packer_6a26840f-88ee-86fb-1ab1-6246cb88bee5[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Creating temporary security group for this instance: packer_6a268411-fd1a-57da-dc92-14ec44f072a8[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Authorizing access to port 22 from [0.0.0.0/0] in the temporary security groups...[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Launching a source AWS instance...[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: changing public IP address config to true for instance on subnet "subnet-04f91d9d0cf91798c"[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Instance ID: i-0792acbb47908da4a[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Waiting for instance (i-0792acbb47908da4a) to become ready...[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Using SSH communicator to connect: 3.102.5.175[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Waiting for SSH to become available...[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Connected to SSH![0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Provisioning with Ansible...[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Setting up proxy adapter for Ansible....[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Executing Ansible: ansible-playbook -e packer_build_name="linux" -e packer_builder_type=amazon-ebs --ssh-extra-args '-o IdentitiesOnly=yes' -e ansible_ssh_transfer_method=piped -e ansible_ssh_private_key_file=/tmp/ansible-key1279744631 -i /tmp/packer-provisioner-ansible3567924088 /home/ansible/hantt_company_test/packer/linux/ansible/playbook.yml[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux:[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: PLAY [Configure Nginx with SSL] ************************************************[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux:[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: TASK [Gathering Facts] *********************************************************[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: ok: [default][0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux:[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: TASK [Install nginx] ***********************************************************[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: changed: [default][0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux:[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: TASK [Create SSL directory] ****************************************************[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: changed: [default][0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux:[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: TASK [Upload SSL certificate] **************************************************[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: changed: [default][0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux:[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: TASK [Upload SSL private key] **************************************************[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: changed: [default][0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux:[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: TASK [Deploy Nginx HTTPS config] ***********************************************[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: changed: [default][0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux:[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: TASK [Remove default Nginx HTTP config] ****************************************[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: ok: [default][0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux:[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: TASK [Deploy welcome page] *****************************************************[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: changed: [default][0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux:[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: TASK [Enable and start Nginx] **************************************************[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: changed: [default][0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux:[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: PLAY RECAP *********************************************************************[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: default                    : ok=9    changed=7    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux:[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Stopping the source instance...[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Stopping instance[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Waiting for the instance to stop...[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Creating AMI hantt-nginx-linux-20260608-085751 from instance i-0792acbb47908da4a[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Attaching run tags to AMI...[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: AMI: ami-0518e6dd6cb17839d[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Waiting for AMI to become ready...[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Skipping Enable AMI deprecation...[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Skipping Enable AMI deregistration protection...[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Adding tags to AMI (ami-0518e6dd6cb17839d)...[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Tagging snapshot: snap-0af34046c36402a0f[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Creating AMI tags[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Adding tag: "ManagedBy": "packer"[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Adding tag: "Name": "hantt-nginx-linux"[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Adding tag: "OS": "AmazonLinux2023"[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Creating snapshot tags[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Terminating the source AWS instance...[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Cleaning up any extra volumes...[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: No volumes to clean up, skipping[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Deleting temporary security group...[0m
+[1;32m==> hantt-nginx-linux.amazon-ebs.linux: Deleting temporary keypair...[0m
+[1;32mBuild 'hantt-nginx-linux.amazon-ebs.linux' finished after 7 minutes 52 seconds.[0m
+
+==> Wait completed after 7 minutes 52 seconds
+
+==> Builds finished. The artifacts of successful builds are:
+--> hantt-nginx-linux.amazon-ebs.linux: AMIs were created:
+ap-southeast-6: ami-0518e6dd6cb17839d
+
+
+=== Result ===
+Linux AMI ID : ami-0518e6dd6cb17839d
+Log saved    : /home/ansible/hantt_company_test/logs/1-packer-linux.log
+Done: 2026-06-08 09:05:48 UTC

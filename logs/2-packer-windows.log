@@ -1,0 +1,122 @@
+============================================================
+  Packer: Build Windows Server 2022 Nginx HTTPS AMI
+  2026-06-08 09:09:14 UTC
+============================================================
+
+=== Refreshing OIDC token ===
+Token written to /home/ansible/secrets/azure-aws/oidc-token
+
+=== packer init ===
+
+=== packer build ===
+[1;32mhantt-nginx-windows.amazon-ebs.windows: output will be in this color.[0m
+
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Prevalidating any provided VPC information[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Prevalidating AMI Name: hantt-nginx-windows-20260608-090922[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Found Image ID: ami-0c1e6ea42c6da3a7f[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Setting public IP address to true on instance without a subnet ID[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: No VPC ID provided, Packer will use the default VPC[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Inferring subnet from the selected VPC "vpc-0f01c48f2e72dff4a"[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Set subnet as "subnet-04f91d9d0cf91798c"[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Creating temporary keypair: packer_6a2686c3-9d51-b597-b9ff-db2ece2556f9[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Creating temporary security group for this instance: packer_6a2686c4-3f80-adb5-81b0-eba92a88baa8[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Authorizing access to port 5986 from [0.0.0.0/0] in the temporary security groups...[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Launching a source AWS instance...[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: changing public IP address config to true for instance on subnet "subnet-04f91d9d0cf91798c"[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Instance ID: i-03f0c51e6f5b14514[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Waiting for instance (i-03f0c51e6f5b14514) to become ready...[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Waiting for auto-generated password for instance...[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: It is normal for this process to take up to 15 minutes,
+==> hantt-nginx-windows.amazon-ebs.windows: but it usually takes around 5. Please wait.[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows:  
+==> hantt-nginx-windows.amazon-ebs.windows: Password retrieved![0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Using WinRM communicator to connect: 3.102.132.26[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Waiting for WinRM to become available...[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: WinRM connected.[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Connected to WinRM![0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Provisioning with Ansible...[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Not using Proxy adapter for Ansible run:
+==> hantt-nginx-windows.amazon-ebs.windows: 	Using WinRM Password from Packer communicator...[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Executing Ansible: ansible-playbook -e packer_build_name="windows" -e packer_builder_type=amazon-ebs -e ansible_connection=winrm -e ansible_winrm_transport=basic -e ansible_winrm_server_cert_validation=ignore -e ansible_winrm_port=5986 -e ansible_password=***** -i /tmp/packer-provisioner-ansible1726480617 /home/ansible/hantt_company_test/packer/windows/ansible/playbook.yml[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows:[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: PLAY [Configure Nginx with SSL on Windows] *************************************[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows:[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: TASK [Gathering Facts] *********************************************************[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: ok: [default][0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows:[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: TASK [Install Chocolatey] ******************************************************[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: changed: [default][0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows:[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: TASK [Install Nginx and NSSM] **************************************************[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: changed: [default][0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows:[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: TASK [Find nginx install directory] ********************************************[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: changed: [default][0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows:[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: TASK [Set nginx dir fact] ******************************************************[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: ok: [default][0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows:[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: TASK [Create SSL directory] ****************************************************[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: changed: [default][0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows:[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: TASK [Upload SSL certificate] **************************************************[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: changed: [default][0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows:[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: TASK [Upload SSL private key] **************************************************[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: changed: [default][0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows:[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: TASK [Deploy Nginx HTTPS config] ***********************************************[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: changed: [default][0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows:[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: TASK [Deploy welcome page] *****************************************************[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: changed: [default][0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows:[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: TASK [Stop nginx if already running] *******************************************[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: changed: [default][0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows:[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: TASK [Register nginx as Windows service via NSSM if not already registered] ****[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: changed: [default][0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows:[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: TASK [Start nginx service] *****************************************************[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: changed: [default][0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows:[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: TASK [Open firewall for HTTPS] *************************************************[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: changed: [default][0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows:[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: PLAY RECAP *********************************************************************[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: default                    : ok=14   changed=12   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows:[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Stopping the source instance...[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Stopping instance[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Waiting for the instance to stop...[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Creating AMI hantt-nginx-windows-20260608-090922 from instance i-03f0c51e6f5b14514[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Attaching run tags to AMI...[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: AMI: ami-03c1519b76d470c78[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Waiting for AMI to become ready...[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Skipping Enable AMI deprecation...[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Skipping Enable AMI deregistration protection...[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Adding tags to AMI (ami-03c1519b76d470c78)...[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Tagging snapshot: snap-04ea1458f37c7fdc4[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Creating AMI tags[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Adding tag: "ManagedBy": "packer"[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Adding tag: "Name": "hantt-nginx-windows"[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Adding tag: "OS": "WindowsServer2022"[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Creating snapshot tags[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Terminating the source AWS instance...[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Cleaning up any extra volumes...[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: No volumes to clean up, skipping[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Deleting temporary security group...[0m
+[1;32m==> hantt-nginx-windows.amazon-ebs.windows: Deleting temporary keypair...[0m
+[1;32mBuild 'hantt-nginx-windows.amazon-ebs.windows' finished after 10 minutes 48 seconds.[0m
+
+==> Wait completed after 10 minutes 48 seconds
+
+==> Builds finished. The artifacts of successful builds are:
+--> hantt-nginx-windows.amazon-ebs.windows: AMIs were created:
+ap-southeast-6: ami-03c1519b76d470c78
+
+
+=== Result ===
+Windows AMI ID : ami-03c1519b76d470c78
+Log saved      : /home/ansible/hantt_company_test/logs/2-packer-windows.log
+Done: 2026-06-08 09:20:12 UTC

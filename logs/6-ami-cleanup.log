@@ -1,0 +1,40 @@
+============================================================
+  AMI Deregister + Snapshot Cleanup
+  2026-06-08 09:34:59 UTC
+============================================================
+
+=== Refreshing OIDC token ===
+Token written to /home/ansible/secrets/azure-aws/oidc-token
+
+AMIs to clean up:
+  Linux  : ami-0518e6dd6cb17839d
+  Windows: ami-03c1519b76d470c78
+
+--- Processing ami-0518e6dd6cb17839d ---
+snap-0af34046c36402a0f
+  Snapshots: snap-0af34046c36402a0f
+  Deregistering AMI ami-0518e6dd6cb17839d ...
+{
+    "Return": true,
+    "DeleteSnapshotResults": []
+}
+  Deregistered: ami-0518e6dd6cb17839d
+  Deleting snapshot snap-0af34046c36402a0f ...
+  Deleted: snap-0af34046c36402a0f
+
+--- Processing ami-03c1519b76d470c78 ---
+snap-04ea1458f37c7fdc4
+  Snapshots: snap-04ea1458f37c7fdc4
+  Deregistering AMI ami-03c1519b76d470c78 ...
+{
+    "Return": true,
+    "DeleteSnapshotResults": []
+}
+  Deregistered: ami-03c1519b76d470c78
+  Deleting snapshot snap-04ea1458f37c7fdc4 ...
+  Deleted: snap-04ea1458f37c7fdc4
+
+=== Result ===
+All AMIs and snapshots removed from ap-southeast-6
+Log saved: /home/ansible/hantt_company_test/logs/6-ami-cleanup.log
+Done: 2026-06-08 09:35:13 UTC
