@@ -227,7 +227,7 @@ Let's Encrypt issues free 90-day certificates and provides tooling (`certbot`) t
 **Networking**
 
 - A NAT Gateway per AZ is needed for instances in private subnets to reach the internet. This has been intentionally omitted to keep the deployment simple; since all software is pre-baked into the AMI, runtime outbound access is not required for this exercise.
-- The NLB uses TCP passthrough on port 443. This means the NLB cannot inspect HTTP headers, add `X-Forwarded-For`, or perform path-based routing. Switching to an Application Load Balancer (ALB) with ACM would enable all of these, plus HTTP→HTTPS redirect and host-based routing.
+- NLB operates at Layer 4 (TCP) and cannot read or write HTTP headers — `X-Forwarded-For` is not configurable on an NLB. Two paths forward: (1) enable **Proxy Protocol v2** on the target group and configure nginx to parse it, which surfaces the real client IP without changing the load balancer type; (2) switch to an **ALB**, which adds `X-Forwarded-For` natively and also enables path-based routing and HTTP→HTTPS redirect — but ALB requires TLS termination at the load balancer, meaning ACM and a real domain name (the same prerequisite as the certificate improvement above).
 
 **Windows user-data dynamic page**
 
