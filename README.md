@@ -241,7 +241,3 @@ Let's Encrypt issues free 90-day certificates and provides tooling (`certbot`) t
 **AMI lifecycle**
 
 - There is no AMI retention policy. Each build produces a new AMI and snapshot that persist indefinitely (until manually cleaned up as in script 6). An automated retention policy (keep the last N AMIs, delete the rest) prevents unbounded snapshot costs.
-
-**Windows nginx service resilience**
-
-- NSSM registers nginx as a Windows service with `start_mode: auto`. The Ansible playbook now also sets `AppExit Default Restart` with a 5-second restart delay, so nginx recovers automatically if it crashes.
