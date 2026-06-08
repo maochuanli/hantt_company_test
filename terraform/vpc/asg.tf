@@ -19,21 +19,19 @@ resource "aws_launch_template" "nginx" {
 
   user_data = base64encode(<<-EOF
     <powershell>
+    # Read nginx install path stamped into the AMI at build time
+    $nginxDir = (Get-Content "C:\nginx-dir.txt" -Raw).Trim()
+
     # Fetch IMDSv2 token then pull instance metadata
     $token        = Invoke-RestMethod -Method Put `
                       -Uri "http://169.254.169.254/latest/api/token" `
                       -Headers @{"X-aws-ec2-metadata-token-ttl-seconds"="21600"}
     $hdrs         = @{"X-aws-ec2-metadata-token"=$token}
-    $instanceId   = Invoke-RestMethod -Uri "http://169.254.169.254/latest/meta-data/instance-id"                    -Headers $hdrs
-    $az           = Invoke-RestMethod -Uri "http://169.254.169.254/latest/meta-data/placement/availability-zone"   -Headers $hdrs
-    $localIp      = Invoke-RestMethod -Uri "http://169.254.169.254/latest/meta-data/local-ipv4"                    -Headers $hdrs
-    $instanceType = Invoke-RestMethod -Uri "http://169.254.169.254/latest/meta-data/instance-type"                 -Headers $hdrs
+    $instanceId   = Invoke-RestMethod -Uri "http://169.254.169.254/latest/meta-data/instance-id"                   -Headers $hdrs
+    $az           = Invoke-RestMethod -Uri "http://169.254.169.254/latest/meta-data/placement/availability-zone"  -Headers $hdrs
+    $localIp      = Invoke-RestMethod -Uri "http://169.254.169.254/latest/meta-data/local-ipv4"                   -Headers $hdrs
+    $instanceType = Invoke-RestMethod -Uri "http://169.254.169.254/latest/meta-data/instance-type"                -Headers $hdrs
     $launched     = (Get-Date).ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss UTC")
-
-    # Locate Chocolatey nginx installation (e.g. C:\tools\nginx-1.x.x)
-    $nginxDir = (Get-ChildItem "C:\tools" -Filter "nginx-*" -Directory -ErrorAction SilentlyContinue |
-                 Sort-Object Name -Descending | Select-Object -First 1).FullName
-    if (-not $nginxDir) { $nginxDir = "C:\nginx" }
 
     $html = @"
 <!DOCTYPE html>

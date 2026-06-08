@@ -85,3 +85,8 @@
       ansible.windows.win_powershell:
         script: |
           netsh advfirewall firewall add rule name="Nginx-HTTPS" protocol=TCP dir=in localport=443 action=allow
+
+    - name: Stamp nginx install path into AMI for user-data to consume
+      win_copy:
+        dest: "C:\\nginx-dir.txt"
+        content: "{{ nginx_dir }}"

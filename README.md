@@ -229,9 +229,6 @@ Let's Encrypt issues free 90-day certificates and provides tooling (`certbot`) t
 - A NAT Gateway per AZ is needed for instances in private subnets to reach the internet. This has been intentionally omitted to keep the deployment simple; since all software is pre-baked into the AMI, runtime outbound access is not required for this exercise.
 - NLB operates at Layer 4 (TCP) and cannot read or write HTTP headers — `X-Forwarded-For` is not configurable on an NLB. Two paths forward: (1) enable **Proxy Protocol v2** on the target group and configure nginx to parse it, which surfaces the real client IP without changing the load balancer type; (2) switch to an **ALB**, which adds `X-Forwarded-For` natively and also enables path-based routing and HTTP→HTTPS redirect — but ALB requires TLS termination at the load balancer, meaning ACM and a real domain name (the same prerequisite as the certificate improvement above).
 
-**Windows user-data dynamic page**
-
-- The Windows launch template user-data (PowerShell) dynamically overwrites the baked-in `index.html` with live instance metadata (instance ID, AZ, IP). This works, but the Windows instance in these tests showed only hostname — the PowerShell IMDSv2 block ran against the static Packer-baked page because EC2Launch executes user-data after nginx is already running. A more reliable approach is to use an EC2Launch `executeScript` task in the AMI image itself, or use SSM Run Command to update the page post-boot.
 
 **Observability**
 
