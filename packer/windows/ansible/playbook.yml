@@ -71,6 +71,9 @@
             & nssm install nginx "$nginxDir\nginx.exe"
             & nssm set nginx AppDirectory "$nginxDir"
           }
+          # Restart automatically on any exit; retry every 5 seconds
+          & nssm set nginx AppExit Default Restart
+          & nssm set nginx AppRestartDelay 5000
 
     - name: Start nginx service
       win_service:

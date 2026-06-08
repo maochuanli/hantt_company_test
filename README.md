@@ -244,4 +244,4 @@ Let's Encrypt issues free 90-day certificates and provides tooling (`certbot`) t
 
 **Windows nginx service resilience**
 
-- NSSM is used to register nginx as a Windows service with `start_mode: auto`. If nginx crashes it will not automatically restart unless NSSM's failure recovery is configured (`nssm set nginx AppExit Default Restart`). This should be added to the Ansible playbook.
+- NSSM registers nginx as a Windows service with `start_mode: auto`. The Ansible playbook now also sets `AppExit Default Restart` with a 5-second restart delay, so nginx recovers automatically if it crashes.
