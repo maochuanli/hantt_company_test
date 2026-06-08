@@ -226,7 +226,7 @@ Let's Encrypt issues free 90-day certificates and provides tooling (`certbot`) t
 
 **Networking**
 
-- The private subnets currently have no NAT Gateway. Instances cannot reach the internet for OS updates or external package installs post-launch. For production, either add a NAT Gateway per AZ, or rely entirely on pre-baked AMIs (the current approach) and accept that runtime outbound access is unavailable. Both are valid positions; the tradeoff should be a deliberate choice.
+- A NAT Gateway per AZ is needed for instances in private subnets to reach the internet. This has been intentionally omitted to keep the deployment simple; since all software is pre-baked into the AMI, runtime outbound access is not required for this exercise.
 - The NLB uses TCP passthrough on port 443. This means the NLB cannot inspect HTTP headers, add `X-Forwarded-For`, or perform path-based routing. Switching to an Application Load Balancer (ALB) with ACM would enable all of these, plus HTTP→HTTPS redirect and host-based routing.
 
 **Windows user-data dynamic page**
