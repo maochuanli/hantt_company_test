@@ -1,6 +1,15 @@
 # Terraform provider binaries (large, re-downloaded by terraform init)
 **/.terraform/
 
+# Terraform state (environment-specific, contains resource IDs)
+terraform/**/*.tfstate
+terraform/**/*.tfstate.backup
+terraform/**/*.tfstate.*.backup
+
+# SSL certificates (generated locally by 0-generate-certificate.sh, never commit private keys)
+packer/shared/ssl/server.crt
+packer/shared/ssl/server.key
+
 # Intermediary state files used between scripts
 logs/linux-ami-id.txt
 logs/windows-ami-id.txt

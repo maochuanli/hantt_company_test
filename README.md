@@ -8,6 +8,7 @@ Multi-OS HTTPS web service on AWS, built with immutable AMIs via Packer + Ansibl
 
 | Step | Outcome | Duration |
 |------|---------|----------|
+| Generate certificate | Self-signed cert written to `packer/shared/ssl/` | <1s |
 | Packer — Linux AMI | `ami-0518e6dd6cb17839d` built successfully | 7m 52s |
 | Packer — Windows AMI | `ami-03c1519b76d470c78` built successfully | 10m 48s |
 | Terraform apply | 26 resources created | ~4m |
@@ -23,6 +24,7 @@ All execution output is captured in [`logs/`](logs/).
 
 | Tool | Version |
 |------|---------|
+| OpenSSL | system (certificate generation) |
 | Packer | 1.15.4 |
 | Terraform | 1.15.5 |
 | Ansible | core 2.14.18 |
@@ -58,6 +60,7 @@ Internet
 
 ```
 .
+├── 0-generate-certificate.sh   # Generate self-signed cert into packer/shared/ssl/ (not committed)
 ├── 1-packer-build-linux.sh     # Packer build: Amazon Linux 2023 AMI
 ├── 2-packer-build-windows.sh   # Packer build: Windows Server 2022 AMI
 ├── 3-terraform-apply.sh        # Deploy infrastructure
@@ -66,7 +69,7 @@ Internet
 ├── 6-ami-cleanup.sh            # Deregister AMIs + delete snapshots
 ├── logs/                       # Captured execution output (proof of run)
 ├── packer/
-│   ├── shared/ssl/             # Self-signed cert shared by both AMI builds
+│   ├── shared/ssl/             # Self-signed cert shared by both AMI builds (gitignored — run script 0 first)
 │   ├── linux/
 │   │   ├── linux.pkr.hcl
 │   │   └── ansible/            # playbook: dnf install nginx, deploy cert + HTTPS config
@@ -219,7 +222,7 @@ Let's Encrypt issues free 90-day certificates and provides tooling (`certbot`) t
 
 **Secrets and credentials**
 
-- The self-signed private key (`packer/shared/ssl/server.key`) is committed to the repository. In production, certificates and keys should be stored in AWS Secrets Manager or SSM Parameter Store and fetched at instance boot — never committed to source control.
+- The self-signed certificate and private key are generated locally by `0-generate-certificate.sh` and excluded from source control via `.gitignore`. In production, certificates and keys should be stored in AWS Secrets Manager or SSM Parameter Store and fetched at instance boot rather than baked into an AMI.
 
 **Networking**
 
