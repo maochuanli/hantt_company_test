@@ -219,7 +219,7 @@ This design demonstrates **separation of duty and flexibility**: certificate lif
 In production, this foundation makes it straightforward to go a step further:
 
 - **ACM + NLB TLS listener** — ACM issues and auto-renews a certificate; the NLB terminates TLS at Layer 4 and forwards plain TCP to instances. Requires a custom domain for DNS validation but no changes to the instances.
-- **ACM + ALB** — ALB terminates TLS at Layer 7 and adds `X-Forwarded-For` natively. An ACM certificate is mandatory for any HTTPS listener on ALB — there is no way to attach a self-signed cert or skip the certificate requirement. This makes ACM (and therefore a custom domain) a hard prerequisite for switching to ALB.
+- **ACM + ALB** — ALB terminates TLS at Layer 7 and adds `X-Forwarded-For` natively. Requires a custom domain for ACM certificate validation.
 - **Let's Encrypt** — free 90-day certs with `certbot` auto-renewal. Works well on Linux; adds operational complexity since renewal logic must run on the instance or in a pipeline.
 
 ---
