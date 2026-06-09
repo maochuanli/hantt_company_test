@@ -1,6 +1,12 @@
 # hantt-company-test
 
-Multi-OS HTTPS web service on AWS, built with immutable AMIs via Packer + Ansible, deployed with Terraform, authenticated through Azure AD OIDC federation — no static AWS credentials.
+Demonstrates end-to-end platform engineering on AWS across the full stack:
+
+- **Infrastructure as Code** — Terraform provisions a VPC with public/private subnets, NAT gateway, Network Load Balancer, Auto Scaling Groups, IAM roles, and security groups
+- **Immutable AMIs** — Packer + Ansible builds separate AMIs for Amazon Linux 2023 and Windows Server 2022, each pre-configured with nginx serving HTTPS
+- **Secrets management** — TLS certificate is stored in AWS Secrets Manager and fetched dynamically at instance boot, decoupling certificate lifecycle from AMI builds
+- **Keyless authentication** — Azure AD service principal authenticates via OIDC federation (`AssumeRoleWithWebIdentity`) — no static AWS credentials anywhere in the pipeline
+- **Multi-OS** — Linux and Windows instances run behind the same NLB target group, serving HTTPS with round-robin load balancing across both platforms
 
 ---
 
@@ -55,7 +61,7 @@ Internet
 - **VPC:** `10.0.0.0/16` — 2 public + 2 private subnets across two AZs
 - **EC2 instances:** sit in private subnets; no direct internet exposure
 - **NLB:** in public subnets; single entry point, round-robins between both ASGs
-- **IAM:** instance profile with `AmazonSSMManagedInstanceCore` + `AmazonS3ReadOnlyAccess`; IMDSv2 enforced
+- **IAM:** instance profile with `AmazonSSMManagedInstanceCore`, `AmazonS3ReadOnlyAccess`, `CloudWatchAgentServerPolicy`, and an inline policy granting `secretsmanager:GetSecretValue` scoped to `hantt/nginx-ssl-cert`; IMDSv2 enforced
 - **EBS:** all volumes gp3, encrypted at rest
 - **Auth:** Azure Service Principal → OIDC token → `AssumeRoleWithWebIdentity` — no static AWS keys
 
@@ -208,9 +214,13 @@ All AMIs, snapshots, and secrets removed from ap-southeast-6
 
 The certificate is stored in **AWS Secrets Manager** (`hantt/nginx-ssl-cert`) and fetched dynamically at instance boot via user-data — it is never baked into the AMI. Both the Linux and Windows launch templates retrieve the cert and key from Secrets Manager on first launch and write them to the nginx `ssl/` directory before starting the service. The IAM instance profile grants `secretsmanager:GetSecretValue` scoped to that secret.
 
-This design demonstrates **separation of duty and flexibility**: certificate lifecycle (generation, renewal, rotation) is managed independently of VM launches and AMI builds. Rotating a certificate requires only updating the secret — no AMI rebuild, no redeployment. New instances always boot with the current cert automatically.
+This design demonstrates **separation of duty and flexibility**: certificate lifecycle (generation, renewal, rotation) is managed independently of VM launches and AMI builds. Rotating a certificate requires only updating the secret and cycling instances (e.g. via an ASG instance refresh) — no AMI rebuild needed. New instances always fetch the latest cert from Secrets Manager at boot automatically.
 
-In production, this foundation makes it straightforward to go a step further with **AWS Certificate Manager (ACM)** (automatic renewal, NLB-native TLS termination) or **Let's Encrypt** (free 90-day certs with `certbot` auto-renewal), depending on whether a custom domain is available.
+In production, this foundation makes it straightforward to go a step further:
+
+- **ACM + NLB TLS listener** — ACM issues and auto-renews a certificate; the NLB terminates TLS at Layer 4 and forwards plain TCP to instances. Requires a custom domain for DNS validation but no changes to the instances.
+- **ACM + ALB** — ALB terminates TLS at Layer 7 and adds `X-Forwarded-For` natively. An ACM certificate is mandatory for any HTTPS listener on ALB — there is no way to attach a self-signed cert or skip the certificate requirement. This makes ACM (and therefore a custom domain) a hard prerequisite for switching to ALB.
+- **Let's Encrypt** — free 90-day certs with `certbot` auto-renewal. Works well on Linux; adds operational complexity since renewal logic must run on the instance or in a pipeline.
 
 ---
 
