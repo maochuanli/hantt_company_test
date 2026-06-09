@@ -27,6 +27,25 @@ resource "aws_iam_role_policy_attachment" "nginx_vm_s3_read" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
 }
 
+resource "aws_iam_role_policy_attachment" "nginx_vm_cloudwatch" {
+  role       = aws_iam_role.nginx_vm.name
+  policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
+}
+
+resource "aws_iam_role_policy" "nginx_vm_secrets" {
+  name = "${var.vpc_name}-nginx-vm-secrets"
+  role = aws_iam_role.nginx_vm.name
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect   = "Allow"
+      Action   = "secretsmanager:GetSecretValue"
+      Resource = "arn:aws:secretsmanager:ap-southeast-6:996992102979:secret:hantt/nginx-ssl-cert-*"
+    }]
+  })
+}
+
 resource "aws_iam_instance_profile" "nginx_vm" {
   name = "${var.vpc_name}-nginx-vm-profile"
   role = aws_iam_role.nginx_vm.name

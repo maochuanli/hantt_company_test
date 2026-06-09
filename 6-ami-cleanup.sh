@@ -12,7 +12,7 @@ mkdir -p "$LOG_DIR"
 log() { echo "$*" | tee -a "$LOG"; }
 
 log "============================================================"
-log "  AMI Deregister + Snapshot Cleanup"
+log "  AMI Deregister + Snapshot + Secret Cleanup"
 log "  $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
 log "============================================================"
 
@@ -70,7 +70,16 @@ for AMI_ID in "$LINUX_AMI" "$WINDOWS_AMI"; do
 done
 
 log ""
+log "=== Deleting Secrets Manager secret ==="
+aws secretsmanager delete-secret \
+  --region "$REGION" \
+  --secret-id hantt/nginx-ssl-cert \
+  --force-delete-without-recovery \
+  2>&1 | tee -a "$LOG"
+log "Deleted secret: hantt/nginx-ssl-cert"
+
+log ""
 log "=== Result ==="
-log "All AMIs and snapshots removed from $REGION"
+log "All AMIs, snapshots, and secrets removed from $REGION"
 log "Log saved: $LOG"
 log "Done: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"

@@ -1,22 +1,23 @@
 ============================================================
   HTTPS Curl Tests
-  2026-06-08 09:25:20 UTC
+  2026-06-09 01:58:44 UTC
 ============================================================
 
-Target: https://hantt-main-vpc-nlb-e4bc246b4bbb994b.elb.ap-southeast-6.amazonaws.com
+Target: https://hantt-main-vpc-nlb-a2b678a5dc3c34f9.elb.ap-southeast-6.amazonaws.com
 Token written to /home/ansible/secrets/azure-aws/oidc-token
 
 === Waiting for NLB targets to become healthy ===
-arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:targetgroup/hantt-main-vpc-tg-443/28a8aefbfdd1e15a
-Target group: arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:targetgroup/hantt-main-vpc-tg-443/28a8aefbfdd1e15a
+arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:targetgroup/hantt-main-vpc-tg-443/68c363934d1b074c
+Target group: arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:targetgroup/hantt-main-vpc-tg-443/68c363934d1b074c
   [0s] healthy targets: 0 / 2
   [20s] healthy targets: 0 / 2
-  [40s] healthy targets: 2 / 2
+  [40s] healthy targets: 1 / 2
+  [60s] healthy targets: 2 / 2
   Both targets healthy — proceeding
 
 === Running 8 HTTPS requests (round-robin across Linux + Windows) ===
 
---- Request 1 / 8  09:26:13 UTC ---
+--- Request 1 / 8  01:59:58 UTC ---
 <!DOCTYPE html>
 <html>
 <head><title>Hantt Hello World</title>
@@ -32,19 +33,19 @@ Target group: arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:targetgro
 <div class="card">
   <h1>Hello World</h1>
   <div class="label">Platform</div><div class="value">Amazon Linux 2023</div>
-  <div class="label">Instance ID</div><div class="value">i-03e553cca71d77f22</div>
+  <div class="label">Instance ID</div><div class="value">i-002c41e85a1c05c71</div>
   <div class="label">Availability Zone</div><div class="value">ap-southeast-6b</div>
-  <div class="label">Private IP</div><div class="value">10.0.4.50</div>
+  <div class="label">Private IP</div><div class="value">10.0.4.130</div>
   <div class="label">Instance Type</div><div class="value">t3.small</div>
-  <div class="label">Launched</div><div class="value">2026-06-08 09:22:54 UTC</div>
+  <div class="label">Launched</div><div class="value">2026-06-09 01:57:26 UTC</div>
 </div>
 </body>
 </html>
 
-[HTTP 200  0.114220s]
+[HTTP 200  0.126521s]
 
---- Request 2 / 8  09:26:17 UTC ---
-<!DOCTYPE html>
+--- Request 2 / 8  02:00:01 UTC ---
+﻿<!DOCTYPE html>
 <html>
 <head><title>Hantt Hello World</title>
 <style>
@@ -59,14 +60,18 @@ Target group: arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:targetgro
 <div class="card">
   <h1>Hello World</h1>
   <div class="label">Platform</div><div class="value">Windows Server 2022</div>
-  <div class="label">Host</div><div class="value">EC2AMAZ-29MLP2B</div>
+  <div class="label">Instance ID</div><div class="value">i-021896eda6184f089</div>
+  <div class="label">Availability Zone</div><div class="value">ap-southeast-6a</div>
+  <div class="label">Private IP</div><div class="value">10.0.3.37</div>
+  <div class="label">Instance Type</div><div class="value">t3.small</div>
+  <div class="label">Launched</div><div class="value">2026-06-09 01:57:36 UTC</div>
 </div>
 </body>
 </html>
 
-[HTTP 200  0.096278s]
+[HTTP 200  0.158496s]
 
---- Request 3 / 8  09:26:20 UTC ---
+--- Request 3 / 8  02:00:04 UTC ---
 <!DOCTYPE html>
 <html>
 <head><title>Hantt Hello World</title>
@@ -82,18 +87,72 @@ Target group: arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:targetgro
 <div class="card">
   <h1>Hello World</h1>
   <div class="label">Platform</div><div class="value">Amazon Linux 2023</div>
-  <div class="label">Instance ID</div><div class="value">i-03e553cca71d77f22</div>
+  <div class="label">Instance ID</div><div class="value">i-002c41e85a1c05c71</div>
   <div class="label">Availability Zone</div><div class="value">ap-southeast-6b</div>
-  <div class="label">Private IP</div><div class="value">10.0.4.50</div>
+  <div class="label">Private IP</div><div class="value">10.0.4.130</div>
   <div class="label">Instance Type</div><div class="value">t3.small</div>
-  <div class="label">Launched</div><div class="value">2026-06-08 09:22:54 UTC</div>
+  <div class="label">Launched</div><div class="value">2026-06-09 01:57:26 UTC</div>
 </div>
 </body>
 </html>
 
-[HTTP 200  0.022296s]
+[HTTP 200  0.022820s]
 
---- Request 4 / 8  09:26:23 UTC ---
+--- Request 4 / 8  02:00:07 UTC ---
+﻿<!DOCTYPE html>
+<html>
+<head><title>Hantt Hello World</title>
+<style>
+  body { font-family: monospace; background: #0d1117; color: #c9d1d9; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+  .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 2rem 3rem; max-width: 480px; }
+  h1 { color: #58a6ff; margin-top: 0; }
+  .label { color: #8b949e; font-size: 0.85em; }
+  .value { color: #e6edf3; margin-bottom: 0.8rem; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>Hello World</h1>
+  <div class="label">Platform</div><div class="value">Windows Server 2022</div>
+  <div class="label">Instance ID</div><div class="value">i-021896eda6184f089</div>
+  <div class="label">Availability Zone</div><div class="value">ap-southeast-6a</div>
+  <div class="label">Private IP</div><div class="value">10.0.3.37</div>
+  <div class="label">Instance Type</div><div class="value">t3.small</div>
+  <div class="label">Launched</div><div class="value">2026-06-09 01:57:36 UTC</div>
+</div>
+</body>
+</html>
+
+[HTTP 200  0.033323s]
+
+--- Request 5 / 8  02:00:11 UTC ---
+﻿<!DOCTYPE html>
+<html>
+<head><title>Hantt Hello World</title>
+<style>
+  body { font-family: monospace; background: #0d1117; color: #c9d1d9; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+  .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 2rem 3rem; max-width: 480px; }
+  h1 { color: #58a6ff; margin-top: 0; }
+  .label { color: #8b949e; font-size: 0.85em; }
+  .value { color: #e6edf3; margin-bottom: 0.8rem; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>Hello World</h1>
+  <div class="label">Platform</div><div class="value">Windows Server 2022</div>
+  <div class="label">Instance ID</div><div class="value">i-021896eda6184f089</div>
+  <div class="label">Availability Zone</div><div class="value">ap-southeast-6a</div>
+  <div class="label">Private IP</div><div class="value">10.0.3.37</div>
+  <div class="label">Instance Type</div><div class="value">t3.small</div>
+  <div class="label">Launched</div><div class="value">2026-06-09 01:57:36 UTC</div>
+</div>
+</body>
+</html>
+
+[HTTP 200  0.031781s]
+
+--- Request 6 / 8  02:00:14 UTC ---
 <!DOCTYPE html>
 <html>
 <head><title>Hantt Hello World</title>
@@ -109,87 +168,18 @@ Target group: arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:targetgro
 <div class="card">
   <h1>Hello World</h1>
   <div class="label">Platform</div><div class="value">Amazon Linux 2023</div>
-  <div class="label">Instance ID</div><div class="value">i-03e553cca71d77f22</div>
+  <div class="label">Instance ID</div><div class="value">i-002c41e85a1c05c71</div>
   <div class="label">Availability Zone</div><div class="value">ap-southeast-6b</div>
-  <div class="label">Private IP</div><div class="value">10.0.4.50</div>
+  <div class="label">Private IP</div><div class="value">10.0.4.130</div>
   <div class="label">Instance Type</div><div class="value">t3.small</div>
-  <div class="label">Launched</div><div class="value">2026-06-08 09:22:54 UTC</div>
+  <div class="label">Launched</div><div class="value">2026-06-09 01:57:26 UTC</div>
 </div>
 </body>
 </html>
 
-[HTTP 200  0.025680s]
+[HTTP 200  0.021542s]
 
---- Request 5 / 8  09:26:26 UTC ---
-<!DOCTYPE html>
-<html>
-<head><title>Hantt Hello World</title>
-<style>
-  body { font-family: monospace; background: #0d1117; color: #c9d1d9; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
-  .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 2rem 3rem; max-width: 480px; }
-  h1 { color: #58a6ff; margin-top: 0; }
-  .label { color: #8b949e; font-size: 0.85em; }
-  .value { color: #e6edf3; margin-bottom: 0.8rem; }
-</style>
-</head>
-<body>
-<div class="card">
-  <h1>Hello World</h1>
-  <div class="label">Platform</div><div class="value">Windows Server 2022</div>
-  <div class="label">Host</div><div class="value">EC2AMAZ-29MLP2B</div>
-</div>
-</body>
-</html>
-
-[HTTP 200  0.032692s]
-
---- Request 6 / 8  09:26:29 UTC ---
-<!DOCTYPE html>
-<html>
-<head><title>Hantt Hello World</title>
-<style>
-  body { font-family: monospace; background: #0d1117; color: #c9d1d9; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
-  .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 2rem 3rem; max-width: 480px; }
-  h1 { color: #58a6ff; margin-top: 0; }
-  .label { color: #8b949e; font-size: 0.85em; }
-  .value { color: #e6edf3; margin-bottom: 0.8rem; }
-</style>
-</head>
-<body>
-<div class="card">
-  <h1>Hello World</h1>
-  <div class="label">Platform</div><div class="value">Windows Server 2022</div>
-  <div class="label">Host</div><div class="value">EC2AMAZ-29MLP2B</div>
-</div>
-</body>
-</html>
-
-[HTTP 200  0.035965s]
-
---- Request 7 / 8  09:26:32 UTC ---
-<!DOCTYPE html>
-<html>
-<head><title>Hantt Hello World</title>
-<style>
-  body { font-family: monospace; background: #0d1117; color: #c9d1d9; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
-  .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 2rem 3rem; max-width: 480px; }
-  h1 { color: #58a6ff; margin-top: 0; }
-  .label { color: #8b949e; font-size: 0.85em; }
-  .value { color: #e6edf3; margin-bottom: 0.8rem; }
-</style>
-</head>
-<body>
-<div class="card">
-  <h1>Hello World</h1>
-  <div class="label">Platform</div><div class="value">Windows Server 2022</div>
-  <div class="label">Host</div><div class="value">EC2AMAZ-29MLP2B</div>
-</div>
-</body>
-</html>
-
-[HTTP 200  0.032223s]
-
---- Request 8 / 8  09:26:35 UTC ---
+--- Request 7 / 8  02:00:17 UTC ---
 <!DOCTYPE html>
 <html>
 <head><title>Hantt Hello World</title>
@@ -205,16 +195,43 @@ Target group: arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:targetgro
 <div class="card">
   <h1>Hello World</h1>
   <div class="label">Platform</div><div class="value">Amazon Linux 2023</div>
-  <div class="label">Instance ID</div><div class="value">i-03e553cca71d77f22</div>
+  <div class="label">Instance ID</div><div class="value">i-002c41e85a1c05c71</div>
   <div class="label">Availability Zone</div><div class="value">ap-southeast-6b</div>
-  <div class="label">Private IP</div><div class="value">10.0.4.50</div>
+  <div class="label">Private IP</div><div class="value">10.0.4.130</div>
   <div class="label">Instance Type</div><div class="value">t3.small</div>
-  <div class="label">Launched</div><div class="value">2026-06-08 09:22:54 UTC</div>
+  <div class="label">Launched</div><div class="value">2026-06-09 01:57:26 UTC</div>
 </div>
 </body>
 </html>
 
-[HTTP 200  0.020525s]
+[HTTP 200  0.020808s]
 
-=== Done: 2026-06-08 09:26:38 UTC ===
+--- Request 8 / 8  02:00:20 UTC ---
+﻿<!DOCTYPE html>
+<html>
+<head><title>Hantt Hello World</title>
+<style>
+  body { font-family: monospace; background: #0d1117; color: #c9d1d9; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+  .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 2rem 3rem; max-width: 480px; }
+  h1 { color: #58a6ff; margin-top: 0; }
+  .label { color: #8b949e; font-size: 0.85em; }
+  .value { color: #e6edf3; margin-bottom: 0.8rem; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>Hello World</h1>
+  <div class="label">Platform</div><div class="value">Windows Server 2022</div>
+  <div class="label">Instance ID</div><div class="value">i-021896eda6184f089</div>
+  <div class="label">Availability Zone</div><div class="value">ap-southeast-6a</div>
+  <div class="label">Private IP</div><div class="value">10.0.3.37</div>
+  <div class="label">Instance Type</div><div class="value">t3.small</div>
+  <div class="label">Launched</div><div class="value">2026-06-09 01:57:36 UTC</div>
+</div>
+</body>
+</html>
+
+[HTTP 200  0.032343s]
+
+=== Done: 2026-06-09 02:00:23 UTC ===
 Log saved: /home/ansible/hantt_company_test/logs/4-curl-test.log

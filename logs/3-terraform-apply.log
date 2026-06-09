@@ -1,10 +1,10 @@
 ============================================================
   Terraform Apply
-  2026-06-08 09:21:03 UTC
+  2026-06-09 01:54:51 UTC
 ============================================================
 
-Linux AMI  : ami-0518e6dd6cb17839d
-Windows AMI: ami-03c1519b76d470c78
+Linux AMI  : ami-06d4ac821dd7c2b7c
+Windows AMI: ami-092825995de360747
 
 === Refreshing OIDC token ===
 Token written to /home/ansible/secrets/azure-aws/oidc-token
@@ -45,7 +45,7 @@ Terraform will perform the following actions:
       [32m+[0m[0m availability_zones               = (known after apply)
       [32m+[0m[0m default_cooldown                 = (known after apply)
       [32m+[0m[0m desired_capacity                 = 1
-      [32m+[0m[0m force_delete                     = false
+      [32m+[0m[0m force_delete                     = true
       [32m+[0m[0m force_delete_warm_pool           = false
       [32m+[0m[0m health_check_grace_period        = 300
       [32m+[0m[0m health_check_type                = "ELB"
@@ -55,7 +55,7 @@ Terraform will perform the following actions:
       [32m+[0m[0m max_size                         = 2
       [32m+[0m[0m metrics_granularity              = "1Minute"
       [32m+[0m[0m min_size                         = 1
-      [32m+[0m[0m name                             = "hantt-main-vpc-nginx-asg"
+      [32m+[0m[0m name                             = "hantt-main-vpc-nginx-windows-asg"
       [32m+[0m[0m name_prefix                      = (known after apply)
       [32m+[0m[0m predicted_capacity               = (known after apply)
       [32m+[0m[0m protect_from_scale_in            = false
@@ -85,7 +85,7 @@ Terraform will perform the following actions:
       [32m+[0m[0m tag {
           [32m+[0m[0m key                 = "Name"
           [32m+[0m[0m propagate_at_launch = true
-          [32m+[0m[0m value               = "hantt-main-vpc-nginx"
+          [32m+[0m[0m value               = "hantt-main-vpc-nginx-windows"
         }
 
       [32m+[0m[0m traffic_source (known after apply)
@@ -97,7 +97,7 @@ Terraform will perform the following actions:
       [32m+[0m[0m availability_zones               = (known after apply)
       [32m+[0m[0m default_cooldown                 = (known after apply)
       [32m+[0m[0m desired_capacity                 = 1
-      [32m+[0m[0m force_delete                     = false
+      [32m+[0m[0m force_delete                     = true
       [32m+[0m[0m force_delete_warm_pool           = false
       [32m+[0m[0m health_check_grace_period        = 300
       [32m+[0m[0m health_check_type                = "ELB"
@@ -146,7 +146,7 @@ Terraform will perform the following actions:
 [1m  # aws_autoscaling_policy.scale_out[0m will be created
 [0m  [32m+[0m[0m resource "aws_autoscaling_policy" "scale_out" {
       [32m+[0m[0m arn                     = (known after apply)
-      [32m+[0m[0m autoscaling_group_name  = "hantt-main-vpc-nginx-asg"
+      [32m+[0m[0m autoscaling_group_name  = "hantt-main-vpc-nginx-windows-asg"
       [32m+[0m[0m enabled                 = true
       [32m+[0m[0m id                      = (known after apply)
       [32m+[0m[0m metric_aggregation_type = (known after apply)
@@ -161,6 +161,38 @@ Terraform will perform the following actions:
               [32m+[0m[0m predefined_metric_type = "ASGAverageCPUUtilization"
             }
         }
+    }
+
+[1m  # aws_eip.nat[0m will be created
+[0m  [32m+[0m[0m resource "aws_eip" "nat" {
+      [32m+[0m[0m allocation_id        = (known after apply)
+      [32m+[0m[0m arn                  = (known after apply)
+      [32m+[0m[0m association_id       = (known after apply)
+      [32m+[0m[0m carrier_ip           = (known after apply)
+      [32m+[0m[0m customer_owned_ip    = (known after apply)
+      [32m+[0m[0m domain               = "vpc"
+      [32m+[0m[0m id                   = (known after apply)
+      [32m+[0m[0m instance             = (known after apply)
+      [32m+[0m[0m ipam_pool_id         = (known after apply)
+      [32m+[0m[0m network_border_group = (known after apply)
+      [32m+[0m[0m network_interface    = (known after apply)
+      [32m+[0m[0m private_dns          = (known after apply)
+      [32m+[0m[0m private_ip           = (known after apply)
+      [32m+[0m[0m ptr_record           = (known after apply)
+      [32m+[0m[0m public_dns           = (known after apply)
+      [32m+[0m[0m public_ip            = (known after apply)
+      [32m+[0m[0m public_ipv4_pool     = (known after apply)
+      [32m+[0m[0m tags                 = {
+          [32m+[0m[0m "Environment" = "dev"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "hantt-main-vpc-nat-eip"
+        }
+      [32m+[0m[0m tags_all             = {
+          [32m+[0m[0m "Environment" = "dev"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "hantt-main-vpc-nat-eip"
+        }
+      [32m+[0m[0m vpc                  = (known after apply)
     }
 
 [1m  # aws_iam_instance_profile.nginx_vm[0m will be created
@@ -216,6 +248,33 @@ Terraform will perform the following actions:
       [32m+[0m[0m inline_policy (known after apply)
     }
 
+[1m  # aws_iam_role_policy.nginx_vm_secrets[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role_policy" "nginx_vm_secrets" {
+      [32m+[0m[0m id          = (known after apply)
+      [32m+[0m[0m name        = "hantt-main-vpc-nginx-vm-secrets"
+      [32m+[0m[0m name_prefix = (known after apply)
+      [32m+[0m[0m policy      = jsonencode(
+            {
+              [32m+[0m[0m Statement = [
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action   = "secretsmanager:GetSecretValue"
+                      [32m+[0m[0m Effect   = "Allow"
+                      [32m+[0m[0m Resource = "arn:aws:secretsmanager:ap-southeast-6:996992102979:secret:hantt/nginx-ssl-cert-*"
+                    },
+                ]
+              [32m+[0m[0m Version   = "2012-10-17"
+            }
+        )
+      [32m+[0m[0m role        = "hantt-main-vpc-nginx-vm-role"
+    }
+
+[1m  # aws_iam_role_policy_attachment.nginx_vm_cloudwatch[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role_policy_attachment" "nginx_vm_cloudwatch" {
+      [32m+[0m[0m id         = (known after apply)
+      [32m+[0m[0m policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
+      [32m+[0m[0m role       = "hantt-main-vpc-nginx-vm-role"
+    }
+
 [1m  # aws_iam_role_policy_attachment.nginx_vm_s3_read[0m will be created
 [0m  [32m+[0m[0m resource "aws_iam_role_policy_attachment" "nginx_vm_s3_read" {
       [32m+[0m[0m id         = (known after apply)
@@ -253,13 +312,13 @@ Terraform will perform the following actions:
       [32m+[0m[0m arn             = (known after apply)
       [32m+[0m[0m default_version = (known after apply)
       [32m+[0m[0m id              = (known after apply)
-      [32m+[0m[0m image_id        = "ami-03c1519b76d470c78"
+      [32m+[0m[0m image_id        = "ami-092825995de360747"
       [32m+[0m[0m instance_type   = "t3.small"
       [32m+[0m[0m latest_version  = (known after apply)
       [32m+[0m[0m name            = (known after apply)
       [32m+[0m[0m name_prefix     = "hantt-main-vpc-nginx-"
       [32m+[0m[0m tags_all        = (known after apply)
-      [32m+[0m[0m user_data       = "ICAgIDxwb3dlcnNoZWxsPgogICAgIyBGZXRjaCBJTURTdjIgdG9rZW4gdGhlbiBwdWxsIGluc3RhbmNlIG1ldGFkYXRhCiAgICAkdG9rZW4gICAgICAgID0gSW52b2tlLVJlc3RNZXRob2QgLU1ldGhvZCBQdXQgYAogICAgICAgICAgICAgICAgICAgICAgLVVyaSAiaHR0cDovLzE2OS4yNTQuMTY5LjI1NC9sYXRlc3QvYXBpL3Rva2VuIiBgCiAgICAgICAgICAgICAgICAgICAgICAtSGVhZGVycyBAeyJYLWF3cy1lYzItbWV0YWRhdGEtdG9rZW4tdHRsLXNlY29uZHMiPSIyMTYwMCJ9CiAgICAkaGRycyAgICAgICAgID0gQHsiWC1hd3MtZWMyLW1ldGFkYXRhLXRva2VuIj0kdG9rZW59CiAgICAkaW5zdGFuY2VJZCAgID0gSW52b2tlLVJlc3RNZXRob2QgLVVyaSAiaHR0cDovLzE2OS4yNTQuMTY5LjI1NC9sYXRlc3QvbWV0YS1kYXRhL2luc3RhbmNlLWlkIiAgICAgICAgICAgICAgICAgICAgLUhlYWRlcnMgJGhkcnMKICAgICRheiAgICAgICAgICAgPSBJbnZva2UtUmVzdE1ldGhvZCAtVXJpICJodHRwOi8vMTY5LjI1NC4xNjkuMjU0L2xhdGVzdC9tZXRhLWRhdGEvcGxhY2VtZW50L2F2YWlsYWJpbGl0eS16b25lIiAgIC1IZWFkZXJzICRoZHJzCiAgICAkbG9jYWxJcCAgICAgID0gSW52b2tlLVJlc3RNZXRob2QgLVVyaSAiaHR0cDovLzE2OS4yNTQuMTY5LjI1NC9sYXRlc3QvbWV0YS1kYXRhL2xvY2FsLWlwdjQiICAgICAgICAgICAgICAgICAgICAtSGVhZGVycyAkaGRycwogICAgJGluc3RhbmNlVHlwZSA9IEludm9rZS1SZXN0TWV0aG9kIC1VcmkgImh0dHA6Ly8xNjkuMjU0LjE2OS4yNTQvbGF0ZXN0L21ldGEtZGF0YS9pbnN0YW5jZS10eXBlIiAgICAgICAgICAgICAgICAgLUhlYWRlcnMgJGhkcnMKICAgICRsYXVuY2hlZCAgICAgPSAoR2V0LURhdGUpLlRvVW5pdmVyc2FsVGltZSgpLlRvU3RyaW5nKCJ5eXl5LU1NLWRkIEhIOm1tOnNzIFVUQyIpCgogICAgIyBMb2NhdGUgQ2hvY29sYXRleSBuZ2lueCBpbnN0YWxsYXRpb24gKGUuZy4gQzpcdG9vbHNcbmdpbngtMS54LngpCiAgICAkbmdpbnhEaXIgPSAoR2V0LUNoaWxkSXRlbSAiQzpcdG9vbHMiIC1GaWx0ZXIgIm5naW54LSoiIC1EaXJlY3RvcnkgLUVycm9yQWN0aW9uIFNpbGVudGx5Q29udGludWUgfAogICAgICAgICAgICAgICAgIFNvcnQtT2JqZWN0IE5hbWUgLURlc2NlbmRpbmcgfCBTZWxlY3QtT2JqZWN0IC1GaXJzdCAxKS5GdWxsTmFtZQogICAgaWYgKC1ub3QgJG5naW54RGlyKSB7ICRuZ2lueERpciA9ICJDOlxuZ2lueCIgfQoKICAgICRodG1sID0gQCIKPCFET0NUWVBFIGh0bWw+CjxodG1sPgo8aGVhZD48dGl0bGU+SGFudHQgSGVsbG8gV29ybGQ8L3RpdGxlPgo8c3R5bGU+CiAgYm9keSB7IGZvbnQtZmFtaWx5OiBtb25vc3BhY2U7IGJhY2tncm91bmQ6ICMwZDExMTc7IGNvbG9yOiAjYzlkMWQ5OyBkaXNwbGF5OiBmbGV4OyBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjsgYWxpZ24taXRlbXM6IGNlbnRlcjsgbWluLWhlaWdodDogMTAwdmg7IG1hcmdpbjogMDsgfQogIC5jYXJkIHsgYmFja2dyb3VuZDogIzE2MWIyMjsgYm9yZGVyOiAxcHggc29saWQgIzMwMzYzZDsgYm9yZGVyLXJhZGl1czogOHB4OyBwYWRkaW5nOiAycmVtIDNyZW07IG1heC13aWR0aDogNDgwcHg7IH0KICBoMSB7IGNvbG9yOiAjNThhNmZmOyBtYXJnaW4tdG9wOiAwOyB9CiAgLmxhYmVsIHsgY29sb3I6ICM4Yjk0OWU7IGZvbnQtc2l6ZTogMC44NWVtOyB9CiAgLnZhbHVlIHsgY29sb3I6ICNlNmVkZjM7IG1hcmdpbi1ib3R0b206IDAuOHJlbTsgfQo8L3N0eWxlPgo8L2hlYWQ+Cjxib2R5Pgo8ZGl2IGNsYXNzPSJjYXJkIj4KICA8aDE+SGVsbG8gV29ybGQ8L2gxPgogIDxkaXYgY2xhc3M9ImxhYmVsIj5QbGF0Zm9ybTwvZGl2PjxkaXYgY2xhc3M9InZhbHVlIj5XaW5kb3dzIFNlcnZlciAyMDIyPC9kaXY+CiAgPGRpdiBjbGFzcz0ibGFiZWwiPkluc3RhbmNlIElEPC9kaXY+PGRpdiBjbGFzcz0idmFsdWUiPiRpbnN0YW5jZUlkPC9kaXY+CiAgPGRpdiBjbGFzcz0ibGFiZWwiPkF2YWlsYWJpbGl0eSBab25lPC9kaXY+PGRpdiBjbGFzcz0idmFsdWUiPiRhejwvZGl2PgogIDxkaXYgY2xhc3M9ImxhYmVsIj5Qcml2YXRlIElQPC9kaXY+PGRpdiBjbGFzcz0idmFsdWUiPiRsb2NhbElwPC9kaXY+CiAgPGRpdiBjbGFzcz0ibGFiZWwiPkluc3RhbmNlIFR5cGU8L2Rpdj48ZGl2IGNsYXNzPSJ2YWx1ZSI+JGluc3RhbmNlVHlwZTwvZGl2PgogIDxkaXYgY2xhc3M9ImxhYmVsIj5MYXVuY2hlZDwvZGl2PjxkaXYgY2xhc3M9InZhbHVlIj4kbGF1bmNoZWQ8L2Rpdj4KPC9kaXY+CjwvYm9keT4KPC9odG1sPgoiQAoKICAgIFNldC1Db250ZW50IC1QYXRoICIkbmdpbnhEaXJcaHRtbFxpbmRleC5odG1sIiAtVmFsdWUgJGh0bWwgLUVuY29kaW5nIFVURjgKICAgIDwvcG93ZXJzaGVsbD4K"
+      [32m+[0m[0m user_data       = "ICAgIDxwb3dlcnNoZWxsPgogICAgU3RhcnQtVHJhbnNjcmlwdCAtUGF0aCAiQzpcdXNlci1kYXRhLmxvZyIgLUZvcmNlCgogICAgIyBSZWFkIG5naW54IGluc3RhbGwgcGF0aCBzdGFtcGVkIGludG8gdGhlIEFNSSBhdCBidWlsZCB0aW1lCiAgICAkbmdpbnhEaXIgPSAoR2V0LUNvbnRlbnQgIkM6XG5naW54LWRpci50eHQiIC1SYXcpLlRyaW0oKQoKICAgICMgRmV0Y2ggU1NMIGNlcnQgYW5kIGtleSBmcm9tIFNlY3JldHMgTWFuYWdlciBzbyBuZ2lueCBjYW4gc3RhcnQKICAgICRlbnY6QVdTX1NUU19SRUdJT05BTF9FTkRQT0lOVFMgPSAicmVnaW9uYWwiCiAgICAkaW1kc1Rva2VuID0gSW52b2tlLVJlc3RNZXRob2QgLU1ldGhvZCBQdXQgYAogICAgICAgICAgICAgICAgICAgLVVyaSAiaHR0cDovLzE2OS4yNTQuMTY5LjI1NC9sYXRlc3QvYXBpL3Rva2VuIiBgCiAgICAgICAgICAgICAgICAgICAtSGVhZGVycyBAeyJYLWF3cy1lYzItbWV0YWRhdGEtdG9rZW4tdHRsLXNlY29uZHMiPSIyMTYwMCJ9CiAgICAkcmVnaW9uICAgID0gSW52b2tlLVJlc3RNZXRob2QgYAogICAgICAgICAgICAgICAgICAgLVVyaSAiaHR0cDovLzE2OS4yNTQuMTY5LjI1NC9sYXRlc3QvbWV0YS1kYXRhL3BsYWNlbWVudC9yZWdpb24iIGAKICAgICAgICAgICAgICAgICAgIC1IZWFkZXJzIEB7IlgtYXdzLWVjMi1tZXRhZGF0YS10b2tlbiI9JGltZHNUb2tlbn0KICAgICRzZWNyZXRKc29uID0gYXdzIHNlY3JldHNtYW5hZ2VyIGdldC1zZWNyZXQtdmFsdWUgYAogICAgICAgICAgICAgICAgICAgIC0tcmVnaW9uICRyZWdpb24gYAogICAgICAgICAgICAgICAgICAgIC0tc2VjcmV0LWlkIGhhbnR0L25naW54LXNzbC1jZXJ0IGAKICAgICAgICAgICAgICAgICAgICAtLXF1ZXJ5IFNlY3JldFN0cmluZyBgCiAgICAgICAgICAgICAgICAgICAgLS1vdXRwdXQgdGV4dAogICAgaWYgKCRMQVNURVhJVENPREUgLW5lIDAgLW9yIFtzdHJpbmddOjpJc051bGxPckVtcHR5KCRzZWNyZXRKc29uKSkgewogICAgICBTdG9wLVRyYW5zY3JpcHQ7IGV4aXQgMQogICAgfQogICAgJHNlY3JldCA9ICRzZWNyZXRKc29uIHwgQ29udmVydEZyb20tSnNvbgogICAgW1N5c3RlbS5JTy5GaWxlXTo6V3JpdGVBbGxUZXh0KCIkbmdpbnhEaXJcc3NsXHNlcnZlci5jcnQiLCAkc2VjcmV0LmNlcnQpCiAgICBbU3lzdGVtLklPLkZpbGVdOjpXcml0ZUFsbFRleHQoIiRuZ2lueERpclxzc2xcc2VydmVyLmtleSIsICRzZWNyZXQua2V5KQogICAgUmVzdGFydC1TZXJ2aWNlIG5naW54IC1Gb3JjZQogICAgU3RhcnQtU2xlZXAgLVNlY29uZHMgMwoKICAgICMgRmV0Y2ggSU1EU3YyIHRva2VuIHRoZW4gcHVsbCBpbnN0YW5jZSBtZXRhZGF0YQogICAgJHRva2VuICAgICAgICA9IEludm9rZS1SZXN0TWV0aG9kIC1NZXRob2QgUHV0IGAKICAgICAgICAgICAgICAgICAgICAgIC1VcmkgImh0dHA6Ly8xNjkuMjU0LjE2OS4yNTQvbGF0ZXN0L2FwaS90b2tlbiIgYAogICAgICAgICAgICAgICAgICAgICAgLUhlYWRlcnMgQHsiWC1hd3MtZWMyLW1ldGFkYXRhLXRva2VuLXR0bC1zZWNvbmRzIj0iMjE2MDAifQogICAgJGhkcnMgICAgICAgICA9IEB7IlgtYXdzLWVjMi1tZXRhZGF0YS10b2tlbiI9JHRva2VufQogICAgJGluc3RhbmNlSWQgICA9IEludm9rZS1SZXN0TWV0aG9kIC1VcmkgImh0dHA6Ly8xNjkuMjU0LjE2OS4yNTQvbGF0ZXN0L21ldGEtZGF0YS9pbnN0YW5jZS1pZCIgICAgICAgICAgICAgICAgICAgLUhlYWRlcnMgJGhkcnMKICAgICRheiAgICAgICAgICAgPSBJbnZva2UtUmVzdE1ldGhvZCAtVXJpICJodHRwOi8vMTY5LjI1NC4xNjkuMjU0L2xhdGVzdC9tZXRhLWRhdGEvcGxhY2VtZW50L2F2YWlsYWJpbGl0eS16b25lIiAgLUhlYWRlcnMgJGhkcnMKICAgICRsb2NhbElwICAgICAgPSBJbnZva2UtUmVzdE1ldGhvZCAtVXJpICJodHRwOi8vMTY5LjI1NC4xNjkuMjU0L2xhdGVzdC9tZXRhLWRhdGEvbG9jYWwtaXB2NCIgICAgICAgICAgICAgICAgICAgLUhlYWRlcnMgJGhkcnMKICAgICRpbnN0YW5jZVR5cGUgPSBJbnZva2UtUmVzdE1ldGhvZCAtVXJpICJodHRwOi8vMTY5LjI1NC4xNjkuMjU0L2xhdGVzdC9tZXRhLWRhdGEvaW5zdGFuY2UtdHlwZSIgICAgICAgICAgICAgICAgLUhlYWRlcnMgJGhkcnMKICAgICRsYXVuY2hlZCAgICAgPSAoR2V0LURhdGUpLlRvVW5pdmVyc2FsVGltZSgpLlRvU3RyaW5nKCJ5eXl5LU1NLWRkIEhIOm1tOnNzIFVUQyIpCgogICAgJGh0bWwgPSBAIgo8IURPQ1RZUEUgaHRtbD4KPGh0bWw+CjxoZWFkPjx0aXRsZT5IYW50dCBIZWxsbyBXb3JsZDwvdGl0bGU+CjxzdHlsZT4KICBib2R5IHsgZm9udC1mYW1pbHk6IG1vbm9zcGFjZTsgYmFja2dyb3VuZDogIzBkMTExNzsgY29sb3I6ICNjOWQxZDk7IGRpc3BsYXk6IGZsZXg7IGp1c3RpZnktY29udGVudDogY2VudGVyOyBhbGlnbi1pdGVtczogY2VudGVyOyBtaW4taGVpZ2h0OiAxMDB2aDsgbWFyZ2luOiAwOyB9CiAgLmNhcmQgeyBiYWNrZ3JvdW5kOiAjMTYxYjIyOyBib3JkZXI6IDFweCBzb2xpZCAjMzAzNjNkOyBib3JkZXItcmFkaXVzOiA4cHg7IHBhZGRpbmc6IDJyZW0gM3JlbTsgbWF4LXdpZHRoOiA0ODBweDsgfQogIGgxIHsgY29sb3I6ICM1OGE2ZmY7IG1hcmdpbi10b3A6IDA7IH0KICAubGFiZWwgeyBjb2xvcjogIzhiOTQ5ZTsgZm9udC1zaXplOiAwLjg1ZW07IH0KICAudmFsdWUgeyBjb2xvcjogI2U2ZWRmMzsgbWFyZ2luLWJvdHRvbTogMC44cmVtOyB9Cjwvc3R5bGU+CjwvaGVhZD4KPGJvZHk+CjxkaXYgY2xhc3M9ImNhcmQiPgogIDxoMT5IZWxsbyBXb3JsZDwvaDE+CiAgPGRpdiBjbGFzcz0ibGFiZWwiPlBsYXRmb3JtPC9kaXY+PGRpdiBjbGFzcz0idmFsdWUiPldpbmRvd3MgU2VydmVyIDIwMjI8L2Rpdj4KICA8ZGl2IGNsYXNzPSJsYWJlbCI+SW5zdGFuY2UgSUQ8L2Rpdj48ZGl2IGNsYXNzPSJ2YWx1ZSI+JGluc3RhbmNlSWQ8L2Rpdj4KICA8ZGl2IGNsYXNzPSJsYWJlbCI+QXZhaWxhYmlsaXR5IFpvbmU8L2Rpdj48ZGl2IGNsYXNzPSJ2YWx1ZSI+JGF6PC9kaXY+CiAgPGRpdiBjbGFzcz0ibGFiZWwiPlByaXZhdGUgSVA8L2Rpdj48ZGl2IGNsYXNzPSJ2YWx1ZSI+JGxvY2FsSXA8L2Rpdj4KICA8ZGl2IGNsYXNzPSJsYWJlbCI+SW5zdGFuY2UgVHlwZTwvZGl2PjxkaXYgY2xhc3M9InZhbHVlIj4kaW5zdGFuY2VUeXBlPC9kaXY+CiAgPGRpdiBjbGFzcz0ibGFiZWwiPkxhdW5jaGVkPC9kaXY+PGRpdiBjbGFzcz0idmFsdWUiPiRsYXVuY2hlZDwvZGl2Pgo8L2Rpdj4KPC9ib2R5Pgo8L2h0bWw+CiJACgogICAgU2V0LUNvbnRlbnQgLVBhdGggIiRuZ2lueERpclxodG1sXGluZGV4Lmh0bWwiIC1WYWx1ZSAkaHRtbCAtRW5jb2RpbmcgVVRGOAogICAgU3RvcC1UcmFuc2NyaXB0CiAgICA8L3Bvd2Vyc2hlbGw+Cg=="
 
       [32m+[0m[0m block_device_mappings {
           [32m+[0m[0m device_name = "/dev/xvda"
@@ -306,13 +365,13 @@ Terraform will perform the following actions:
       [32m+[0m[0m arn             = (known after apply)
       [32m+[0m[0m default_version = (known after apply)
       [32m+[0m[0m id              = (known after apply)
-      [32m+[0m[0m image_id        = "ami-0518e6dd6cb17839d"
+      [32m+[0m[0m image_id        = "ami-06d4ac821dd7c2b7c"
       [32m+[0m[0m instance_type   = "t3.small"
       [32m+[0m[0m latest_version  = (known after apply)
       [32m+[0m[0m name            = (known after apply)
       [32m+[0m[0m name_prefix     = "hantt-main-vpc-nginx-linux-"
       [32m+[0m[0m tags_all        = (known after apply)
-      [32m+[0m[0m user_data       = "IyEvYmluL2Jhc2gKVE9LRU49JChjdXJsIC1zIC1YIFBVVCAiaHR0cDovLzE2OS4yNTQuMTY5LjI1NC9sYXRlc3QvYXBpL3Rva2VuIiBcCiAgLUggIlgtYXdzLWVjMi1tZXRhZGF0YS10b2tlbi10dGwtc2Vjb25kczogMjE2MDAiKQpJTlNUQU5DRV9JRD0kKGN1cmwgLXMgLUggIlgtYXdzLWVjMi1tZXRhZGF0YS10b2tlbjogJFRPS0VOIiBcCiAgaHR0cDovLzE2OS4yNTQuMTY5LjI1NC9sYXRlc3QvbWV0YS1kYXRhL2luc3RhbmNlLWlkKQpBWj0kKGN1cmwgLXMgLUggIlgtYXdzLWVjMi1tZXRhZGF0YS10b2tlbjogJFRPS0VOIiBcCiAgaHR0cDovLzE2OS4yNTQuMTY5LjI1NC9sYXRlc3QvbWV0YS1kYXRhL3BsYWNlbWVudC9hdmFpbGFiaWxpdHktem9uZSkKTE9DQUxfSVA9JChjdXJsIC1zIC1IICJYLWF3cy1lYzItbWV0YWRhdGEtdG9rZW46ICRUT0tFTiIgXAogIGh0dHA6Ly8xNjkuMjU0LjE2OS4yNTQvbGF0ZXN0L21ldGEtZGF0YS9sb2NhbC1pcHY0KQpJTlNUQU5DRV9UWVBFPSQoY3VybCAtcyAtSCAiWC1hd3MtZWMyLW1ldGFkYXRhLXRva2VuOiAkVE9LRU4iIFwKICBodHRwOi8vMTY5LjI1NC4xNjkuMjU0L2xhdGVzdC9tZXRhLWRhdGEvaW5zdGFuY2UtdHlwZSkKTEFVTkNIRUQ9JChkYXRlIC11ICcrJVktJW0tJWQgJUg6JU06JVMgVVRDJykKCmNhdCA+IC91c3Ivc2hhcmUvbmdpbngvaHRtbC9pbmRleC5odG1sIDw8SFRNTAo8IURPQ1RZUEUgaHRtbD4KPGh0bWw+CjxoZWFkPjx0aXRsZT5IYW50dCBIZWxsbyBXb3JsZDwvdGl0bGU+CjxzdHlsZT4KICBib2R5IHsgZm9udC1mYW1pbHk6IG1vbm9zcGFjZTsgYmFja2dyb3VuZDogIzBkMTExNzsgY29sb3I6ICNjOWQxZDk7IGRpc3BsYXk6IGZsZXg7IGp1c3RpZnktY29udGVudDogY2VudGVyOyBhbGlnbi1pdGVtczogY2VudGVyOyBtaW4taGVpZ2h0OiAxMDB2aDsgbWFyZ2luOiAwOyB9CiAgLmNhcmQgeyBiYWNrZ3JvdW5kOiAjMTYxYjIyOyBib3JkZXI6IDFweCBzb2xpZCAjMzAzNjNkOyBib3JkZXItcmFkaXVzOiA4cHg7IHBhZGRpbmc6IDJyZW0gM3JlbTsgbWF4LXdpZHRoOiA0ODBweDsgfQogIGgxIHsgY29sb3I6ICM1OGE2ZmY7IG1hcmdpbi10b3A6IDA7IH0KICAubGFiZWwgeyBjb2xvcjogIzhiOTQ5ZTsgZm9udC1zaXplOiAwLjg1ZW07IH0KICAudmFsdWUgeyBjb2xvcjogI2U2ZWRmMzsgbWFyZ2luLWJvdHRvbTogMC44cmVtOyB9Cjwvc3R5bGU+CjwvaGVhZD4KPGJvZHk+CjxkaXYgY2xhc3M9ImNhcmQiPgogIDxoMT5IZWxsbyBXb3JsZDwvaDE+CiAgPGRpdiBjbGFzcz0ibGFiZWwiPlBsYXRmb3JtPC9kaXY+PGRpdiBjbGFzcz0idmFsdWUiPkFtYXpvbiBMaW51eCAyMDIzPC9kaXY+CiAgPGRpdiBjbGFzcz0ibGFiZWwiPkluc3RhbmNlIElEPC9kaXY+PGRpdiBjbGFzcz0idmFsdWUiPiRJTlNUQU5DRV9JRDwvZGl2PgogIDxkaXYgY2xhc3M9ImxhYmVsIj5BdmFpbGFiaWxpdHkgWm9uZTwvZGl2PjxkaXYgY2xhc3M9InZhbHVlIj4kQVo8L2Rpdj4KICA8ZGl2IGNsYXNzPSJsYWJlbCI+UHJpdmF0ZSBJUDwvZGl2PjxkaXYgY2xhc3M9InZhbHVlIj4kTE9DQUxfSVA8L2Rpdj4KICA8ZGl2IGNsYXNzPSJsYWJlbCI+SW5zdGFuY2UgVHlwZTwvZGl2PjxkaXYgY2xhc3M9InZhbHVlIj4kSU5TVEFOQ0VfVFlQRTwvZGl2PgogIDxkaXYgY2xhc3M9ImxhYmVsIj5MYXVuY2hlZDwvZGl2PjxkaXYgY2xhc3M9InZhbHVlIj4kTEFVTkNIRUQ8L2Rpdj4KPC9kaXY+CjwvYm9keT4KPC9odG1sPgpIVE1MCg=="
+      [32m+[0m[0m user_data       = "IyEvYmluL2Jhc2gKIyBQdWxsIFNTTCBjZXJ0IGFuZCBrZXkgZnJvbSBTZWNyZXRzIE1hbmFnZXIKU0VDUkVUX0pTT049JChhd3Mgc2VjcmV0c21hbmFnZXIgZ2V0LXNlY3JldC12YWx1ZSBcCiAgLS1yZWdpb24gYXAtc291dGhlYXN0LTYgXAogIC0tc2VjcmV0LWlkIGhhbnR0L25naW54LXNzbC1jZXJ0IFwKICAtLXF1ZXJ5IFNlY3JldFN0cmluZyBcCiAgLS1vdXRwdXQgdGV4dCkKbWtkaXIgLXAgL2V0Yy9uZ2lueC9zc2wKU0VDUkVUX0pTT049IiRTRUNSRVRfSlNPTiIgcHl0aG9uMyAtYyAiCmltcG9ydCBqc29uLCBvcwpzID0ganNvbi5sb2Fkcyhvcy5lbnZpcm9uWydTRUNSRVRfSlNPTiddKQpvcGVuKCcvZXRjL25naW54L3NzbC9zZXJ2ZXIuY3J0JywgJ3cnKS53cml0ZShzWydjZXJ0J10pCm9wZW4oJy9ldGMvbmdpbngvc3NsL3NlcnZlci5rZXknLCAndycpLndyaXRlKHNbJ2tleSddKQoiCmNobW9kIDA2MDAgL2V0Yy9uZ2lueC9zc2wvc2VydmVyLmtleQpzeXN0ZW1jdGwgcmVzdGFydCBuZ2lueAoKIyBGZXRjaCBpbnN0YW5jZSBtZXRhZGF0YSB2aWEgSU1EU3YyClRPS0VOPSQoY3VybCAtcyAtWCBQVVQgImh0dHA6Ly8xNjkuMjU0LjE2OS4yNTQvbGF0ZXN0L2FwaS90b2tlbiIgXAogIC1IICJYLWF3cy1lYzItbWV0YWRhdGEtdG9rZW4tdHRsLXNlY29uZHM6IDIxNjAwIikKSU5TVEFOQ0VfSUQ9JChjdXJsIC1zIC1IICJYLWF3cy1lYzItbWV0YWRhdGEtdG9rZW46ICRUT0tFTiIgXAogIGh0dHA6Ly8xNjkuMjU0LjE2OS4yNTQvbGF0ZXN0L21ldGEtZGF0YS9pbnN0YW5jZS1pZCkKQVo9JChjdXJsIC1zIC1IICJYLWF3cy1lYzItbWV0YWRhdGEtdG9rZW46ICRUT0tFTiIgXAogIGh0dHA6Ly8xNjkuMjU0LjE2OS4yNTQvbGF0ZXN0L21ldGEtZGF0YS9wbGFjZW1lbnQvYXZhaWxhYmlsaXR5LXpvbmUpCkxPQ0FMX0lQPSQoY3VybCAtcyAtSCAiWC1hd3MtZWMyLW1ldGFkYXRhLXRva2VuOiAkVE9LRU4iIFwKICBodHRwOi8vMTY5LjI1NC4xNjkuMjU0L2xhdGVzdC9tZXRhLWRhdGEvbG9jYWwtaXB2NCkKSU5TVEFOQ0VfVFlQRT0kKGN1cmwgLXMgLUggIlgtYXdzLWVjMi1tZXRhZGF0YS10b2tlbjogJFRPS0VOIiBcCiAgaHR0cDovLzE2OS4yNTQuMTY5LjI1NC9sYXRlc3QvbWV0YS1kYXRhL2luc3RhbmNlLXR5cGUpCkxBVU5DSEVEPSQoZGF0ZSAtdSAnKyVZLSVtLSVkICVIOiVNOiVTIFVUQycpCgpjYXQgPiAvdXNyL3NoYXJlL25naW54L2h0bWwvaW5kZXguaHRtbCA8PEhUTUwKPCFET0NUWVBFIGh0bWw+CjxodG1sPgo8aGVhZD48dGl0bGU+SGFudHQgSGVsbG8gV29ybGQ8L3RpdGxlPgo8c3R5bGU+CiAgYm9keSB7IGZvbnQtZmFtaWx5OiBtb25vc3BhY2U7IGJhY2tncm91bmQ6ICMwZDExMTc7IGNvbG9yOiAjYzlkMWQ5OyBkaXNwbGF5OiBmbGV4OyBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjsgYWxpZ24taXRlbXM6IGNlbnRlcjsgbWluLWhlaWdodDogMTAwdmg7IG1hcmdpbjogMDsgfQogIC5jYXJkIHsgYmFja2dyb3VuZDogIzE2MWIyMjsgYm9yZGVyOiAxcHggc29saWQgIzMwMzYzZDsgYm9yZGVyLXJhZGl1czogOHB4OyBwYWRkaW5nOiAycmVtIDNyZW07IG1heC13aWR0aDogNDgwcHg7IH0KICBoMSB7IGNvbG9yOiAjNThhNmZmOyBtYXJnaW4tdG9wOiAwOyB9CiAgLmxhYmVsIHsgY29sb3I6ICM4Yjk0OWU7IGZvbnQtc2l6ZTogMC44NWVtOyB9CiAgLnZhbHVlIHsgY29sb3I6ICNlNmVkZjM7IG1hcmdpbi1ib3R0b206IDAuOHJlbTsgfQo8L3N0eWxlPgo8L2hlYWQ+Cjxib2R5Pgo8ZGl2IGNsYXNzPSJjYXJkIj4KICA8aDE+SGVsbG8gV29ybGQ8L2gxPgogIDxkaXYgY2xhc3M9ImxhYmVsIj5QbGF0Zm9ybTwvZGl2PjxkaXYgY2xhc3M9InZhbHVlIj5BbWF6b24gTGludXggMjAyMzwvZGl2PgogIDxkaXYgY2xhc3M9ImxhYmVsIj5JbnN0YW5jZSBJRDwvZGl2PjxkaXYgY2xhc3M9InZhbHVlIj4kSU5TVEFOQ0VfSUQ8L2Rpdj4KICA8ZGl2IGNsYXNzPSJsYWJlbCI+QXZhaWxhYmlsaXR5IFpvbmU8L2Rpdj48ZGl2IGNsYXNzPSJ2YWx1ZSI+JEFaPC9kaXY+CiAgPGRpdiBjbGFzcz0ibGFiZWwiPlByaXZhdGUgSVA8L2Rpdj48ZGl2IGNsYXNzPSJ2YWx1ZSI+JExPQ0FMX0lQPC9kaXY+CiAgPGRpdiBjbGFzcz0ibGFiZWwiPkluc3RhbmNlIFR5cGU8L2Rpdj48ZGl2IGNsYXNzPSJ2YWx1ZSI+JElOU1RBTkNFX1RZUEU8L2Rpdj4KICA8ZGl2IGNsYXNzPSJsYWJlbCI+TGF1bmNoZWQ8L2Rpdj48ZGl2IGNsYXNzPSJ2YWx1ZSI+JExBVU5DSEVEPC9kaXY+CjwvZGl2Pgo8L2JvZHk+CjwvaHRtbD4KSFRNTAo="
 
       [32m+[0m[0m block_device_mappings {
           [32m+[0m[0m device_name = "/dev/xvda"
@@ -482,13 +541,43 @@ Terraform will perform the following actions:
       [32m+[0m[0m target_health_state (known after apply)
     }
 
+[1m  # aws_nat_gateway.main[0m will be created
+[0m  [32m+[0m[0m resource "aws_nat_gateway" "main" {
+      [32m+[0m[0m allocation_id                      = (known after apply)
+      [32m+[0m[0m association_id                     = (known after apply)
+      [32m+[0m[0m connectivity_type                  = "public"
+      [32m+[0m[0m id                                 = (known after apply)
+      [32m+[0m[0m network_interface_id               = (known after apply)
+      [32m+[0m[0m private_ip                         = (known after apply)
+      [32m+[0m[0m public_ip                          = (known after apply)
+      [32m+[0m[0m secondary_private_ip_address_count = (known after apply)
+      [32m+[0m[0m secondary_private_ip_addresses     = (known after apply)
+      [32m+[0m[0m subnet_id                          = (known after apply)
+      [32m+[0m[0m tags                               = {
+          [32m+[0m[0m "Environment" = "dev"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "hantt-main-vpc-nat"
+        }
+      [32m+[0m[0m tags_all                           = {
+          [32m+[0m[0m "Environment" = "dev"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "hantt-main-vpc-nat"
+        }
+    }
+
 [1m  # aws_route_table.private[0m will be created
 [0m  [32m+[0m[0m resource "aws_route_table" "private" {
       [32m+[0m[0m arn              = (known after apply)
       [32m+[0m[0m id               = (known after apply)
       [32m+[0m[0m owner_id         = (known after apply)
       [32m+[0m[0m propagating_vgws = (known after apply)
-      [32m+[0m[0m route            = (known after apply)
+      [32m+[0m[0m route            = [
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_block                 = "0.0.0.0/0"
+              [32m+[0m[0m nat_gateway_id             = (known after apply)
+                [90m# (11 unchanged attributes hidden)[0m[0m
+            },
+        ]
       [32m+[0m[0m tags             = {
           [32m+[0m[0m "Environment" = "dev"
           [32m+[0m[0m "ManagedBy"   = "terraform"
@@ -817,11 +906,13 @@ Terraform will perform the following actions:
         }
     }
 
-[1mPlan:[0m [0m26 to add, 0 to change, 0 to destroy.
+[1mPlan:[0m [0m30 to add, 0 to change, 0 to destroy.
 
 Changes to Outputs:
-  [32m+[0m[0m asg_name            = "hantt-main-vpc-nginx-asg"
+  [32m+[0m[0m asg_name            = "hantt-main-vpc-nginx-windows-asg"
   [32m+[0m[0m internet_gateway_id = (known after apply)
+  [32m+[0m[0m nat_gateway_eip     = (known after apply)
+  [32m+[0m[0m nat_gateway_id      = (known after apply)
   [32m+[0m[0m nlb_arn             = (known after apply)
   [32m+[0m[0m nlb_dns_name        = (known after apply)
   [32m+[0m[0m private_subnet_a_id = (known after apply)
@@ -830,68 +921,84 @@ Changes to Outputs:
   [32m+[0m[0m public_subnet_b_id  = (known after apply)
   [32m+[0m[0m vpc_cidr            = "10.0.0.0/16"
   [32m+[0m[0m vpc_id              = (known after apply)
-[0m[1maws_iam_role.nginx_vm: Creating...[0m[0m
+[0m[1maws_eip.nat: Creating...[0m[0m
 [0m[1maws_vpc.main: Creating...[0m[0m
-[0m[1maws_iam_role.nginx_vm: Creation complete after 2s [id=hantt-main-vpc-nginx-vm-role][0m
+[0m[1maws_iam_role.nginx_vm: Creating...[0m[0m
+[0m[1maws_eip.nat: Creation complete after 0s [id=eipalloc-07a05fdf6d3656cde][0m
+[0m[1maws_iam_role.nginx_vm: Creation complete after 1s [id=hantt-main-vpc-nginx-vm-role][0m
+[0m[1maws_iam_role_policy.nginx_vm_secrets: Creating...[0m[0m
+[0m[1maws_iam_role_policy_attachment.nginx_vm_ssm: Creating...[0m[0m
 [0m[1maws_iam_role_policy_attachment.nginx_vm_s3_read: Creating...[0m[0m
 [0m[1maws_iam_instance_profile.nginx_vm: Creating...[0m[0m
-[0m[1maws_iam_role_policy_attachment.nginx_vm_ssm: Creating...[0m[0m
-[0m[1maws_iam_role_policy_attachment.nginx_vm_ssm: Creation complete after 1s [id=hantt-main-vpc-nginx-vm-role-20260608092158254300000001][0m
-[0m[1maws_iam_role_policy_attachment.nginx_vm_s3_read: Creation complete after 1s [id=hantt-main-vpc-nginx-vm-role-20260608092158573700000002][0m
+[0m[1maws_iam_role_policy_attachment.nginx_vm_cloudwatch: Creating...[0m[0m
+[0m[1maws_iam_role_policy_attachment.nginx_vm_cloudwatch: Creation complete after 1s [id=hantt-main-vpc-nginx-vm-role-20260609015540736100000001][0m
+[0m[1maws_iam_role_policy_attachment.nginx_vm_ssm: Creation complete after 2s [id=hantt-main-vpc-nginx-vm-role-20260609015541290000000002][0m
+[0m[1maws_iam_role_policy.nginx_vm_secrets: Creation complete after 2s [id=hantt-main-vpc-nginx-vm-role:hantt-main-vpc-nginx-vm-secrets][0m
+[0m[1maws_iam_role_policy_attachment.nginx_vm_s3_read: Creation complete after 2s [id=hantt-main-vpc-nginx-vm-role-20260609015541403400000003][0m
 [0m[1maws_iam_instance_profile.nginx_vm: Creation complete after 8s [id=hantt-main-vpc-nginx-vm-profile][0m
 [0m[1maws_vpc.main: Still creating... [00m10s elapsed][0m[0m
-[0m[1maws_vpc.main: Creation complete after 12s [id=vpc-040d8a184db39e4d1][0m
+[0m[1maws_vpc.main: Creation complete after 11s [id=vpc-0d7894ac074281692][0m
+[0m[1maws_security_group.nlb: Creating...[0m[0m
+[0m[1maws_internet_gateway.main: Creating...[0m[0m
+[0m[1maws_subnet.private_b: Creating...[0m[0m
 [0m[1maws_subnet.private_a: Creating...[0m[0m
 [0m[1maws_subnet.public_b: Creating...[0m[0m
-[0m[1maws_route_table.private: Creating...[0m[0m
 [0m[1maws_subnet.public_a: Creating...[0m[0m
-[0m[1maws_internet_gateway.main: Creating...[0m[0m
-[0m[1maws_security_group.nlb: Creating...[0m[0m
-[0m[1maws_subnet.private_b: Creating...[0m[0m
 [0m[1maws_lb_target_group.https: Creating...[0m[0m
-[0m[1maws_internet_gateway.main: Creation complete after 0s [id=igw-0e51d32e3c9067f6b][0m
+[0m[1maws_internet_gateway.main: Creation complete after 1s [id=igw-01c1f2c25c56822e0][0m
 [0m[1maws_route_table.public: Creating...[0m[0m
-[0m[1maws_route_table.private: Creation complete after 0s [id=rtb-0d97933909218d8ed][0m
-[0m[1maws_subnet.private_b: Creation complete after 1s [id=subnet-08b6beb8f7dc1fae0][0m
-[0m[1maws_route_table_association.private_b: Creating...[0m[0m
-[0m[1maws_lb_target_group.https: Creation complete after 1s [id=arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:targetgroup/hantt-main-vpc-tg-443/28a8aefbfdd1e15a][0m
-[0m[1maws_route_table_association.private_b: Creation complete after 0s [id=rtbassoc-0b53ce2740f723e0e][0m
-[0m[1maws_route_table.public: Creation complete after 1s [id=rtb-04cd66c3fd45c1e8b][0m
-[0m[1maws_security_group.nlb: Creation complete after 2s [id=sg-0210d7c42b1d4a7eb][0m
+[0m[1maws_lb_target_group.https: Creation complete after 1s [id=arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:targetgroup/hantt-main-vpc-tg-443/68c363934d1b074c][0m
+[0m[1maws_subnet.private_b: Creation complete after 1s [id=subnet-02cc18cd04b2c5fe2][0m
+[0m[1maws_route_table.public: Creation complete after 0s [id=rtb-005946bb868674da5][0m
+[0m[1maws_security_group.nlb: Creation complete after 3s [id=sg-008e546efaae1210b][0m
 [0m[1maws_security_group.private_vm: Creating...[0m[0m
-[0m[1maws_subnet.private_a: Creation complete after 4s [id=subnet-01b3a3038cb251ca9][0m
-[0m[1maws_route_table_association.private_a: Creating...[0m[0m
-[0m[1maws_security_group.private_vm: Creation complete after 2s [id=sg-0b88adbdbb3010a64][0m
+[0m[1maws_subnet.private_a: Creation complete after 3s [id=subnet-09d429d5904420918][0m
+[0m[1maws_security_group.private_vm: Creation complete after 2s [id=sg-0559bb24d3f7e89a3][0m
 [0m[1maws_launch_template.nginx: Creating...[0m[0m
 [0m[1maws_launch_template.nginx_linux: Creating...[0m[0m
-[0m[1maws_route_table_association.private_a: Creation complete after 0s [id=rtbassoc-0c7aed240a92a2873][0m
-[0m[1maws_launch_template.nginx: Creation complete after 6s [id=lt-0f423c7b690523801][0m
-[0m[1maws_launch_template.nginx_linux: Creation complete after 6s [id=lt-06a90e0f580dbdb25][0m
-[0m[1maws_autoscaling_group.nginx: Creating...[0m[0m
+[0m[1maws_launch_template.nginx_linux: Creation complete after 5s [id=lt-0d9032c0fbcada104][0m
+[0m[1maws_launch_template.nginx: Creation complete after 5s [id=lt-0b46aae15952c97f2][0m
 [0m[1maws_autoscaling_group.nginx_linux: Creating...[0m[0m
+[0m[1maws_autoscaling_group.nginx: Creating...[0m[0m
 [0m[1maws_subnet.public_b: Still creating... [00m10s elapsed][0m[0m
 [0m[1maws_subnet.public_a: Still creating... [00m10s elapsed][0m[0m
-[0m[1maws_subnet.public_a: Creation complete after 11s [id=subnet-0a65ed10308e374f8][0m
+[0m[1maws_subnet.public_a: Creation complete after 11s [id=subnet-0fce056577e90d209][0m
+[0m[1maws_nat_gateway.main: Creating...[0m[0m
 [0m[1maws_route_table_association.public_a: Creating...[0m[0m
-[0m[1maws_subnet.public_b: Creation complete after 11s [id=subnet-041b76f7982de9961][0m
+[0m[1maws_route_table_association.public_a: Creation complete after 1s [id=rtbassoc-006828a5124188032][0m
+[0m[1maws_subnet.public_b: Creation complete after 14s [id=subnet-0415076d92ef7568e][0m
 [0m[1maws_route_table_association.public_b: Creating...[0m[0m
 [0m[1maws_lb.main: Creating...[0m[0m
-[0m[1maws_route_table_association.public_a: Creation complete after 0s [id=rtbassoc-06372c930ef185946][0m
-[0m[1maws_route_table_association.public_b: Creation complete after 0s [id=rtbassoc-0d3d1eae1816a0aa2][0m
-[0m[1maws_autoscaling_group.nginx: Still creating... [00m10s elapsed][0m[0m
+[0m[1maws_route_table_association.public_b: Creation complete after 0s [id=rtbassoc-064755895dd2654f5][0m
 [0m[1maws_autoscaling_group.nginx_linux: Still creating... [00m10s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still creating... [00m10s elapsed][0m[0m
+[0m[1maws_nat_gateway.main: Still creating... [00m10s elapsed][0m[0m
 [0m[1maws_lb.main: Still creating... [00m10s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Creation complete after 15s [id=hantt-main-vpc-nginx-linux-asg][0m
-[0m[1maws_autoscaling_group.nginx: Creation complete after 15s [id=hantt-main-vpc-nginx-asg][0m
+[0m[1maws_autoscaling_group.nginx: Creation complete after 15s [id=hantt-main-vpc-nginx-windows-asg][0m
 [0m[1maws_autoscaling_policy.scale_out: Creating...[0m[0m
 [0m[1maws_autoscaling_policy.scale_out: Creation complete after 0s [id=hantt-main-vpc-scale-out][0m
+[0m[1maws_nat_gateway.main: Still creating... [00m20s elapsed][0m[0m
 [0m[1maws_lb.main: Still creating... [00m20s elapsed][0m[0m
+[0m[1maws_nat_gateway.main: Still creating... [00m30s elapsed][0m[0m
 [0m[1maws_lb.main: Still creating... [00m30s elapsed][0m[0m
+[0m[1maws_nat_gateway.main: Still creating... [00m40s elapsed][0m[0m
 [0m[1maws_lb.main: Still creating... [00m40s elapsed][0m[0m
+[0m[1maws_nat_gateway.main: Still creating... [00m50s elapsed][0m[0m
 [0m[1maws_lb.main: Still creating... [00m50s elapsed][0m[0m
+[0m[1maws_nat_gateway.main: Still creating... [01m00s elapsed][0m[0m
 [0m[1maws_lb.main: Still creating... [01m00s elapsed][0m[0m
+[0m[1maws_nat_gateway.main: Still creating... [01m10s elapsed][0m[0m
 [0m[1maws_lb.main: Still creating... [01m10s elapsed][0m[0m
+[0m[1maws_nat_gateway.main: Still creating... [01m20s elapsed][0m[0m
 [0m[1maws_lb.main: Still creating... [01m20s elapsed][0m[0m
+[0m[1maws_nat_gateway.main: Creation complete after 1m24s [id=nat-01c5528c7c543148e][0m
+[0m[1maws_route_table.private: Creating...[0m[0m
+[0m[1maws_route_table.private: Creation complete after 1s [id=rtb-0c1514070e4f6700f][0m
+[0m[1maws_route_table_association.private_b: Creating...[0m[0m
+[0m[1maws_route_table_association.private_a: Creating...[0m[0m
+[0m[1maws_route_table_association.private_a: Creation complete after 0s [id=rtbassoc-0f34db3d7eacea27e][0m
+[0m[1maws_route_table_association.private_b: Creation complete after 0s [id=rtbassoc-0096cf0a4087123e2][0m
 [0m[1maws_lb.main: Still creating... [01m30s elapsed][0m[0m
 [0m[1maws_lb.main: Still creating... [01m40s elapsed][0m[0m
 [0m[1maws_lb.main: Still creating... [01m50s elapsed][0m[0m
@@ -899,27 +1006,28 @@ Changes to Outputs:
 [0m[1maws_lb.main: Still creating... [02m10s elapsed][0m[0m
 [0m[1maws_lb.main: Still creating... [02m20s elapsed][0m[0m
 [0m[1maws_lb.main: Still creating... [02m30s elapsed][0m[0m
-[0m[1maws_lb.main: Still creating... [02m40s elapsed][0m[0m
-[0m[1maws_lb.main: Creation complete after 2m41s [id=arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:loadbalancer/net/hantt-main-vpc-nlb/e4bc246b4bbb994b][0m
+[0m[1maws_lb.main: Creation complete after 2m32s [id=arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:loadbalancer/net/hantt-main-vpc-nlb/a2b678a5dc3c34f9][0m
 [0m[1maws_lb_listener.https: Creating...[0m[0m
-[0m[1maws_lb_listener.https: Creation complete after 0s [id=arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:listener/net/hantt-main-vpc-nlb/e4bc246b4bbb994b/491cf40b7d1bc41e][0m
+[0m[1maws_lb_listener.https: Creation complete after 0s [id=arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:listener/net/hantt-main-vpc-nlb/a2b678a5dc3c34f9/0f4c486b035c2028][0m
 [0m[1m[32m
-Apply complete! Resources: 26 added, 0 changed, 0 destroyed.[0m
+Apply complete! Resources: 30 added, 0 changed, 0 destroyed.[0m
 [0m[1m[32m
 Outputs:
 
-[0masg_name = "hantt-main-vpc-nginx-asg"
-internet_gateway_id = "igw-0e51d32e3c9067f6b"
-nlb_arn = "arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:loadbalancer/net/hantt-main-vpc-nlb/e4bc246b4bbb994b"
-nlb_dns_name = "hantt-main-vpc-nlb-e4bc246b4bbb994b.elb.ap-southeast-6.amazonaws.com"
-private_subnet_a_id = "subnet-01b3a3038cb251ca9"
-private_subnet_b_id = "subnet-08b6beb8f7dc1fae0"
-public_subnet_a_id = "subnet-0a65ed10308e374f8"
-public_subnet_b_id = "subnet-041b76f7982de9961"
+[0masg_name = "hantt-main-vpc-nginx-windows-asg"
+internet_gateway_id = "igw-01c1f2c25c56822e0"
+nat_gateway_eip = "3.103.66.215"
+nat_gateway_id = "nat-01c5528c7c543148e"
+nlb_arn = "arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:loadbalancer/net/hantt-main-vpc-nlb/a2b678a5dc3c34f9"
+nlb_dns_name = "hantt-main-vpc-nlb-a2b678a5dc3c34f9.elb.ap-southeast-6.amazonaws.com"
+private_subnet_a_id = "subnet-09d429d5904420918"
+private_subnet_b_id = "subnet-02cc18cd04b2c5fe2"
+public_subnet_a_id = "subnet-0fce056577e90d209"
+public_subnet_b_id = "subnet-0415076d92ef7568e"
 vpc_cidr = "10.0.0.0/16"
-vpc_id = "vpc-040d8a184db39e4d1"
+vpc_id = "vpc-0d7894ac074281692"
 
 === Result ===
-NLB DNS  : hantt-main-vpc-nlb-e4bc246b4bbb994b.elb.ap-southeast-6.amazonaws.com
+NLB DNS  : hantt-main-vpc-nlb-a2b678a5dc3c34f9.elb.ap-southeast-6.amazonaws.com
 Log saved: /home/ansible/hantt_company_test/logs/3-terraform-apply.log
-Done: 2026-06-08 09:25:10 UTC
+Done: 2026-06-09 01:58:44 UTC

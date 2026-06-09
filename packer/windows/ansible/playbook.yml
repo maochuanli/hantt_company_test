@@ -12,11 +12,12 @@
             iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
           }
 
-    - name: Install Nginx and NSSM
+    - name: Install Nginx, NSSM and AWS CLI
       win_chocolatey:
         name:
           - nginx
           - nssm
+          - awscli
         state: present
 
     - name: Find nginx install directory
@@ -35,16 +36,6 @@
       win_file:
         path: "{{ nginx_dir }}\\ssl"
         state: directory
-
-    - name: Upload SSL certificate
-      win_copy:
-        src: "{{ playbook_dir }}/../../shared/ssl/server.crt"
-        dest: "{{ nginx_dir }}\\ssl\\server.crt"
-
-    - name: Upload SSL private key
-      win_copy:
-        src: "{{ playbook_dir }}/../../shared/ssl/server.key"
-        dest: "{{ nginx_dir }}\\ssl\\server.key"
 
     - name: Deploy Nginx HTTPS config
       win_template:
@@ -80,6 +71,7 @@
         name: nginx
         state: started
         start_mode: auto
+      ignore_errors: true
 
     - name: Open firewall for HTTPS
       ansible.windows.win_powershell:
@@ -90,3 +82,22 @@
       win_copy:
         dest: "C:\\nginx-dir.txt"
         content: "{{ nginx_dir }}"
+
+    - name: Ensure SSM agent is installed and set to auto-start
+      ansible.windows.win_powershell:
+        script: |
+          $svc = Get-Service -Name AmazonSSMAgent -ErrorAction SilentlyContinue
+          if (-not $svc) {
+            $msi = "$env:TEMP\AmazonSSMAgentSetup.exe"
+            Invoke-WebRequest -Uri "https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/windows_amd64/AmazonSSMAgentSetup.exe" `
+              -OutFile $msi -UseBasicParsing
+            Start-Process -FilePath $msi -ArgumentList "/S" -Wait
+            Remove-Item $msi -Force
+          }
+          Set-Service -Name AmazonSSMAgent -StartupType Automatic
+          Start-Service -Name AmazonSSMAgent -ErrorAction SilentlyContinue
+
+    - name: Reset EC2Launch v2 so user-data runs on first boot from this AMI
+      ansible.windows.win_powershell:
+        script: |
+          & "C:\Program Files\Amazon\EC2Launch\EC2Launch.exe" reset --clean

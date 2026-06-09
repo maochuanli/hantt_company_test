@@ -19,8 +19,32 @@ resource "aws_launch_template" "nginx" {
 
   user_data = base64encode(<<-EOF
     <powershell>
+    Start-Transcript -Path "C:\user-data.log" -Force
+
     # Read nginx install path stamped into the AMI at build time
     $nginxDir = (Get-Content "C:\nginx-dir.txt" -Raw).Trim()
+
+    # Fetch SSL cert and key from Secrets Manager so nginx can start
+    $env:AWS_STS_REGIONAL_ENDPOINTS = "regional"
+    $imdsToken = Invoke-RestMethod -Method Put `
+                   -Uri "http://169.254.169.254/latest/api/token" `
+                   -Headers @{"X-aws-ec2-metadata-token-ttl-seconds"="21600"}
+    $region    = Invoke-RestMethod `
+                   -Uri "http://169.254.169.254/latest/meta-data/placement/region" `
+                   -Headers @{"X-aws-ec2-metadata-token"=$imdsToken}
+    $secretJson = aws secretsmanager get-secret-value `
+                    --region $region `
+                    --secret-id hantt/nginx-ssl-cert `
+                    --query SecretString `
+                    --output text
+    if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrEmpty($secretJson)) {
+      Stop-Transcript; exit 1
+    }
+    $secret = $secretJson | ConvertFrom-Json
+    [System.IO.File]::WriteAllText("$nginxDir\ssl\server.crt", $secret.cert)
+    [System.IO.File]::WriteAllText("$nginxDir\ssl\server.key", $secret.key)
+    Restart-Service nginx -Force
+    Start-Sleep -Seconds 3
 
     # Fetch IMDSv2 token then pull instance metadata
     $token        = Invoke-RestMethod -Method Put `
@@ -60,6 +84,7 @@ resource "aws_launch_template" "nginx" {
 "@
 
     Set-Content -Path "$nginxDir\html\index.html" -Value $html -Encoding UTF8
+    Stop-Transcript
     </powershell>
     EOF
   )
@@ -88,10 +113,11 @@ resource "aws_launch_template" "nginx" {
 }
 
 resource "aws_autoscaling_group" "nginx" {
-  name                = "${var.vpc_name}-nginx-asg"
+  name                = "${var.vpc_name}-nginx-windows-asg"
   vpc_zone_identifier = [aws_subnet.private_a.id, aws_subnet.private_b.id]
   target_group_arns   = [aws_lb_target_group.https.arn]
   health_check_type   = "ELB"
+  force_delete        = true
 
   min_size         = var.asg_min
   max_size         = var.asg_max
@@ -104,7 +130,7 @@ resource "aws_autoscaling_group" "nginx" {
 
   tag {
     key                 = "Name"
-    value               = "${var.vpc_name}-nginx"
+    value               = "${var.vpc_name}-nginx-windows"
     propagate_at_launch = true
   }
 
@@ -136,6 +162,23 @@ resource "aws_launch_template" "nginx_linux" {
 
   user_data = base64encode(<<-EOF
     #!/bin/bash
+    # Pull SSL cert and key from Secrets Manager
+    SECRET_JSON=$(aws secretsmanager get-secret-value \
+      --region ap-southeast-6 \
+      --secret-id hantt/nginx-ssl-cert \
+      --query SecretString \
+      --output text)
+    mkdir -p /etc/nginx/ssl
+    SECRET_JSON="$SECRET_JSON" python3 -c "
+    import json, os
+    s = json.loads(os.environ['SECRET_JSON'])
+    open('/etc/nginx/ssl/server.crt', 'w').write(s['cert'])
+    open('/etc/nginx/ssl/server.key', 'w').write(s['key'])
+    "
+    chmod 0600 /etc/nginx/ssl/server.key
+    systemctl restart nginx
+
+    # Fetch instance metadata via IMDSv2
     TOKEN=$(curl -s -X PUT "http://169.254.169.254/latest/api/token" \
       -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
     INSTANCE_ID=$(curl -s -H "X-aws-ec2-metadata-token: $TOKEN" \
@@ -204,6 +247,7 @@ resource "aws_autoscaling_group" "nginx_linux" {
   vpc_zone_identifier = [aws_subnet.private_a.id, aws_subnet.private_b.id]
   target_group_arns   = [aws_lb_target_group.https.arn]
   health_check_type   = "ELB"
+  force_delete        = true
 
   min_size         = 1
   max_size         = 1

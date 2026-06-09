@@ -33,6 +33,16 @@ output "internet_gateway_id" {
   value       = aws_internet_gateway.main.id
 }
 
+output "nat_gateway_id" {
+  description = "ID of the NAT gateway"
+  value       = aws_nat_gateway.main.id
+}
+
+output "nat_gateway_eip" {
+  description = "Public IP of the NAT gateway"
+  value       = aws_eip.nat.public_ip
+}
+
 output "nlb_dns_name" {
   description = "DNS name of the NLB — access your service at https://<this>"
   value       = aws_lb.main.dns_name

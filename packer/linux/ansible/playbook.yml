@@ -4,28 +4,17 @@
   become: true
 
   tasks:
-    - name: Install nginx
+    - name: Install nginx and SSM agent
       dnf:
-        name: nginx
+        name:
+          - nginx
+          - amazon-ssm-agent
         state: present
 
-    - name: Create SSL directory
-      file:
-        path: /etc/nginx/ssl
-        state: directory
-        mode: "0700"
-
-    - name: Upload SSL certificate
-      copy:
-        src: "{{ playbook_dir }}/../../shared/ssl/server.crt"
-        dest: /etc/nginx/ssl/server.crt
-        mode: "0644"
-
-    - name: Upload SSL private key
-      copy:
-        src: "{{ playbook_dir }}/../../shared/ssl/server.key"
-        dest: /etc/nginx/ssl/server.key
-        mode: "0600"
+    - name: Enable SSM agent
+      systemd:
+        name: amazon-ssm-agent
+        enabled: true
 
     - name: Deploy Nginx HTTPS config
       template:
@@ -44,5 +33,7 @@
         dest: /usr/share/nginx/html/index.html
         mode: "0644"
 
-    - name: Enable and start Nginx
-      shell: systemctl enable --now nginx
+    - name: Enable Nginx (cert fetched from Secrets Manager at first boot via user-data)
+      systemd:
+        name: nginx
+        enabled: true

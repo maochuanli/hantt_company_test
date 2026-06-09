@@ -1,42 +1,46 @@
 ============================================================
   Terraform Destroy
-  2026-06-08 09:26:42 UTC
+  2026-06-09 02:00:23 UTC
 ============================================================
 
-Linux AMI  : ami-0518e6dd6cb17839d
-Windows AMI: ami-03c1519b76d470c78
+Linux AMI  : ami-06d4ac821dd7c2b7c
+Windows AMI: ami-092825995de360747
 
 === Refreshing OIDC token ===
 Token written to /home/ansible/secrets/azure-aws/oidc-token
 
 === terraform destroy ===
-[0m[1maws_iam_role.nginx_vm: Refreshing state... [id=hantt-main-vpc-nginx-vm-role][0m
-[0m[1maws_vpc.main: Refreshing state... [id=vpc-040d8a184db39e4d1][0m
+[0m[1maws_vpc.main: Refreshing state... [id=vpc-0d7894ac074281692][0m
 [0m[1mdata.aws_availability_zones.available: Reading...[0m[0m
-[0m[1mdata.aws_availability_zones.available: Read complete after 0s [id=ap-southeast-6][0m
-[0m[1maws_lb_target_group.https: Refreshing state... [id=arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:targetgroup/hantt-main-vpc-tg-443/28a8aefbfdd1e15a][0m
-[0m[1maws_internet_gateway.main: Refreshing state... [id=igw-0e51d32e3c9067f6b][0m
-[0m[1maws_subnet.public_a: Refreshing state... [id=subnet-0a65ed10308e374f8][0m
-[0m[1maws_subnet.private_b: Refreshing state... [id=subnet-08b6beb8f7dc1fae0][0m
-[0m[1maws_subnet.private_a: Refreshing state... [id=subnet-01b3a3038cb251ca9][0m
-[0m[1maws_route_table.private: Refreshing state... [id=rtb-0d97933909218d8ed][0m
-[0m[1maws_security_group.nlb: Refreshing state... [id=sg-0210d7c42b1d4a7eb][0m
-[0m[1maws_subnet.public_b: Refreshing state... [id=subnet-041b76f7982de9961][0m
-[0m[1maws_route_table.public: Refreshing state... [id=rtb-04cd66c3fd45c1e8b][0m
-[0m[1maws_route_table_association.public_a: Refreshing state... [id=rtbassoc-06372c930ef185946][0m
-[0m[1maws_security_group.private_vm: Refreshing state... [id=sg-0b88adbdbb3010a64][0m
-[0m[1maws_route_table_association.private_a: Refreshing state... [id=rtbassoc-0c7aed240a92a2873][0m
-[0m[1maws_route_table_association.private_b: Refreshing state... [id=rtbassoc-0b53ce2740f723e0e][0m
-[0m[1maws_lb.main: Refreshing state... [id=arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:loadbalancer/net/hantt-main-vpc-nlb/e4bc246b4bbb994b][0m
-[0m[1maws_route_table_association.public_b: Refreshing state... [id=rtbassoc-0d3d1eae1816a0aa2][0m
-[0m[1maws_iam_role_policy_attachment.nginx_vm_ssm: Refreshing state... [id=hantt-main-vpc-nginx-vm-role-20260608092158254300000001][0m
+[0m[1maws_eip.nat: Refreshing state... [id=eipalloc-07a05fdf6d3656cde][0m
+[0m[1maws_iam_role.nginx_vm: Refreshing state... [id=hantt-main-vpc-nginx-vm-role][0m
+[0m[1mdata.aws_availability_zones.available: Read complete after 1s [id=ap-southeast-6][0m
+[0m[1maws_subnet.public_a: Refreshing state... [id=subnet-0fce056577e90d209][0m
+[0m[1maws_subnet.public_b: Refreshing state... [id=subnet-0415076d92ef7568e][0m
+[0m[1maws_subnet.private_a: Refreshing state... [id=subnet-09d429d5904420918][0m
+[0m[1maws_subnet.private_b: Refreshing state... [id=subnet-02cc18cd04b2c5fe2][0m
+[0m[1maws_lb_target_group.https: Refreshing state... [id=arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:targetgroup/hantt-main-vpc-tg-443/68c363934d1b074c][0m
+[0m[1maws_internet_gateway.main: Refreshing state... [id=igw-01c1f2c25c56822e0][0m
+[0m[1maws_security_group.nlb: Refreshing state... [id=sg-008e546efaae1210b][0m
+[0m[1maws_route_table.public: Refreshing state... [id=rtb-005946bb868674da5][0m
+[0m[1maws_route_table_association.public_a: Refreshing state... [id=rtbassoc-006828a5124188032][0m
+[0m[1maws_nat_gateway.main: Refreshing state... [id=nat-01c5528c7c543148e][0m
+[0m[1maws_route_table_association.public_b: Refreshing state... [id=rtbassoc-064755895dd2654f5][0m
+[0m[1maws_security_group.private_vm: Refreshing state... [id=sg-0559bb24d3f7e89a3][0m
+[0m[1maws_lb.main: Refreshing state... [id=arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:loadbalancer/net/hantt-main-vpc-nlb/a2b678a5dc3c34f9][0m
+[0m[1maws_route_table.private: Refreshing state... [id=rtb-0c1514070e4f6700f][0m
+[0m[1maws_route_table_association.private_a: Refreshing state... [id=rtbassoc-0f34db3d7eacea27e][0m
+[0m[1maws_route_table_association.private_b: Refreshing state... [id=rtbassoc-0096cf0a4087123e2][0m
+[0m[1maws_lb_listener.https: Refreshing state... [id=arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:listener/net/hantt-main-vpc-nlb/a2b678a5dc3c34f9/0f4c486b035c2028][0m
+[0m[1maws_iam_role_policy_attachment.nginx_vm_ssm: Refreshing state... [id=hantt-main-vpc-nginx-vm-role-20260609015541290000000002][0m
+[0m[1maws_iam_role_policy_attachment.nginx_vm_cloudwatch: Refreshing state... [id=hantt-main-vpc-nginx-vm-role-20260609015540736100000001][0m
+[0m[1maws_iam_role_policy_attachment.nginx_vm_s3_read: Refreshing state... [id=hantt-main-vpc-nginx-vm-role-20260609015541403400000003][0m
+[0m[1maws_iam_role_policy.nginx_vm_secrets: Refreshing state... [id=hantt-main-vpc-nginx-vm-role:hantt-main-vpc-nginx-vm-secrets][0m
 [0m[1maws_iam_instance_profile.nginx_vm: Refreshing state... [id=hantt-main-vpc-nginx-vm-profile][0m
-[0m[1maws_iam_role_policy_attachment.nginx_vm_s3_read: Refreshing state... [id=hantt-main-vpc-nginx-vm-role-20260608092158573700000002][0m
-[0m[1maws_lb_listener.https: Refreshing state... [id=arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:listener/net/hantt-main-vpc-nlb/e4bc246b4bbb994b/491cf40b7d1bc41e][0m
-[0m[1maws_launch_template.nginx: Refreshing state... [id=lt-0f423c7b690523801][0m
-[0m[1maws_launch_template.nginx_linux: Refreshing state... [id=lt-06a90e0f580dbdb25][0m
-[0m[1maws_autoscaling_group.nginx: Refreshing state... [id=hantt-main-vpc-nginx-asg][0m
+[0m[1maws_launch_template.nginx_linux: Refreshing state... [id=lt-0d9032c0fbcada104][0m
+[0m[1maws_launch_template.nginx: Refreshing state... [id=lt-0b46aae15952c97f2][0m
 [0m[1maws_autoscaling_group.nginx_linux: Refreshing state... [id=hantt-main-vpc-nginx-linux-asg][0m
+[0m[1maws_autoscaling_group.nginx: Refreshing state... [id=hantt-main-vpc-nginx-windows-asg][0m
 [0m[1maws_autoscaling_policy.scale_out: Refreshing state... [id=hantt-main-vpc-scale-out][0m
 
 Terraform used the selected providers to generate the following execution
@@ -47,7 +51,7 @@ Terraform will perform the following actions:
 
 [1m  # aws_autoscaling_group.nginx[0m will be [1m[31mdestroyed[0m
 [0m  [31m-[0m[0m resource "aws_autoscaling_group" "nginx" {
-      [31m-[0m[0m arn                              = "arn:aws:autoscaling:ap-southeast-6:996992102979:autoScalingGroup:03f1f0a3-a4f1-4a11-9a1e-6cb888e7e9b6:autoScalingGroupName/hantt-main-vpc-nginx-asg" [90m-> null[0m[0m
+      [31m-[0m[0m arn                              = "arn:aws:autoscaling:ap-southeast-6:996992102979:autoScalingGroup:8da90eca-8dae-4a8a-816c-f8c926fe6bbd:autoScalingGroupName/hantt-main-vpc-nginx-windows-asg" [90m-> null[0m[0m
       [31m-[0m[0m availability_zones               = [
           [31m-[0m[0m "ap-southeast-6a",
           [31m-[0m[0m "ap-southeast-6b",
@@ -57,29 +61,29 @@ Terraform will perform the following actions:
       [31m-[0m[0m default_instance_warmup          = 0 [90m-> null[0m[0m
       [31m-[0m[0m desired_capacity                 = 1 [90m-> null[0m[0m
       [31m-[0m[0m enabled_metrics                  = [] [90m-> null[0m[0m
-      [31m-[0m[0m force_delete                     = false [90m-> null[0m[0m
+      [31m-[0m[0m force_delete                     = true [90m-> null[0m[0m
       [31m-[0m[0m force_delete_warm_pool           = false [90m-> null[0m[0m
       [31m-[0m[0m health_check_grace_period        = 300 [90m-> null[0m[0m
       [31m-[0m[0m health_check_type                = "ELB" [90m-> null[0m[0m
-      [31m-[0m[0m id                               = "hantt-main-vpc-nginx-asg" [90m-> null[0m[0m
+      [31m-[0m[0m id                               = "hantt-main-vpc-nginx-windows-asg" [90m-> null[0m[0m
       [31m-[0m[0m ignore_failed_scaling_activities = false [90m-> null[0m[0m
       [31m-[0m[0m load_balancers                   = [] [90m-> null[0m[0m
       [31m-[0m[0m max_instance_lifetime            = 0 [90m-> null[0m[0m
       [31m-[0m[0m max_size                         = 2 [90m-> null[0m[0m
       [31m-[0m[0m metrics_granularity              = "1Minute" [90m-> null[0m[0m
       [31m-[0m[0m min_size                         = 1 [90m-> null[0m[0m
-      [31m-[0m[0m name                             = "hantt-main-vpc-nginx-asg" [90m-> null[0m[0m
+      [31m-[0m[0m name                             = "hantt-main-vpc-nginx-windows-asg" [90m-> null[0m[0m
       [31m-[0m[0m predicted_capacity               = 0 [90m-> null[0m[0m
       [31m-[0m[0m protect_from_scale_in            = false [90m-> null[0m[0m
       [31m-[0m[0m service_linked_role_arn          = "arn:aws:iam::996992102979:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling" [90m-> null[0m[0m
       [31m-[0m[0m suspended_processes              = [] [90m-> null[0m[0m
       [31m-[0m[0m target_group_arns                = [
-          [31m-[0m[0m "arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:targetgroup/hantt-main-vpc-tg-443/28a8aefbfdd1e15a",
+          [31m-[0m[0m "arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:targetgroup/hantt-main-vpc-tg-443/68c363934d1b074c",
         ] [90m-> null[0m[0m
       [31m-[0m[0m termination_policies             = [] [90m-> null[0m[0m
       [31m-[0m[0m vpc_zone_identifier              = [
-          [31m-[0m[0m "subnet-01b3a3038cb251ca9",
-          [31m-[0m[0m "subnet-08b6beb8f7dc1fae0",
+          [31m-[0m[0m "subnet-02cc18cd04b2c5fe2",
+          [31m-[0m[0m "subnet-09d429d5904420918",
         ] [90m-> null[0m[0m
       [31m-[0m[0m wait_for_capacity_timeout        = "10m" [90m-> null[0m[0m
       [31m-[0m[0m warm_pool_size                   = 0 [90m-> null[0m[0m
@@ -94,8 +98,8 @@ Terraform will perform the following actions:
         }
 
       [31m-[0m[0m launch_template {
-          [31m-[0m[0m id      = "lt-0f423c7b690523801" [90m-> null[0m[0m
-          [31m-[0m[0m name    = "hantt-main-vpc-nginx-20260608092212407300000005" [90m-> null[0m[0m
+          [31m-[0m[0m id      = "lt-0b46aae15952c97f2" [90m-> null[0m[0m
+          [31m-[0m[0m name    = "hantt-main-vpc-nginx-20260609015554629200000005" [90m-> null[0m[0m
           [31m-[0m[0m version = "$Latest" [90m-> null[0m[0m
         }
 
@@ -107,18 +111,18 @@ Terraform will perform the following actions:
       [31m-[0m[0m tag {
           [31m-[0m[0m key                 = "Name" [90m-> null[0m[0m
           [31m-[0m[0m propagate_at_launch = true [90m-> null[0m[0m
-          [31m-[0m[0m value               = "hantt-main-vpc-nginx" [90m-> null[0m[0m
+          [31m-[0m[0m value               = "hantt-main-vpc-nginx-windows" [90m-> null[0m[0m
         }
 
       [31m-[0m[0m traffic_source {
-          [31m-[0m[0m identifier = "arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:targetgroup/hantt-main-vpc-tg-443/28a8aefbfdd1e15a" [90m-> null[0m[0m
+          [31m-[0m[0m identifier = "arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:targetgroup/hantt-main-vpc-tg-443/68c363934d1b074c" [90m-> null[0m[0m
           [31m-[0m[0m type       = "elbv2" [90m-> null[0m[0m
         }
     }
 
 [1m  # aws_autoscaling_group.nginx_linux[0m will be [1m[31mdestroyed[0m
 [0m  [31m-[0m[0m resource "aws_autoscaling_group" "nginx_linux" {
-      [31m-[0m[0m arn                              = "arn:aws:autoscaling:ap-southeast-6:996992102979:autoScalingGroup:157507fc-1032-426e-a28d-d0c3986b1a48:autoScalingGroupName/hantt-main-vpc-nginx-linux-asg" [90m-> null[0m[0m
+      [31m-[0m[0m arn                              = "arn:aws:autoscaling:ap-southeast-6:996992102979:autoScalingGroup:c3fb1eae-3705-4961-875e-2076b6fa1875:autoScalingGroupName/hantt-main-vpc-nginx-linux-asg" [90m-> null[0m[0m
       [31m-[0m[0m availability_zones               = [
           [31m-[0m[0m "ap-southeast-6a",
           [31m-[0m[0m "ap-southeast-6b",
@@ -128,7 +132,7 @@ Terraform will perform the following actions:
       [31m-[0m[0m default_instance_warmup          = 0 [90m-> null[0m[0m
       [31m-[0m[0m desired_capacity                 = 1 [90m-> null[0m[0m
       [31m-[0m[0m enabled_metrics                  = [] [90m-> null[0m[0m
-      [31m-[0m[0m force_delete                     = false [90m-> null[0m[0m
+      [31m-[0m[0m force_delete                     = true [90m-> null[0m[0m
       [31m-[0m[0m force_delete_warm_pool           = false [90m-> null[0m[0m
       [31m-[0m[0m health_check_grace_period        = 300 [90m-> null[0m[0m
       [31m-[0m[0m health_check_type                = "ELB" [90m-> null[0m[0m
@@ -145,12 +149,12 @@ Terraform will perform the following actions:
       [31m-[0m[0m service_linked_role_arn          = "arn:aws:iam::996992102979:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling" [90m-> null[0m[0m
       [31m-[0m[0m suspended_processes              = [] [90m-> null[0m[0m
       [31m-[0m[0m target_group_arns                = [
-          [31m-[0m[0m "arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:targetgroup/hantt-main-vpc-tg-443/28a8aefbfdd1e15a",
+          [31m-[0m[0m "arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:targetgroup/hantt-main-vpc-tg-443/68c363934d1b074c",
         ] [90m-> null[0m[0m
       [31m-[0m[0m termination_policies             = [] [90m-> null[0m[0m
       [31m-[0m[0m vpc_zone_identifier              = [
-          [31m-[0m[0m "subnet-01b3a3038cb251ca9",
-          [31m-[0m[0m "subnet-08b6beb8f7dc1fae0",
+          [31m-[0m[0m "subnet-02cc18cd04b2c5fe2",
+          [31m-[0m[0m "subnet-09d429d5904420918",
         ] [90m-> null[0m[0m
       [31m-[0m[0m wait_for_capacity_timeout        = "10m" [90m-> null[0m[0m
       [31m-[0m[0m warm_pool_size                   = 0 [90m-> null[0m[0m
@@ -165,8 +169,8 @@ Terraform will perform the following actions:
         }
 
       [31m-[0m[0m launch_template {
-          [31m-[0m[0m id      = "lt-06a90e0f580dbdb25" [90m-> null[0m[0m
-          [31m-[0m[0m name    = "hantt-main-vpc-nginx-linux-20260608092212419600000007" [90m-> null[0m[0m
+          [31m-[0m[0m id      = "lt-0d9032c0fbcada104" [90m-> null[0m[0m
+          [31m-[0m[0m name    = "hantt-main-vpc-nginx-linux-20260609015554646100000007" [90m-> null[0m[0m
           [31m-[0m[0m version = "$Latest" [90m-> null[0m[0m
         }
 
@@ -182,15 +186,15 @@ Terraform will perform the following actions:
         }
 
       [31m-[0m[0m traffic_source {
-          [31m-[0m[0m identifier = "arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:targetgroup/hantt-main-vpc-tg-443/28a8aefbfdd1e15a" [90m-> null[0m[0m
+          [31m-[0m[0m identifier = "arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:targetgroup/hantt-main-vpc-tg-443/68c363934d1b074c" [90m-> null[0m[0m
           [31m-[0m[0m type       = "elbv2" [90m-> null[0m[0m
         }
     }
 
 [1m  # aws_autoscaling_policy.scale_out[0m will be [1m[31mdestroyed[0m
 [0m  [31m-[0m[0m resource "aws_autoscaling_policy" "scale_out" {
-      [31m-[0m[0m arn                       = "arn:aws:autoscaling:ap-southeast-6:996992102979:scalingPolicy:7248c7ea-ac54-4b05-841c-96d9d9017a5a:autoScalingGroupName/hantt-main-vpc-nginx-asg:policyName/hantt-main-vpc-scale-out" [90m-> null[0m[0m
-      [31m-[0m[0m autoscaling_group_name    = "hantt-main-vpc-nginx-asg" [90m-> null[0m[0m
+      [31m-[0m[0m arn                       = "arn:aws:autoscaling:ap-southeast-6:996992102979:scalingPolicy:96c10d7b-ba0f-4404-8e2d-9b49d49a4530:autoScalingGroupName/hantt-main-vpc-nginx-windows-asg:policyName/hantt-main-vpc-scale-out" [90m-> null[0m[0m
+      [31m-[0m[0m autoscaling_group_name    = "hantt-main-vpc-nginx-windows-asg" [90m-> null[0m[0m
       [31m-[0m[0m cooldown                  = 0 [90m-> null[0m[0m
       [31m-[0m[0m enabled                   = true [90m-> null[0m[0m
       [31m-[0m[0m estimated_instance_warmup = 0 [90m-> null[0m[0m
@@ -212,17 +216,45 @@ Terraform will perform the following actions:
         }
     }
 
+[1m  # aws_eip.nat[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_eip" "nat" {
+      [31m-[0m[0m allocation_id            = "eipalloc-07a05fdf6d3656cde" [90m-> null[0m[0m
+      [31m-[0m[0m arn                      = "arn:aws:ec2:ap-southeast-6:996992102979:elastic-ip/eipalloc-07a05fdf6d3656cde" [90m-> null[0m[0m
+      [31m-[0m[0m association_id           = "eipassoc-0810f152280d79722" [90m-> null[0m[0m
+      [31m-[0m[0m domain                   = "vpc" [90m-> null[0m[0m
+      [31m-[0m[0m id                       = "eipalloc-07a05fdf6d3656cde" [90m-> null[0m[0m
+      [31m-[0m[0m network_border_group     = "ap-southeast-6" [90m-> null[0m[0m
+      [31m-[0m[0m network_interface        = "eni-08a7f69de3eccf6c2" [90m-> null[0m[0m
+      [31m-[0m[0m private_dns              = "ip-10-0-1-195.ap-southeast-6.compute.internal" [90m-> null[0m[0m
+      [31m-[0m[0m private_ip               = "10.0.1.195" [90m-> null[0m[0m
+      [31m-[0m[0m public_dns               = "ec2-3-103-66-215.ap-southeast-6.compute.amazonaws.com" [90m-> null[0m[0m
+      [31m-[0m[0m public_ip                = "3.103.66.215" [90m-> null[0m[0m
+      [31m-[0m[0m public_ipv4_pool         = "amazon" [90m-> null[0m[0m
+      [31m-[0m[0m tags                     = {
+          [31m-[0m[0m "Environment" = "dev"
+          [31m-[0m[0m "ManagedBy"   = "terraform"
+          [31m-[0m[0m "Name"        = "hantt-main-vpc-nat-eip"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all                 = {
+          [31m-[0m[0m "Environment" = "dev"
+          [31m-[0m[0m "ManagedBy"   = "terraform"
+          [31m-[0m[0m "Name"        = "hantt-main-vpc-nat-eip"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m vpc                      = true [90m-> null[0m[0m
+        [90m# (5 unchanged attributes hidden)[0m[0m
+    }
+
 [1m  # aws_iam_instance_profile.nginx_vm[0m will be [1m[31mdestroyed[0m
 [0m  [31m-[0m[0m resource "aws_iam_instance_profile" "nginx_vm" {
       [31m-[0m[0m arn         = "arn:aws:iam::996992102979:instance-profile/hantt-main-vpc-nginx-vm-profile" [90m-> null[0m[0m
-      [31m-[0m[0m create_date = "2026-06-08T09:21:58Z" [90m-> null[0m[0m
+      [31m-[0m[0m create_date = "2026-06-09T01:55:41Z" [90m-> null[0m[0m
       [31m-[0m[0m id          = "hantt-main-vpc-nginx-vm-profile" [90m-> null[0m[0m
       [31m-[0m[0m name        = "hantt-main-vpc-nginx-vm-profile" [90m-> null[0m[0m
       [31m-[0m[0m path        = "/" [90m-> null[0m[0m
       [31m-[0m[0m role        = "hantt-main-vpc-nginx-vm-role" [90m-> null[0m[0m
       [31m-[0m[0m tags        = {} [90m-> null[0m[0m
       [31m-[0m[0m tags_all    = {} [90m-> null[0m[0m
-      [31m-[0m[0m unique_id   = "AIPA6QIK4GJBX2TYVU3X4" [90m-> null[0m[0m
+      [31m-[0m[0m unique_id   = "AIPA6QIK4GJB2232IJNGK" [90m-> null[0m[0m
         [90m# (1 unchanged attribute hidden)[0m[0m
     }
 
@@ -243,12 +275,13 @@ Terraform will perform the following actions:
               [31m-[0m[0m Version   = "2012-10-17"
             }
         ) [90m-> null[0m[0m
-      [31m-[0m[0m create_date           = "2026-06-08T09:21:56Z" [90m-> null[0m[0m
+      [31m-[0m[0m create_date           = "2026-06-09T01:55:39Z" [90m-> null[0m[0m
       [31m-[0m[0m force_detach_policies = false [90m-> null[0m[0m
       [31m-[0m[0m id                    = "hantt-main-vpc-nginx-vm-role" [90m-> null[0m[0m
       [31m-[0m[0m managed_policy_arns   = [
           [31m-[0m[0m "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess",
           [31m-[0m[0m "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore",
+          [31m-[0m[0m "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy",
         ] [90m-> null[0m[0m
       [31m-[0m[0m max_session_duration  = 3600 [90m-> null[0m[0m
       [31m-[0m[0m name                  = "hantt-main-vpc-nginx-vm-role" [90m-> null[0m[0m
@@ -263,28 +296,71 @@ Terraform will perform the following actions:
           [31m-[0m[0m "ManagedBy"   = "terraform"
           [31m-[0m[0m "Name"        = "hantt-main-vpc-nginx-vm-role"
         } [90m-> null[0m[0m
-      [31m-[0m[0m unique_id             = "AROA6QIK4GJB2NKYBMKDN" [90m-> null[0m[0m
+      [31m-[0m[0m unique_id             = "AROA6QIK4GJBSISHHDPM2" [90m-> null[0m[0m
         [90m# (3 unchanged attributes hidden)[0m[0m
+
+      [31m-[0m[0m inline_policy {
+          [31m-[0m[0m name   = "hantt-main-vpc-nginx-vm-secrets" [90m-> null[0m[0m
+          [31m-[0m[0m policy = jsonencode(
+                {
+                  [31m-[0m[0m Statement = [
+                      [31m-[0m[0m {
+                          [31m-[0m[0m Action   = "secretsmanager:GetSecretValue"
+                          [31m-[0m[0m Effect   = "Allow"
+                          [31m-[0m[0m Resource = "arn:aws:secretsmanager:ap-southeast-6:996992102979:secret:hantt/nginx-ssl-cert-*"
+                        },
+                    ]
+                  [31m-[0m[0m Version   = "2012-10-17"
+                }
+            ) [90m-> null[0m[0m
+        }
+    }
+
+[1m  # aws_iam_role_policy.nginx_vm_secrets[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_role_policy" "nginx_vm_secrets" {
+      [31m-[0m[0m id          = "hantt-main-vpc-nginx-vm-role:hantt-main-vpc-nginx-vm-secrets" [90m-> null[0m[0m
+      [31m-[0m[0m name        = "hantt-main-vpc-nginx-vm-secrets" [90m-> null[0m[0m
+      [31m-[0m[0m policy      = jsonencode(
+            {
+              [31m-[0m[0m Statement = [
+                  [31m-[0m[0m {
+                      [31m-[0m[0m Action   = "secretsmanager:GetSecretValue"
+                      [31m-[0m[0m Effect   = "Allow"
+                      [31m-[0m[0m Resource = "arn:aws:secretsmanager:ap-southeast-6:996992102979:secret:hantt/nginx-ssl-cert-*"
+                    },
+                ]
+              [31m-[0m[0m Version   = "2012-10-17"
+            }
+        ) [90m-> null[0m[0m
+      [31m-[0m[0m role        = "hantt-main-vpc-nginx-vm-role" [90m-> null[0m[0m
+        [90m# (1 unchanged attribute hidden)[0m[0m
+    }
+
+[1m  # aws_iam_role_policy_attachment.nginx_vm_cloudwatch[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_iam_role_policy_attachment" "nginx_vm_cloudwatch" {
+      [31m-[0m[0m id         = "hantt-main-vpc-nginx-vm-role-20260609015540736100000001" [90m-> null[0m[0m
+      [31m-[0m[0m policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy" [90m-> null[0m[0m
+      [31m-[0m[0m role       = "hantt-main-vpc-nginx-vm-role" [90m-> null[0m[0m
     }
 
 [1m  # aws_iam_role_policy_attachment.nginx_vm_s3_read[0m will be [1m[31mdestroyed[0m
 [0m  [31m-[0m[0m resource "aws_iam_role_policy_attachment" "nginx_vm_s3_read" {
-      [31m-[0m[0m id         = "hantt-main-vpc-nginx-vm-role-20260608092158573700000002" [90m-> null[0m[0m
+      [31m-[0m[0m id         = "hantt-main-vpc-nginx-vm-role-20260609015541403400000003" [90m-> null[0m[0m
       [31m-[0m[0m policy_arn = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess" [90m-> null[0m[0m
       [31m-[0m[0m role       = "hantt-main-vpc-nginx-vm-role" [90m-> null[0m[0m
     }
 
 [1m  # aws_iam_role_policy_attachment.nginx_vm_ssm[0m will be [1m[31mdestroyed[0m
 [0m  [31m-[0m[0m resource "aws_iam_role_policy_attachment" "nginx_vm_ssm" {
-      [31m-[0m[0m id         = "hantt-main-vpc-nginx-vm-role-20260608092158254300000001" [90m-> null[0m[0m
+      [31m-[0m[0m id         = "hantt-main-vpc-nginx-vm-role-20260609015541290000000002" [90m-> null[0m[0m
       [31m-[0m[0m policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore" [90m-> null[0m[0m
       [31m-[0m[0m role       = "hantt-main-vpc-nginx-vm-role" [90m-> null[0m[0m
     }
 
 [1m  # aws_internet_gateway.main[0m will be [1m[31mdestroyed[0m
 [0m  [31m-[0m[0m resource "aws_internet_gateway" "main" {
-      [31m-[0m[0m arn      = "arn:aws:ec2:ap-southeast-6:996992102979:internet-gateway/igw-0e51d32e3c9067f6b" [90m-> null[0m[0m
-      [31m-[0m[0m id       = "igw-0e51d32e3c9067f6b" [90m-> null[0m[0m
+      [31m-[0m[0m arn      = "arn:aws:ec2:ap-southeast-6:996992102979:internet-gateway/igw-01c1f2c25c56822e0" [90m-> null[0m[0m
+      [31m-[0m[0m id       = "igw-01c1f2c25c56822e0" [90m-> null[0m[0m
       [31m-[0m[0m owner_id = "996992102979" [90m-> null[0m[0m
       [31m-[0m[0m tags     = {
           [31m-[0m[0m "Environment" = "dev"
@@ -296,25 +372,25 @@ Terraform will perform the following actions:
           [31m-[0m[0m "ManagedBy"   = "terraform"
           [31m-[0m[0m "Name"        = "hantt-main-vpc-igw"
         } [90m-> null[0m[0m
-      [31m-[0m[0m vpc_id   = "vpc-040d8a184db39e4d1" [90m-> null[0m[0m
+      [31m-[0m[0m vpc_id   = "vpc-0d7894ac074281692" [90m-> null[0m[0m
     }
 
 [1m  # aws_launch_template.nginx[0m will be [1m[31mdestroyed[0m
 [0m  [31m-[0m[0m resource "aws_launch_template" "nginx" {
-      [31m-[0m[0m arn                                  = "arn:aws:ec2:ap-southeast-6:996992102979:launch-template/lt-0f423c7b690523801" [90m-> null[0m[0m
+      [31m-[0m[0m arn                                  = "arn:aws:ec2:ap-southeast-6:996992102979:launch-template/lt-0b46aae15952c97f2" [90m-> null[0m[0m
       [31m-[0m[0m default_version                      = 1 [90m-> null[0m[0m
       [31m-[0m[0m disable_api_stop                     = false [90m-> null[0m[0m
       [31m-[0m[0m disable_api_termination              = false [90m-> null[0m[0m
-      [31m-[0m[0m id                                   = "lt-0f423c7b690523801" [90m-> null[0m[0m
-      [31m-[0m[0m image_id                             = "ami-03c1519b76d470c78" [90m-> null[0m[0m
+      [31m-[0m[0m id                                   = "lt-0b46aae15952c97f2" [90m-> null[0m[0m
+      [31m-[0m[0m image_id                             = "ami-092825995de360747" [90m-> null[0m[0m
       [31m-[0m[0m instance_type                        = "t3.small" [90m-> null[0m[0m
       [31m-[0m[0m latest_version                       = 1 [90m-> null[0m[0m
-      [31m-[0m[0m name                                 = "hantt-main-vpc-nginx-20260608092212407300000005" [90m-> null[0m[0m
+      [31m-[0m[0m name                                 = "hantt-main-vpc-nginx-20260609015554629200000005" [90m-> null[0m[0m
       [31m-[0m[0m name_prefix                          = "hantt-main-vpc-nginx-" [90m-> null[0m[0m
       [31m-[0m[0m security_group_names                 = [] [90m-> null[0m[0m
       [31m-[0m[0m tags                                 = {} [90m-> null[0m[0m
       [31m-[0m[0m tags_all                             = {} [90m-> null[0m[0m
-      [31m-[0m[0m user_data                            = "ICAgIDxwb3dlcnNoZWxsPgogICAgIyBGZXRjaCBJTURTdjIgdG9rZW4gdGhlbiBwdWxsIGluc3RhbmNlIG1ldGFkYXRhCiAgICAkdG9rZW4gICAgICAgID0gSW52b2tlLVJlc3RNZXRob2QgLU1ldGhvZCBQdXQgYAogICAgICAgICAgICAgICAgICAgICAgLVVyaSAiaHR0cDovLzE2OS4yNTQuMTY5LjI1NC9sYXRlc3QvYXBpL3Rva2VuIiBgCiAgICAgICAgICAgICAgICAgICAgICAtSGVhZGVycyBAeyJYLWF3cy1lYzItbWV0YWRhdGEtdG9rZW4tdHRsLXNlY29uZHMiPSIyMTYwMCJ9CiAgICAkaGRycyAgICAgICAgID0gQHsiWC1hd3MtZWMyLW1ldGFkYXRhLXRva2VuIj0kdG9rZW59CiAgICAkaW5zdGFuY2VJZCAgID0gSW52b2tlLVJlc3RNZXRob2QgLVVyaSAiaHR0cDovLzE2OS4yNTQuMTY5LjI1NC9sYXRlc3QvbWV0YS1kYXRhL2luc3RhbmNlLWlkIiAgICAgICAgICAgICAgICAgICAgLUhlYWRlcnMgJGhkcnMKICAgICRheiAgICAgICAgICAgPSBJbnZva2UtUmVzdE1ldGhvZCAtVXJpICJodHRwOi8vMTY5LjI1NC4xNjkuMjU0L2xhdGVzdC9tZXRhLWRhdGEvcGxhY2VtZW50L2F2YWlsYWJpbGl0eS16b25lIiAgIC1IZWFkZXJzICRoZHJzCiAgICAkbG9jYWxJcCAgICAgID0gSW52b2tlLVJlc3RNZXRob2QgLVVyaSAiaHR0cDovLzE2OS4yNTQuMTY5LjI1NC9sYXRlc3QvbWV0YS1kYXRhL2xvY2FsLWlwdjQiICAgICAgICAgICAgICAgICAgICAtSGVhZGVycyAkaGRycwogICAgJGluc3RhbmNlVHlwZSA9IEludm9rZS1SZXN0TWV0aG9kIC1VcmkgImh0dHA6Ly8xNjkuMjU0LjE2OS4yNTQvbGF0ZXN0L21ldGEtZGF0YS9pbnN0YW5jZS10eXBlIiAgICAgICAgICAgICAgICAgLUhlYWRlcnMgJGhkcnMKICAgICRsYXVuY2hlZCAgICAgPSAoR2V0LURhdGUpLlRvVW5pdmVyc2FsVGltZSgpLlRvU3RyaW5nKCJ5eXl5LU1NLWRkIEhIOm1tOnNzIFVUQyIpCgogICAgIyBMb2NhdGUgQ2hvY29sYXRleSBuZ2lueCBpbnN0YWxsYXRpb24gKGUuZy4gQzpcdG9vbHNcbmdpbngtMS54LngpCiAgICAkbmdpbnhEaXIgPSAoR2V0LUNoaWxkSXRlbSAiQzpcdG9vbHMiIC1GaWx0ZXIgIm5naW54LSoiIC1EaXJlY3RvcnkgLUVycm9yQWN0aW9uIFNpbGVudGx5Q29udGludWUgfAogICAgICAgICAgICAgICAgIFNvcnQtT2JqZWN0IE5hbWUgLURlc2NlbmRpbmcgfCBTZWxlY3QtT2JqZWN0IC1GaXJzdCAxKS5GdWxsTmFtZQogICAgaWYgKC1ub3QgJG5naW54RGlyKSB7ICRuZ2lueERpciA9ICJDOlxuZ2lueCIgfQoKICAgICRodG1sID0gQCIKPCFET0NUWVBFIGh0bWw+CjxodG1sPgo8aGVhZD48dGl0bGU+SGFudHQgSGVsbG8gV29ybGQ8L3RpdGxlPgo8c3R5bGU+CiAgYm9keSB7IGZvbnQtZmFtaWx5OiBtb25vc3BhY2U7IGJhY2tncm91bmQ6ICMwZDExMTc7IGNvbG9yOiAjYzlkMWQ5OyBkaXNwbGF5OiBmbGV4OyBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjsgYWxpZ24taXRlbXM6IGNlbnRlcjsgbWluLWhlaWdodDogMTAwdmg7IG1hcmdpbjogMDsgfQogIC5jYXJkIHsgYmFja2dyb3VuZDogIzE2MWIyMjsgYm9yZGVyOiAxcHggc29saWQgIzMwMzYzZDsgYm9yZGVyLXJhZGl1czogOHB4OyBwYWRkaW5nOiAycmVtIDNyZW07IG1heC13aWR0aDogNDgwcHg7IH0KICBoMSB7IGNvbG9yOiAjNThhNmZmOyBtYXJnaW4tdG9wOiAwOyB9CiAgLmxhYmVsIHsgY29sb3I6ICM4Yjk0OWU7IGZvbnQtc2l6ZTogMC44NWVtOyB9CiAgLnZhbHVlIHsgY29sb3I6ICNlNmVkZjM7IG1hcmdpbi1ib3R0b206IDAuOHJlbTsgfQo8L3N0eWxlPgo8L2hlYWQ+Cjxib2R5Pgo8ZGl2IGNsYXNzPSJjYXJkIj4KICA8aDE+SGVsbG8gV29ybGQ8L2gxPgogIDxkaXYgY2xhc3M9ImxhYmVsIj5QbGF0Zm9ybTwvZGl2PjxkaXYgY2xhc3M9InZhbHVlIj5XaW5kb3dzIFNlcnZlciAyMDIyPC9kaXY+CiAgPGRpdiBjbGFzcz0ibGFiZWwiPkluc3RhbmNlIElEPC9kaXY+PGRpdiBjbGFzcz0idmFsdWUiPiRpbnN0YW5jZUlkPC9kaXY+CiAgPGRpdiBjbGFzcz0ibGFiZWwiPkF2YWlsYWJpbGl0eSBab25lPC9kaXY+PGRpdiBjbGFzcz0idmFsdWUiPiRhejwvZGl2PgogIDxkaXYgY2xhc3M9ImxhYmVsIj5Qcml2YXRlIElQPC9kaXY+PGRpdiBjbGFzcz0idmFsdWUiPiRsb2NhbElwPC9kaXY+CiAgPGRpdiBjbGFzcz0ibGFiZWwiPkluc3RhbmNlIFR5cGU8L2Rpdj48ZGl2IGNsYXNzPSJ2YWx1ZSI+JGluc3RhbmNlVHlwZTwvZGl2PgogIDxkaXYgY2xhc3M9ImxhYmVsIj5MYXVuY2hlZDwvZGl2PjxkaXYgY2xhc3M9InZhbHVlIj4kbGF1bmNoZWQ8L2Rpdj4KPC9kaXY+CjwvYm9keT4KPC9odG1sPgoiQAoKICAgIFNldC1Db250ZW50IC1QYXRoICIkbmdpbnhEaXJcaHRtbFxpbmRleC5odG1sIiAtVmFsdWUgJGh0bWwgLUVuY29kaW5nIFVURjgKICAgIDwvcG93ZXJzaGVsbD4K" [90m-> null[0m[0m
+      [31m-[0m[0m user_data                            = "ICAgIDxwb3dlcnNoZWxsPgogICAgU3RhcnQtVHJhbnNjcmlwdCAtUGF0aCAiQzpcdXNlci1kYXRhLmxvZyIgLUZvcmNlCgogICAgIyBSZWFkIG5naW54IGluc3RhbGwgcGF0aCBzdGFtcGVkIGludG8gdGhlIEFNSSBhdCBidWlsZCB0aW1lCiAgICAkbmdpbnhEaXIgPSAoR2V0LUNvbnRlbnQgIkM6XG5naW54LWRpci50eHQiIC1SYXcpLlRyaW0oKQoKICAgICMgRmV0Y2ggU1NMIGNlcnQgYW5kIGtleSBmcm9tIFNlY3JldHMgTWFuYWdlciBzbyBuZ2lueCBjYW4gc3RhcnQKICAgICRlbnY6QVdTX1NUU19SRUdJT05BTF9FTkRQT0lOVFMgPSAicmVnaW9uYWwiCiAgICAkaW1kc1Rva2VuID0gSW52b2tlLVJlc3RNZXRob2QgLU1ldGhvZCBQdXQgYAogICAgICAgICAgICAgICAgICAgLVVyaSAiaHR0cDovLzE2OS4yNTQuMTY5LjI1NC9sYXRlc3QvYXBpL3Rva2VuIiBgCiAgICAgICAgICAgICAgICAgICAtSGVhZGVycyBAeyJYLWF3cy1lYzItbWV0YWRhdGEtdG9rZW4tdHRsLXNlY29uZHMiPSIyMTYwMCJ9CiAgICAkcmVnaW9uICAgID0gSW52b2tlLVJlc3RNZXRob2QgYAogICAgICAgICAgICAgICAgICAgLVVyaSAiaHR0cDovLzE2OS4yNTQuMTY5LjI1NC9sYXRlc3QvbWV0YS1kYXRhL3BsYWNlbWVudC9yZWdpb24iIGAKICAgICAgICAgICAgICAgICAgIC1IZWFkZXJzIEB7IlgtYXdzLWVjMi1tZXRhZGF0YS10b2tlbiI9JGltZHNUb2tlbn0KICAgICRzZWNyZXRKc29uID0gYXdzIHNlY3JldHNtYW5hZ2VyIGdldC1zZWNyZXQtdmFsdWUgYAogICAgICAgICAgICAgICAgICAgIC0tcmVnaW9uICRyZWdpb24gYAogICAgICAgICAgICAgICAgICAgIC0tc2VjcmV0LWlkIGhhbnR0L25naW54LXNzbC1jZXJ0IGAKICAgICAgICAgICAgICAgICAgICAtLXF1ZXJ5IFNlY3JldFN0cmluZyBgCiAgICAgICAgICAgICAgICAgICAgLS1vdXRwdXQgdGV4dAogICAgaWYgKCRMQVNURVhJVENPREUgLW5lIDAgLW9yIFtzdHJpbmddOjpJc051bGxPckVtcHR5KCRzZWNyZXRKc29uKSkgewogICAgICBTdG9wLVRyYW5zY3JpcHQ7IGV4aXQgMQogICAgfQogICAgJHNlY3JldCA9ICRzZWNyZXRKc29uIHwgQ29udmVydEZyb20tSnNvbgogICAgW1N5c3RlbS5JTy5GaWxlXTo6V3JpdGVBbGxUZXh0KCIkbmdpbnhEaXJcc3NsXHNlcnZlci5jcnQiLCAkc2VjcmV0LmNlcnQpCiAgICBbU3lzdGVtLklPLkZpbGVdOjpXcml0ZUFsbFRleHQoIiRuZ2lueERpclxzc2xcc2VydmVyLmtleSIsICRzZWNyZXQua2V5KQogICAgUmVzdGFydC1TZXJ2aWNlIG5naW54IC1Gb3JjZQogICAgU3RhcnQtU2xlZXAgLVNlY29uZHMgMwoKICAgICMgRmV0Y2ggSU1EU3YyIHRva2VuIHRoZW4gcHVsbCBpbnN0YW5jZSBtZXRhZGF0YQogICAgJHRva2VuICAgICAgICA9IEludm9rZS1SZXN0TWV0aG9kIC1NZXRob2QgUHV0IGAKICAgICAgICAgICAgICAgICAgICAgIC1VcmkgImh0dHA6Ly8xNjkuMjU0LjE2OS4yNTQvbGF0ZXN0L2FwaS90b2tlbiIgYAogICAgICAgICAgICAgICAgICAgICAgLUhlYWRlcnMgQHsiWC1hd3MtZWMyLW1ldGFkYXRhLXRva2VuLXR0bC1zZWNvbmRzIj0iMjE2MDAifQogICAgJGhkcnMgICAgICAgICA9IEB7IlgtYXdzLWVjMi1tZXRhZGF0YS10b2tlbiI9JHRva2VufQogICAgJGluc3RhbmNlSWQgICA9IEludm9rZS1SZXN0TWV0aG9kIC1VcmkgImh0dHA6Ly8xNjkuMjU0LjE2OS4yNTQvbGF0ZXN0L21ldGEtZGF0YS9pbnN0YW5jZS1pZCIgICAgICAgICAgICAgICAgICAgLUhlYWRlcnMgJGhkcnMKICAgICRheiAgICAgICAgICAgPSBJbnZva2UtUmVzdE1ldGhvZCAtVXJpICJodHRwOi8vMTY5LjI1NC4xNjkuMjU0L2xhdGVzdC9tZXRhLWRhdGEvcGxhY2VtZW50L2F2YWlsYWJpbGl0eS16b25lIiAgLUhlYWRlcnMgJGhkcnMKICAgICRsb2NhbElwICAgICAgPSBJbnZva2UtUmVzdE1ldGhvZCAtVXJpICJodHRwOi8vMTY5LjI1NC4xNjkuMjU0L2xhdGVzdC9tZXRhLWRhdGEvbG9jYWwtaXB2NCIgICAgICAgICAgICAgICAgICAgLUhlYWRlcnMgJGhkcnMKICAgICRpbnN0YW5jZVR5cGUgPSBJbnZva2UtUmVzdE1ldGhvZCAtVXJpICJodHRwOi8vMTY5LjI1NC4xNjkuMjU0L2xhdGVzdC9tZXRhLWRhdGEvaW5zdGFuY2UtdHlwZSIgICAgICAgICAgICAgICAgLUhlYWRlcnMgJGhkcnMKICAgICRsYXVuY2hlZCAgICAgPSAoR2V0LURhdGUpLlRvVW5pdmVyc2FsVGltZSgpLlRvU3RyaW5nKCJ5eXl5LU1NLWRkIEhIOm1tOnNzIFVUQyIpCgogICAgJGh0bWwgPSBAIgo8IURPQ1RZUEUgaHRtbD4KPGh0bWw+CjxoZWFkPjx0aXRsZT5IYW50dCBIZWxsbyBXb3JsZDwvdGl0bGU+CjxzdHlsZT4KICBib2R5IHsgZm9udC1mYW1pbHk6IG1vbm9zcGFjZTsgYmFja2dyb3VuZDogIzBkMTExNzsgY29sb3I6ICNjOWQxZDk7IGRpc3BsYXk6IGZsZXg7IGp1c3RpZnktY29udGVudDogY2VudGVyOyBhbGlnbi1pdGVtczogY2VudGVyOyBtaW4taGVpZ2h0OiAxMDB2aDsgbWFyZ2luOiAwOyB9CiAgLmNhcmQgeyBiYWNrZ3JvdW5kOiAjMTYxYjIyOyBib3JkZXI6IDFweCBzb2xpZCAjMzAzNjNkOyBib3JkZXItcmFkaXVzOiA4cHg7IHBhZGRpbmc6IDJyZW0gM3JlbTsgbWF4LXdpZHRoOiA0ODBweDsgfQogIGgxIHsgY29sb3I6ICM1OGE2ZmY7IG1hcmdpbi10b3A6IDA7IH0KICAubGFiZWwgeyBjb2xvcjogIzhiOTQ5ZTsgZm9udC1zaXplOiAwLjg1ZW07IH0KICAudmFsdWUgeyBjb2xvcjogI2U2ZWRmMzsgbWFyZ2luLWJvdHRvbTogMC44cmVtOyB9Cjwvc3R5bGU+CjwvaGVhZD4KPGJvZHk+CjxkaXYgY2xhc3M9ImNhcmQiPgogIDxoMT5IZWxsbyBXb3JsZDwvaDE+CiAgPGRpdiBjbGFzcz0ibGFiZWwiPlBsYXRmb3JtPC9kaXY+PGRpdiBjbGFzcz0idmFsdWUiPldpbmRvd3MgU2VydmVyIDIwMjI8L2Rpdj4KICA8ZGl2IGNsYXNzPSJsYWJlbCI+SW5zdGFuY2UgSUQ8L2Rpdj48ZGl2IGNsYXNzPSJ2YWx1ZSI+JGluc3RhbmNlSWQ8L2Rpdj4KICA8ZGl2IGNsYXNzPSJsYWJlbCI+QXZhaWxhYmlsaXR5IFpvbmU8L2Rpdj48ZGl2IGNsYXNzPSJ2YWx1ZSI+JGF6PC9kaXY+CiAgPGRpdiBjbGFzcz0ibGFiZWwiPlByaXZhdGUgSVA8L2Rpdj48ZGl2IGNsYXNzPSJ2YWx1ZSI+JGxvY2FsSXA8L2Rpdj4KICA8ZGl2IGNsYXNzPSJsYWJlbCI+SW5zdGFuY2UgVHlwZTwvZGl2PjxkaXYgY2xhc3M9InZhbHVlIj4kaW5zdGFuY2VUeXBlPC9kaXY+CiAgPGRpdiBjbGFzcz0ibGFiZWwiPkxhdW5jaGVkPC9kaXY+PGRpdiBjbGFzcz0idmFsdWUiPiRsYXVuY2hlZDwvZGl2Pgo8L2Rpdj4KPC9ib2R5Pgo8L2h0bWw+CiJACgogICAgU2V0LUNvbnRlbnQgLVBhdGggIiRuZ2lueERpclxodG1sXGluZGV4Lmh0bWwiIC1WYWx1ZSAkaHRtbCAtRW5jb2RpbmcgVVRGOAogICAgU3RvcC1UcmFuc2NyaXB0CiAgICA8L3Bvd2Vyc2hlbGw+Cg==" [90m-> null[0m[0m
       [31m-[0m[0m vpc_security_group_ids               = [] [90m-> null[0m[0m
         [90m# (6 unchanged attributes hidden)[0m[0m
 
@@ -357,7 +433,7 @@ Terraform will perform the following actions:
           [31m-[0m[0m ipv6_prefixes                = [] [90m-> null[0m[0m
           [31m-[0m[0m network_card_index           = 0 [90m-> null[0m[0m
           [31m-[0m[0m security_groups              = [
-              [31m-[0m[0m "sg-0b88adbdbb3010a64",
+              [31m-[0m[0m "sg-0559bb24d3f7e89a3",
             ] [90m-> null[0m[0m
             [90m# (8 unchanged attributes hidden)[0m[0m
         }
@@ -374,20 +450,20 @@ Terraform will perform the following actions:
 
 [1m  # aws_launch_template.nginx_linux[0m will be [1m[31mdestroyed[0m
 [0m  [31m-[0m[0m resource "aws_launch_template" "nginx_linux" {
-      [31m-[0m[0m arn                                  = "arn:aws:ec2:ap-southeast-6:996992102979:launch-template/lt-06a90e0f580dbdb25" [90m-> null[0m[0m
+      [31m-[0m[0m arn                                  = "arn:aws:ec2:ap-southeast-6:996992102979:launch-template/lt-0d9032c0fbcada104" [90m-> null[0m[0m
       [31m-[0m[0m default_version                      = 1 [90m-> null[0m[0m
       [31m-[0m[0m disable_api_stop                     = false [90m-> null[0m[0m
       [31m-[0m[0m disable_api_termination              = false [90m-> null[0m[0m
-      [31m-[0m[0m id                                   = "lt-06a90e0f580dbdb25" [90m-> null[0m[0m
-      [31m-[0m[0m image_id                             = "ami-0518e6dd6cb17839d" [90m-> null[0m[0m
+      [31m-[0m[0m id                                   = "lt-0d9032c0fbcada104" [90m-> null[0m[0m
+      [31m-[0m[0m image_id                             = "ami-06d4ac821dd7c2b7c" [90m-> null[0m[0m
       [31m-[0m[0m instance_type                        = "t3.small" [90m-> null[0m[0m
       [31m-[0m[0m latest_version                       = 1 [90m-> null[0m[0m
-      [31m-[0m[0m name                                 = "hantt-main-vpc-nginx-linux-20260608092212419600000007" [90m-> null[0m[0m
+      [31m-[0m[0m name                                 = "hantt-main-vpc-nginx-linux-20260609015554646100000007" [90m-> null[0m[0m
       [31m-[0m[0m name_prefix                          = "hantt-main-vpc-nginx-linux-" [90m-> null[0m[0m
       [31m-[0m[0m security_group_names                 = [] [90m-> null[0m[0m
       [31m-[0m[0m tags                                 = {} [90m-> null[0m[0m
       [31m-[0m[0m tags_all                             = {} [90m-> null[0m[0m
-      [31m-[0m[0m user_data                            = "IyEvYmluL2Jhc2gKVE9LRU49JChjdXJsIC1zIC1YIFBVVCAiaHR0cDovLzE2OS4yNTQuMTY5LjI1NC9sYXRlc3QvYXBpL3Rva2VuIiBcCiAgLUggIlgtYXdzLWVjMi1tZXRhZGF0YS10b2tlbi10dGwtc2Vjb25kczogMjE2MDAiKQpJTlNUQU5DRV9JRD0kKGN1cmwgLXMgLUggIlgtYXdzLWVjMi1tZXRhZGF0YS10b2tlbjogJFRPS0VOIiBcCiAgaHR0cDovLzE2OS4yNTQuMTY5LjI1NC9sYXRlc3QvbWV0YS1kYXRhL2luc3RhbmNlLWlkKQpBWj0kKGN1cmwgLXMgLUggIlgtYXdzLWVjMi1tZXRhZGF0YS10b2tlbjogJFRPS0VOIiBcCiAgaHR0cDovLzE2OS4yNTQuMTY5LjI1NC9sYXRlc3QvbWV0YS1kYXRhL3BsYWNlbWVudC9hdmFpbGFiaWxpdHktem9uZSkKTE9DQUxfSVA9JChjdXJsIC1zIC1IICJYLWF3cy1lYzItbWV0YWRhdGEtdG9rZW46ICRUT0tFTiIgXAogIGh0dHA6Ly8xNjkuMjU0LjE2OS4yNTQvbGF0ZXN0L21ldGEtZGF0YS9sb2NhbC1pcHY0KQpJTlNUQU5DRV9UWVBFPSQoY3VybCAtcyAtSCAiWC1hd3MtZWMyLW1ldGFkYXRhLXRva2VuOiAkVE9LRU4iIFwKICBodHRwOi8vMTY5LjI1NC4xNjkuMjU0L2xhdGVzdC9tZXRhLWRhdGEvaW5zdGFuY2UtdHlwZSkKTEFVTkNIRUQ9JChkYXRlIC11ICcrJVktJW0tJWQgJUg6JU06JVMgVVRDJykKCmNhdCA+IC91c3Ivc2hhcmUvbmdpbngvaHRtbC9pbmRleC5odG1sIDw8SFRNTAo8IURPQ1RZUEUgaHRtbD4KPGh0bWw+CjxoZWFkPjx0aXRsZT5IYW50dCBIZWxsbyBXb3JsZDwvdGl0bGU+CjxzdHlsZT4KICBib2R5IHsgZm9udC1mYW1pbHk6IG1vbm9zcGFjZTsgYmFja2dyb3VuZDogIzBkMTExNzsgY29sb3I6ICNjOWQxZDk7IGRpc3BsYXk6IGZsZXg7IGp1c3RpZnktY29udGVudDogY2VudGVyOyBhbGlnbi1pdGVtczogY2VudGVyOyBtaW4taGVpZ2h0OiAxMDB2aDsgbWFyZ2luOiAwOyB9CiAgLmNhcmQgeyBiYWNrZ3JvdW5kOiAjMTYxYjIyOyBib3JkZXI6IDFweCBzb2xpZCAjMzAzNjNkOyBib3JkZXItcmFkaXVzOiA4cHg7IHBhZGRpbmc6IDJyZW0gM3JlbTsgbWF4LXdpZHRoOiA0ODBweDsgfQogIGgxIHsgY29sb3I6ICM1OGE2ZmY7IG1hcmdpbi10b3A6IDA7IH0KICAubGFiZWwgeyBjb2xvcjogIzhiOTQ5ZTsgZm9udC1zaXplOiAwLjg1ZW07IH0KICAudmFsdWUgeyBjb2xvcjogI2U2ZWRmMzsgbWFyZ2luLWJvdHRvbTogMC44cmVtOyB9Cjwvc3R5bGU+CjwvaGVhZD4KPGJvZHk+CjxkaXYgY2xhc3M9ImNhcmQiPgogIDxoMT5IZWxsbyBXb3JsZDwvaDE+CiAgPGRpdiBjbGFzcz0ibGFiZWwiPlBsYXRmb3JtPC9kaXY+PGRpdiBjbGFzcz0idmFsdWUiPkFtYXpvbiBMaW51eCAyMDIzPC9kaXY+CiAgPGRpdiBjbGFzcz0ibGFiZWwiPkluc3RhbmNlIElEPC9kaXY+PGRpdiBjbGFzcz0idmFsdWUiPiRJTlNUQU5DRV9JRDwvZGl2PgogIDxkaXYgY2xhc3M9ImxhYmVsIj5BdmFpbGFiaWxpdHkgWm9uZTwvZGl2PjxkaXYgY2xhc3M9InZhbHVlIj4kQVo8L2Rpdj4KICA8ZGl2IGNsYXNzPSJsYWJlbCI+UHJpdmF0ZSBJUDwvZGl2PjxkaXYgY2xhc3M9InZhbHVlIj4kTE9DQUxfSVA8L2Rpdj4KICA8ZGl2IGNsYXNzPSJsYWJlbCI+SW5zdGFuY2UgVHlwZTwvZGl2PjxkaXYgY2xhc3M9InZhbHVlIj4kSU5TVEFOQ0VfVFlQRTwvZGl2PgogIDxkaXYgY2xhc3M9ImxhYmVsIj5MYXVuY2hlZDwvZGl2PjxkaXYgY2xhc3M9InZhbHVlIj4kTEFVTkNIRUQ8L2Rpdj4KPC9kaXY+CjwvYm9keT4KPC9odG1sPgpIVE1MCg==" [90m-> null[0m[0m
+      [31m-[0m[0m user_data                            = "IyEvYmluL2Jhc2gKIyBQdWxsIFNTTCBjZXJ0IGFuZCBrZXkgZnJvbSBTZWNyZXRzIE1hbmFnZXIKU0VDUkVUX0pTT049JChhd3Mgc2VjcmV0c21hbmFnZXIgZ2V0LXNlY3JldC12YWx1ZSBcCiAgLS1yZWdpb24gYXAtc291dGhlYXN0LTYgXAogIC0tc2VjcmV0LWlkIGhhbnR0L25naW54LXNzbC1jZXJ0IFwKICAtLXF1ZXJ5IFNlY3JldFN0cmluZyBcCiAgLS1vdXRwdXQgdGV4dCkKbWtkaXIgLXAgL2V0Yy9uZ2lueC9zc2wKU0VDUkVUX0pTT049IiRTRUNSRVRfSlNPTiIgcHl0aG9uMyAtYyAiCmltcG9ydCBqc29uLCBvcwpzID0ganNvbi5sb2Fkcyhvcy5lbnZpcm9uWydTRUNSRVRfSlNPTiddKQpvcGVuKCcvZXRjL25naW54L3NzbC9zZXJ2ZXIuY3J0JywgJ3cnKS53cml0ZShzWydjZXJ0J10pCm9wZW4oJy9ldGMvbmdpbngvc3NsL3NlcnZlci5rZXknLCAndycpLndyaXRlKHNbJ2tleSddKQoiCmNobW9kIDA2MDAgL2V0Yy9uZ2lueC9zc2wvc2VydmVyLmtleQpzeXN0ZW1jdGwgcmVzdGFydCBuZ2lueAoKIyBGZXRjaCBpbnN0YW5jZSBtZXRhZGF0YSB2aWEgSU1EU3YyClRPS0VOPSQoY3VybCAtcyAtWCBQVVQgImh0dHA6Ly8xNjkuMjU0LjE2OS4yNTQvbGF0ZXN0L2FwaS90b2tlbiIgXAogIC1IICJYLWF3cy1lYzItbWV0YWRhdGEtdG9rZW4tdHRsLXNlY29uZHM6IDIxNjAwIikKSU5TVEFOQ0VfSUQ9JChjdXJsIC1zIC1IICJYLWF3cy1lYzItbWV0YWRhdGEtdG9rZW46ICRUT0tFTiIgXAogIGh0dHA6Ly8xNjkuMjU0LjE2OS4yNTQvbGF0ZXN0L21ldGEtZGF0YS9pbnN0YW5jZS1pZCkKQVo9JChjdXJsIC1zIC1IICJYLWF3cy1lYzItbWV0YWRhdGEtdG9rZW46ICRUT0tFTiIgXAogIGh0dHA6Ly8xNjkuMjU0LjE2OS4yNTQvbGF0ZXN0L21ldGEtZGF0YS9wbGFjZW1lbnQvYXZhaWxhYmlsaXR5LXpvbmUpCkxPQ0FMX0lQPSQoY3VybCAtcyAtSCAiWC1hd3MtZWMyLW1ldGFkYXRhLXRva2VuOiAkVE9LRU4iIFwKICBodHRwOi8vMTY5LjI1NC4xNjkuMjU0L2xhdGVzdC9tZXRhLWRhdGEvbG9jYWwtaXB2NCkKSU5TVEFOQ0VfVFlQRT0kKGN1cmwgLXMgLUggIlgtYXdzLWVjMi1tZXRhZGF0YS10b2tlbjogJFRPS0VOIiBcCiAgaHR0cDovLzE2OS4yNTQuMTY5LjI1NC9sYXRlc3QvbWV0YS1kYXRhL2luc3RhbmNlLXR5cGUpCkxBVU5DSEVEPSQoZGF0ZSAtdSAnKyVZLSVtLSVkICVIOiVNOiVTIFVUQycpCgpjYXQgPiAvdXNyL3NoYXJlL25naW54L2h0bWwvaW5kZXguaHRtbCA8PEhUTUwKPCFET0NUWVBFIGh0bWw+CjxodG1sPgo8aGVhZD48dGl0bGU+SGFudHQgSGVsbG8gV29ybGQ8L3RpdGxlPgo8c3R5bGU+CiAgYm9keSB7IGZvbnQtZmFtaWx5OiBtb25vc3BhY2U7IGJhY2tncm91bmQ6ICMwZDExMTc7IGNvbG9yOiAjYzlkMWQ5OyBkaXNwbGF5OiBmbGV4OyBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjsgYWxpZ24taXRlbXM6IGNlbnRlcjsgbWluLWhlaWdodDogMTAwdmg7IG1hcmdpbjogMDsgfQogIC5jYXJkIHsgYmFja2dyb3VuZDogIzE2MWIyMjsgYm9yZGVyOiAxcHggc29saWQgIzMwMzYzZDsgYm9yZGVyLXJhZGl1czogOHB4OyBwYWRkaW5nOiAycmVtIDNyZW07IG1heC13aWR0aDogNDgwcHg7IH0KICBoMSB7IGNvbG9yOiAjNThhNmZmOyBtYXJnaW4tdG9wOiAwOyB9CiAgLmxhYmVsIHsgY29sb3I6ICM4Yjk0OWU7IGZvbnQtc2l6ZTogMC44NWVtOyB9CiAgLnZhbHVlIHsgY29sb3I6ICNlNmVkZjM7IG1hcmdpbi1ib3R0b206IDAuOHJlbTsgfQo8L3N0eWxlPgo8L2hlYWQ+Cjxib2R5Pgo8ZGl2IGNsYXNzPSJjYXJkIj4KICA8aDE+SGVsbG8gV29ybGQ8L2gxPgogIDxkaXYgY2xhc3M9ImxhYmVsIj5QbGF0Zm9ybTwvZGl2PjxkaXYgY2xhc3M9InZhbHVlIj5BbWF6b24gTGludXggMjAyMzwvZGl2PgogIDxkaXYgY2xhc3M9ImxhYmVsIj5JbnN0YW5jZSBJRDwvZGl2PjxkaXYgY2xhc3M9InZhbHVlIj4kSU5TVEFOQ0VfSUQ8L2Rpdj4KICA8ZGl2IGNsYXNzPSJsYWJlbCI+QXZhaWxhYmlsaXR5IFpvbmU8L2Rpdj48ZGl2IGNsYXNzPSJ2YWx1ZSI+JEFaPC9kaXY+CiAgPGRpdiBjbGFzcz0ibGFiZWwiPlByaXZhdGUgSVA8L2Rpdj48ZGl2IGNsYXNzPSJ2YWx1ZSI+JExPQ0FMX0lQPC9kaXY+CiAgPGRpdiBjbGFzcz0ibGFiZWwiPkluc3RhbmNlIFR5cGU8L2Rpdj48ZGl2IGNsYXNzPSJ2YWx1ZSI+JElOU1RBTkNFX1RZUEU8L2Rpdj4KICA8ZGl2IGNsYXNzPSJsYWJlbCI+TGF1bmNoZWQ8L2Rpdj48ZGl2IGNsYXNzPSJ2YWx1ZSI+JExBVU5DSEVEPC9kaXY+CjwvZGl2Pgo8L2JvZHk+CjwvaHRtbD4KSFRNTAo=" [90m-> null[0m[0m
       [31m-[0m[0m vpc_security_group_ids               = [] [90m-> null[0m[0m
         [90m# (6 unchanged attributes hidden)[0m[0m
 
@@ -430,7 +506,7 @@ Terraform will perform the following actions:
           [31m-[0m[0m ipv6_prefixes                = [] [90m-> null[0m[0m
           [31m-[0m[0m network_card_index           = 0 [90m-> null[0m[0m
           [31m-[0m[0m security_groups              = [
-              [31m-[0m[0m "sg-0b88adbdbb3010a64",
+              [31m-[0m[0m "sg-0559bb24d3f7e89a3",
             ] [90m-> null[0m[0m
             [90m# (8 unchanged attributes hidden)[0m[0m
         }
@@ -447,24 +523,24 @@ Terraform will perform the following actions:
 
 [1m  # aws_lb.main[0m will be [1m[31mdestroyed[0m
 [0m  [31m-[0m[0m resource "aws_lb" "main" {
-      [31m-[0m[0m arn                                                          = "arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:loadbalancer/net/hantt-main-vpc-nlb/e4bc246b4bbb994b" [90m-> null[0m[0m
-      [31m-[0m[0m arn_suffix                                                   = "net/hantt-main-vpc-nlb/e4bc246b4bbb994b" [90m-> null[0m[0m
-      [31m-[0m[0m dns_name                                                     = "hantt-main-vpc-nlb-e4bc246b4bbb994b.elb.ap-southeast-6.amazonaws.com" [90m-> null[0m[0m
+      [31m-[0m[0m arn                                                          = "arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:loadbalancer/net/hantt-main-vpc-nlb/a2b678a5dc3c34f9" [90m-> null[0m[0m
+      [31m-[0m[0m arn_suffix                                                   = "net/hantt-main-vpc-nlb/a2b678a5dc3c34f9" [90m-> null[0m[0m
+      [31m-[0m[0m dns_name                                                     = "hantt-main-vpc-nlb-a2b678a5dc3c34f9.elb.ap-southeast-6.amazonaws.com" [90m-> null[0m[0m
       [31m-[0m[0m dns_record_client_routing_policy                             = "any_availability_zone" [90m-> null[0m[0m
       [31m-[0m[0m enable_cross_zone_load_balancing                             = true [90m-> null[0m[0m
       [31m-[0m[0m enable_deletion_protection                                   = false [90m-> null[0m[0m
       [31m-[0m[0m enable_zonal_shift                                           = false [90m-> null[0m[0m
-      [31m-[0m[0m id                                                           = "arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:loadbalancer/net/hantt-main-vpc-nlb/e4bc246b4bbb994b" [90m-> null[0m[0m
+      [31m-[0m[0m id                                                           = "arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:loadbalancer/net/hantt-main-vpc-nlb/a2b678a5dc3c34f9" [90m-> null[0m[0m
       [31m-[0m[0m internal                                                     = false [90m-> null[0m[0m
       [31m-[0m[0m ip_address_type                                              = "ipv4" [90m-> null[0m[0m
       [31m-[0m[0m load_balancer_type                                           = "network" [90m-> null[0m[0m
       [31m-[0m[0m name                                                         = "hantt-main-vpc-nlb" [90m-> null[0m[0m
       [31m-[0m[0m security_groups                                              = [
-          [31m-[0m[0m "sg-0210d7c42b1d4a7eb",
+          [31m-[0m[0m "sg-008e546efaae1210b",
         ] [90m-> null[0m[0m
       [31m-[0m[0m subnets                                                      = [
-          [31m-[0m[0m "subnet-041b76f7982de9961",
-          [31m-[0m[0m "subnet-0a65ed10308e374f8",
+          [31m-[0m[0m "subnet-0415076d92ef7568e",
+          [31m-[0m[0m "subnet-0fce056577e90d209",
         ] [90m-> null[0m[0m
       [31m-[0m[0m tags                                                         = {
           [31m-[0m[0m "Environment" = "dev"
@@ -476,7 +552,7 @@ Terraform will perform the following actions:
           [31m-[0m[0m "ManagedBy"   = "terraform"
           [31m-[0m[0m "Name"        = "hantt-main-vpc-nlb"
         } [90m-> null[0m[0m
-      [31m-[0m[0m vpc_id                                                       = "vpc-040d8a184db39e4d1" [90m-> null[0m[0m
+      [31m-[0m[0m vpc_id                                                       = "vpc-0d7894ac074281692" [90m-> null[0m[0m
       [31m-[0m[0m zone_id                                                      = "Z01392953RKV2Q3RBP0KU" [90m-> null[0m[0m
         [90m# (3 unchanged attributes hidden)[0m[0m
 
@@ -486,20 +562,20 @@ Terraform will perform the following actions:
         }
 
       [31m-[0m[0m subnet_mapping {
-          [31m-[0m[0m subnet_id            = "subnet-041b76f7982de9961" [90m-> null[0m[0m
+          [31m-[0m[0m subnet_id            = "subnet-0415076d92ef7568e" [90m-> null[0m[0m
             [90m# (4 unchanged attributes hidden)[0m[0m
         }
       [31m-[0m[0m subnet_mapping {
-          [31m-[0m[0m subnet_id            = "subnet-0a65ed10308e374f8" [90m-> null[0m[0m
+          [31m-[0m[0m subnet_id            = "subnet-0fce056577e90d209" [90m-> null[0m[0m
             [90m# (4 unchanged attributes hidden)[0m[0m
         }
     }
 
 [1m  # aws_lb_listener.https[0m will be [1m[31mdestroyed[0m
 [0m  [31m-[0m[0m resource "aws_lb_listener" "https" {
-      [31m-[0m[0m arn                      = "arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:listener/net/hantt-main-vpc-nlb/e4bc246b4bbb994b/491cf40b7d1bc41e" [90m-> null[0m[0m
-      [31m-[0m[0m id                       = "arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:listener/net/hantt-main-vpc-nlb/e4bc246b4bbb994b/491cf40b7d1bc41e" [90m-> null[0m[0m
-      [31m-[0m[0m load_balancer_arn        = "arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:loadbalancer/net/hantt-main-vpc-nlb/e4bc246b4bbb994b" [90m-> null[0m[0m
+      [31m-[0m[0m arn                      = "arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:listener/net/hantt-main-vpc-nlb/a2b678a5dc3c34f9/0f4c486b035c2028" [90m-> null[0m[0m
+      [31m-[0m[0m id                       = "arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:listener/net/hantt-main-vpc-nlb/a2b678a5dc3c34f9/0f4c486b035c2028" [90m-> null[0m[0m
+      [31m-[0m[0m load_balancer_arn        = "arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:loadbalancer/net/hantt-main-vpc-nlb/a2b678a5dc3c34f9" [90m-> null[0m[0m
       [31m-[0m[0m port                     = 443 [90m-> null[0m[0m
       [31m-[0m[0m protocol                 = "TCP" [90m-> null[0m[0m
       [31m-[0m[0m tags                     = {} [90m-> null[0m[0m
@@ -509,22 +585,22 @@ Terraform will perform the following actions:
 
       [31m-[0m[0m default_action {
           [31m-[0m[0m order            = 1 [90m-> null[0m[0m
-          [31m-[0m[0m target_group_arn = "arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:targetgroup/hantt-main-vpc-tg-443/28a8aefbfdd1e15a" [90m-> null[0m[0m
+          [31m-[0m[0m target_group_arn = "arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:targetgroup/hantt-main-vpc-tg-443/68c363934d1b074c" [90m-> null[0m[0m
           [31m-[0m[0m type             = "forward" [90m-> null[0m[0m
         }
     }
 
 [1m  # aws_lb_target_group.https[0m will be [1m[31mdestroyed[0m
 [0m  [31m-[0m[0m resource "aws_lb_target_group" "https" {
-      [31m-[0m[0m arn                                = "arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:targetgroup/hantt-main-vpc-tg-443/28a8aefbfdd1e15a" [90m-> null[0m[0m
-      [31m-[0m[0m arn_suffix                         = "targetgroup/hantt-main-vpc-tg-443/28a8aefbfdd1e15a" [90m-> null[0m[0m
+      [31m-[0m[0m arn                                = "arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:targetgroup/hantt-main-vpc-tg-443/68c363934d1b074c" [90m-> null[0m[0m
+      [31m-[0m[0m arn_suffix                         = "targetgroup/hantt-main-vpc-tg-443/68c363934d1b074c" [90m-> null[0m[0m
       [31m-[0m[0m connection_termination             = false [90m-> null[0m[0m
       [31m-[0m[0m deregistration_delay               = "300" [90m-> null[0m[0m
-      [31m-[0m[0m id                                 = "arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:targetgroup/hantt-main-vpc-tg-443/28a8aefbfdd1e15a" [90m-> null[0m[0m
+      [31m-[0m[0m id                                 = "arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:targetgroup/hantt-main-vpc-tg-443/68c363934d1b074c" [90m-> null[0m[0m
       [31m-[0m[0m ip_address_type                    = "ipv4" [90m-> null[0m[0m
       [31m-[0m[0m lambda_multi_value_headers_enabled = false [90m-> null[0m[0m
       [31m-[0m[0m load_balancer_arns                 = [
-          [31m-[0m[0m "arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:loadbalancer/net/hantt-main-vpc-nlb/e4bc246b4bbb994b",
+          [31m-[0m[0m "arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:loadbalancer/net/hantt-main-vpc-nlb/a2b678a5dc3c34f9",
         ] [90m-> null[0m[0m
       [31m-[0m[0m load_balancing_cross_zone_enabled  = "use_load_balancer_configuration" [90m-> null[0m[0m
       [31m-[0m[0m name                               = "hantt-main-vpc-tg-443" [90m-> null[0m[0m
@@ -544,7 +620,7 @@ Terraform will perform the following actions:
           [31m-[0m[0m "Name"        = "hantt-main-vpc-tg-443"
         } [90m-> null[0m[0m
       [31m-[0m[0m target_type                        = "instance" [90m-> null[0m[0m
-      [31m-[0m[0m vpc_id                             = "vpc-040d8a184db39e4d1" [90m-> null[0m[0m
+      [31m-[0m[0m vpc_id                             = "vpc-0d7894ac074281692" [90m-> null[0m[0m
         [90m# (1 unchanged attribute hidden)[0m[0m
 
       [31m-[0m[0m health_check {
@@ -584,13 +660,44 @@ Terraform will perform the following actions:
         }
     }
 
+[1m  # aws_nat_gateway.main[0m will be [1m[31mdestroyed[0m
+[0m  [31m-[0m[0m resource "aws_nat_gateway" "main" {
+      [31m-[0m[0m allocation_id                      = "eipalloc-07a05fdf6d3656cde" [90m-> null[0m[0m
+      [31m-[0m[0m association_id                     = "eipassoc-0810f152280d79722" [90m-> null[0m[0m
+      [31m-[0m[0m connectivity_type                  = "public" [90m-> null[0m[0m
+      [31m-[0m[0m id                                 = "nat-01c5528c7c543148e" [90m-> null[0m[0m
+      [31m-[0m[0m network_interface_id               = "eni-08a7f69de3eccf6c2" [90m-> null[0m[0m
+      [31m-[0m[0m private_ip                         = "10.0.1.195" [90m-> null[0m[0m
+      [31m-[0m[0m public_ip                          = "3.103.66.215" [90m-> null[0m[0m
+      [31m-[0m[0m secondary_allocation_ids           = [] [90m-> null[0m[0m
+      [31m-[0m[0m secondary_private_ip_address_count = 0 [90m-> null[0m[0m
+      [31m-[0m[0m secondary_private_ip_addresses     = [] [90m-> null[0m[0m
+      [31m-[0m[0m subnet_id                          = "subnet-0fce056577e90d209" [90m-> null[0m[0m
+      [31m-[0m[0m tags                               = {
+          [31m-[0m[0m "Environment" = "dev"
+          [31m-[0m[0m "ManagedBy"   = "terraform"
+          [31m-[0m[0m "Name"        = "hantt-main-vpc-nat"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m tags_all                           = {
+          [31m-[0m[0m "Environment" = "dev"
+          [31m-[0m[0m "ManagedBy"   = "terraform"
+          [31m-[0m[0m "Name"        = "hantt-main-vpc-nat"
+        } [90m-> null[0m[0m
+    }
+
 [1m  # aws_route_table.private[0m will be [1m[31mdestroyed[0m
 [0m  [31m-[0m[0m resource "aws_route_table" "private" {
-      [31m-[0m[0m arn              = "arn:aws:ec2:ap-southeast-6:996992102979:route-table/rtb-0d97933909218d8ed" [90m-> null[0m[0m
-      [31m-[0m[0m id               = "rtb-0d97933909218d8ed" [90m-> null[0m[0m
+      [31m-[0m[0m arn              = "arn:aws:ec2:ap-southeast-6:996992102979:route-table/rtb-0c1514070e4f6700f" [90m-> null[0m[0m
+      [31m-[0m[0m id               = "rtb-0c1514070e4f6700f" [90m-> null[0m[0m
       [31m-[0m[0m owner_id         = "996992102979" [90m-> null[0m[0m
       [31m-[0m[0m propagating_vgws = [] [90m-> null[0m[0m
-      [31m-[0m[0m route            = [] [90m-> null[0m[0m
+      [31m-[0m[0m route            = [
+          [31m-[0m[0m {
+              [31m-[0m[0m cidr_block                 = "0.0.0.0/0"
+              [31m-[0m[0m nat_gateway_id             = "nat-01c5528c7c543148e"
+                [90m# (11 unchanged attributes hidden)[0m[0m
+            },
+        ] [90m-> null[0m[0m
       [31m-[0m[0m tags             = {
           [31m-[0m[0m "Environment" = "dev"
           [31m-[0m[0m "ManagedBy"   = "terraform"
@@ -601,19 +708,19 @@ Terraform will perform the following actions:
           [31m-[0m[0m "ManagedBy"   = "terraform"
           [31m-[0m[0m "Name"        = "hantt-main-vpc-private-rt"
         } [90m-> null[0m[0m
-      [31m-[0m[0m vpc_id           = "vpc-040d8a184db39e4d1" [90m-> null[0m[0m
+      [31m-[0m[0m vpc_id           = "vpc-0d7894ac074281692" [90m-> null[0m[0m
     }
 
 [1m  # aws_route_table.public[0m will be [1m[31mdestroyed[0m
 [0m  [31m-[0m[0m resource "aws_route_table" "public" {
-      [31m-[0m[0m arn              = "arn:aws:ec2:ap-southeast-6:996992102979:route-table/rtb-04cd66c3fd45c1e8b" [90m-> null[0m[0m
-      [31m-[0m[0m id               = "rtb-04cd66c3fd45c1e8b" [90m-> null[0m[0m
+      [31m-[0m[0m arn              = "arn:aws:ec2:ap-southeast-6:996992102979:route-table/rtb-005946bb868674da5" [90m-> null[0m[0m
+      [31m-[0m[0m id               = "rtb-005946bb868674da5" [90m-> null[0m[0m
       [31m-[0m[0m owner_id         = "996992102979" [90m-> null[0m[0m
       [31m-[0m[0m propagating_vgws = [] [90m-> null[0m[0m
       [31m-[0m[0m route            = [
           [31m-[0m[0m {
               [31m-[0m[0m cidr_block                 = "0.0.0.0/0"
-              [31m-[0m[0m gateway_id                 = "igw-0e51d32e3c9067f6b"
+              [31m-[0m[0m gateway_id                 = "igw-01c1f2c25c56822e0"
                 [90m# (11 unchanged attributes hidden)[0m[0m
             },
         ] [90m-> null[0m[0m
@@ -627,44 +734,44 @@ Terraform will perform the following actions:
           [31m-[0m[0m "ManagedBy"   = "terraform"
           [31m-[0m[0m "Name"        = "hantt-main-vpc-public-rt"
         } [90m-> null[0m[0m
-      [31m-[0m[0m vpc_id           = "vpc-040d8a184db39e4d1" [90m-> null[0m[0m
+      [31m-[0m[0m vpc_id           = "vpc-0d7894ac074281692" [90m-> null[0m[0m
     }
 
 [1m  # aws_route_table_association.private_a[0m will be [1m[31mdestroyed[0m
 [0m  [31m-[0m[0m resource "aws_route_table_association" "private_a" {
-      [31m-[0m[0m id             = "rtbassoc-0c7aed240a92a2873" [90m-> null[0m[0m
-      [31m-[0m[0m route_table_id = "rtb-0d97933909218d8ed" [90m-> null[0m[0m
-      [31m-[0m[0m subnet_id      = "subnet-01b3a3038cb251ca9" [90m-> null[0m[0m
+      [31m-[0m[0m id             = "rtbassoc-0f34db3d7eacea27e" [90m-> null[0m[0m
+      [31m-[0m[0m route_table_id = "rtb-0c1514070e4f6700f" [90m-> null[0m[0m
+      [31m-[0m[0m subnet_id      = "subnet-09d429d5904420918" [90m-> null[0m[0m
         [90m# (1 unchanged attribute hidden)[0m[0m
     }
 
 [1m  # aws_route_table_association.private_b[0m will be [1m[31mdestroyed[0m
 [0m  [31m-[0m[0m resource "aws_route_table_association" "private_b" {
-      [31m-[0m[0m id             = "rtbassoc-0b53ce2740f723e0e" [90m-> null[0m[0m
-      [31m-[0m[0m route_table_id = "rtb-0d97933909218d8ed" [90m-> null[0m[0m
-      [31m-[0m[0m subnet_id      = "subnet-08b6beb8f7dc1fae0" [90m-> null[0m[0m
+      [31m-[0m[0m id             = "rtbassoc-0096cf0a4087123e2" [90m-> null[0m[0m
+      [31m-[0m[0m route_table_id = "rtb-0c1514070e4f6700f" [90m-> null[0m[0m
+      [31m-[0m[0m subnet_id      = "subnet-02cc18cd04b2c5fe2" [90m-> null[0m[0m
         [90m# (1 unchanged attribute hidden)[0m[0m
     }
 
 [1m  # aws_route_table_association.public_a[0m will be [1m[31mdestroyed[0m
 [0m  [31m-[0m[0m resource "aws_route_table_association" "public_a" {
-      [31m-[0m[0m id             = "rtbassoc-06372c930ef185946" [90m-> null[0m[0m
-      [31m-[0m[0m route_table_id = "rtb-04cd66c3fd45c1e8b" [90m-> null[0m[0m
-      [31m-[0m[0m subnet_id      = "subnet-0a65ed10308e374f8" [90m-> null[0m[0m
+      [31m-[0m[0m id             = "rtbassoc-006828a5124188032" [90m-> null[0m[0m
+      [31m-[0m[0m route_table_id = "rtb-005946bb868674da5" [90m-> null[0m[0m
+      [31m-[0m[0m subnet_id      = "subnet-0fce056577e90d209" [90m-> null[0m[0m
         [90m# (1 unchanged attribute hidden)[0m[0m
     }
 
 [1m  # aws_route_table_association.public_b[0m will be [1m[31mdestroyed[0m
 [0m  [31m-[0m[0m resource "aws_route_table_association" "public_b" {
-      [31m-[0m[0m id             = "rtbassoc-0d3d1eae1816a0aa2" [90m-> null[0m[0m
-      [31m-[0m[0m route_table_id = "rtb-04cd66c3fd45c1e8b" [90m-> null[0m[0m
-      [31m-[0m[0m subnet_id      = "subnet-041b76f7982de9961" [90m-> null[0m[0m
+      [31m-[0m[0m id             = "rtbassoc-064755895dd2654f5" [90m-> null[0m[0m
+      [31m-[0m[0m route_table_id = "rtb-005946bb868674da5" [90m-> null[0m[0m
+      [31m-[0m[0m subnet_id      = "subnet-0415076d92ef7568e" [90m-> null[0m[0m
         [90m# (1 unchanged attribute hidden)[0m[0m
     }
 
 [1m  # aws_security_group.nlb[0m will be [1m[31mdestroyed[0m
 [0m  [31m-[0m[0m resource "aws_security_group" "nlb" {
-      [31m-[0m[0m arn                    = "arn:aws:ec2:ap-southeast-6:996992102979:security-group/sg-0210d7c42b1d4a7eb" [90m-> null[0m[0m
+      [31m-[0m[0m arn                    = "arn:aws:ec2:ap-southeast-6:996992102979:security-group/sg-008e546efaae1210b" [90m-> null[0m[0m
       [31m-[0m[0m description            = "NLB - allow HTTPS from internet" [90m-> null[0m[0m
       [31m-[0m[0m egress                 = [
           [31m-[0m[0m {
@@ -681,7 +788,7 @@ Terraform will perform the following actions:
               [31m-[0m[0m to_port          = 0
             },
         ] [90m-> null[0m[0m
-      [31m-[0m[0m id                     = "sg-0210d7c42b1d4a7eb" [90m-> null[0m[0m
+      [31m-[0m[0m id                     = "sg-008e546efaae1210b" [90m-> null[0m[0m
       [31m-[0m[0m ingress                = [
           [31m-[0m[0m {
               [31m-[0m[0m cidr_blocks      = [
@@ -710,13 +817,13 @@ Terraform will perform the following actions:
           [31m-[0m[0m "ManagedBy"   = "terraform"
           [31m-[0m[0m "Name"        = "hantt-main-vpc-nlb-sg"
         } [90m-> null[0m[0m
-      [31m-[0m[0m vpc_id                 = "vpc-040d8a184db39e4d1" [90m-> null[0m[0m
+      [31m-[0m[0m vpc_id                 = "vpc-0d7894ac074281692" [90m-> null[0m[0m
         [90m# (1 unchanged attribute hidden)[0m[0m
     }
 
 [1m  # aws_security_group.private_vm[0m will be [1m[31mdestroyed[0m
 [0m  [31m-[0m[0m resource "aws_security_group" "private_vm" {
-      [31m-[0m[0m arn                    = "arn:aws:ec2:ap-southeast-6:996992102979:security-group/sg-0b88adbdbb3010a64" [90m-> null[0m[0m
+      [31m-[0m[0m arn                    = "arn:aws:ec2:ap-southeast-6:996992102979:security-group/sg-0559bb24d3f7e89a3" [90m-> null[0m[0m
       [31m-[0m[0m description            = "Private VMs - HTTPS only from NLB security group, SSH from VPC" [90m-> null[0m[0m
       [31m-[0m[0m egress                 = [
           [31m-[0m[0m {
@@ -733,7 +840,7 @@ Terraform will perform the following actions:
               [31m-[0m[0m to_port          = 0
             },
         ] [90m-> null[0m[0m
-      [31m-[0m[0m id                     = "sg-0b88adbdbb3010a64" [90m-> null[0m[0m
+      [31m-[0m[0m id                     = "sg-0559bb24d3f7e89a3" [90m-> null[0m[0m
       [31m-[0m[0m ingress                = [
           [31m-[0m[0m {
               [31m-[0m[0m cidr_blocks      = [
@@ -756,7 +863,7 @@ Terraform will perform the following actions:
               [31m-[0m[0m prefix_list_ids  = []
               [31m-[0m[0m protocol         = "tcp"
               [31m-[0m[0m security_groups  = [
-                  [31m-[0m[0m "sg-0210d7c42b1d4a7eb",
+                  [31m-[0m[0m "sg-008e546efaae1210b",
                 ]
               [31m-[0m[0m self             = false
               [31m-[0m[0m to_port          = 443
@@ -775,13 +882,13 @@ Terraform will perform the following actions:
           [31m-[0m[0m "ManagedBy"   = "terraform"
           [31m-[0m[0m "Name"        = "hantt-main-vpc-private-vm-sg"
         } [90m-> null[0m[0m
-      [31m-[0m[0m vpc_id                 = "vpc-040d8a184db39e4d1" [90m-> null[0m[0m
+      [31m-[0m[0m vpc_id                 = "vpc-0d7894ac074281692" [90m-> null[0m[0m
         [90m# (1 unchanged attribute hidden)[0m[0m
     }
 
 [1m  # aws_subnet.private_a[0m will be [1m[31mdestroyed[0m
 [0m  [31m-[0m[0m resource "aws_subnet" "private_a" {
-      [31m-[0m[0m arn                                            = "arn:aws:ec2:ap-southeast-6:996992102979:subnet/subnet-01b3a3038cb251ca9" [90m-> null[0m[0m
+      [31m-[0m[0m arn                                            = "arn:aws:ec2:ap-southeast-6:996992102979:subnet/subnet-09d429d5904420918" [90m-> null[0m[0m
       [31m-[0m[0m assign_ipv6_address_on_creation                = false [90m-> null[0m[0m
       [31m-[0m[0m availability_zone                              = "ap-southeast-6a" [90m-> null[0m[0m
       [31m-[0m[0m availability_zone_id                           = "apse6-az1" [90m-> null[0m[0m
@@ -790,7 +897,7 @@ Terraform will perform the following actions:
       [31m-[0m[0m enable_lni_at_device_index                     = 0 [90m-> null[0m[0m
       [31m-[0m[0m enable_resource_name_dns_a_record_on_launch    = false [90m-> null[0m[0m
       [31m-[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false [90m-> null[0m[0m
-      [31m-[0m[0m id                                             = "subnet-01b3a3038cb251ca9" [90m-> null[0m[0m
+      [31m-[0m[0m id                                             = "subnet-09d429d5904420918" [90m-> null[0m[0m
       [31m-[0m[0m ipv6_native                                    = false [90m-> null[0m[0m
       [31m-[0m[0m map_customer_owned_ip_on_launch                = false [90m-> null[0m[0m
       [31m-[0m[0m map_public_ip_on_launch                        = false [90m-> null[0m[0m
@@ -806,13 +913,13 @@ Terraform will perform the following actions:
           [31m-[0m[0m "ManagedBy"   = "terraform"
           [31m-[0m[0m "Name"        = "hantt-main-vpc-private-a"
         } [90m-> null[0m[0m
-      [31m-[0m[0m vpc_id                                         = "vpc-040d8a184db39e4d1" [90m-> null[0m[0m
+      [31m-[0m[0m vpc_id                                         = "vpc-0d7894ac074281692" [90m-> null[0m[0m
         [90m# (4 unchanged attributes hidden)[0m[0m
     }
 
 [1m  # aws_subnet.private_b[0m will be [1m[31mdestroyed[0m
 [0m  [31m-[0m[0m resource "aws_subnet" "private_b" {
-      [31m-[0m[0m arn                                            = "arn:aws:ec2:ap-southeast-6:996992102979:subnet/subnet-08b6beb8f7dc1fae0" [90m-> null[0m[0m
+      [31m-[0m[0m arn                                            = "arn:aws:ec2:ap-southeast-6:996992102979:subnet/subnet-02cc18cd04b2c5fe2" [90m-> null[0m[0m
       [31m-[0m[0m assign_ipv6_address_on_creation                = false [90m-> null[0m[0m
       [31m-[0m[0m availability_zone                              = "ap-southeast-6b" [90m-> null[0m[0m
       [31m-[0m[0m availability_zone_id                           = "apse6-az2" [90m-> null[0m[0m
@@ -821,7 +928,7 @@ Terraform will perform the following actions:
       [31m-[0m[0m enable_lni_at_device_index                     = 0 [90m-> null[0m[0m
       [31m-[0m[0m enable_resource_name_dns_a_record_on_launch    = false [90m-> null[0m[0m
       [31m-[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false [90m-> null[0m[0m
-      [31m-[0m[0m id                                             = "subnet-08b6beb8f7dc1fae0" [90m-> null[0m[0m
+      [31m-[0m[0m id                                             = "subnet-02cc18cd04b2c5fe2" [90m-> null[0m[0m
       [31m-[0m[0m ipv6_native                                    = false [90m-> null[0m[0m
       [31m-[0m[0m map_customer_owned_ip_on_launch                = false [90m-> null[0m[0m
       [31m-[0m[0m map_public_ip_on_launch                        = false [90m-> null[0m[0m
@@ -837,13 +944,13 @@ Terraform will perform the following actions:
           [31m-[0m[0m "ManagedBy"   = "terraform"
           [31m-[0m[0m "Name"        = "hantt-main-vpc-private-b"
         } [90m-> null[0m[0m
-      [31m-[0m[0m vpc_id                                         = "vpc-040d8a184db39e4d1" [90m-> null[0m[0m
+      [31m-[0m[0m vpc_id                                         = "vpc-0d7894ac074281692" [90m-> null[0m[0m
         [90m# (4 unchanged attributes hidden)[0m[0m
     }
 
 [1m  # aws_subnet.public_a[0m will be [1m[31mdestroyed[0m
 [0m  [31m-[0m[0m resource "aws_subnet" "public_a" {
-      [31m-[0m[0m arn                                            = "arn:aws:ec2:ap-southeast-6:996992102979:subnet/subnet-0a65ed10308e374f8" [90m-> null[0m[0m
+      [31m-[0m[0m arn                                            = "arn:aws:ec2:ap-southeast-6:996992102979:subnet/subnet-0fce056577e90d209" [90m-> null[0m[0m
       [31m-[0m[0m assign_ipv6_address_on_creation                = false [90m-> null[0m[0m
       [31m-[0m[0m availability_zone                              = "ap-southeast-6a" [90m-> null[0m[0m
       [31m-[0m[0m availability_zone_id                           = "apse6-az1" [90m-> null[0m[0m
@@ -852,7 +959,7 @@ Terraform will perform the following actions:
       [31m-[0m[0m enable_lni_at_device_index                     = 0 [90m-> null[0m[0m
       [31m-[0m[0m enable_resource_name_dns_a_record_on_launch    = false [90m-> null[0m[0m
       [31m-[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false [90m-> null[0m[0m
-      [31m-[0m[0m id                                             = "subnet-0a65ed10308e374f8" [90m-> null[0m[0m
+      [31m-[0m[0m id                                             = "subnet-0fce056577e90d209" [90m-> null[0m[0m
       [31m-[0m[0m ipv6_native                                    = false [90m-> null[0m[0m
       [31m-[0m[0m map_customer_owned_ip_on_launch                = false [90m-> null[0m[0m
       [31m-[0m[0m map_public_ip_on_launch                        = true [90m-> null[0m[0m
@@ -868,13 +975,13 @@ Terraform will perform the following actions:
           [31m-[0m[0m "ManagedBy"   = "terraform"
           [31m-[0m[0m "Name"        = "hantt-main-vpc-public-a"
         } [90m-> null[0m[0m
-      [31m-[0m[0m vpc_id                                         = "vpc-040d8a184db39e4d1" [90m-> null[0m[0m
+      [31m-[0m[0m vpc_id                                         = "vpc-0d7894ac074281692" [90m-> null[0m[0m
         [90m# (4 unchanged attributes hidden)[0m[0m
     }
 
 [1m  # aws_subnet.public_b[0m will be [1m[31mdestroyed[0m
 [0m  [31m-[0m[0m resource "aws_subnet" "public_b" {
-      [31m-[0m[0m arn                                            = "arn:aws:ec2:ap-southeast-6:996992102979:subnet/subnet-041b76f7982de9961" [90m-> null[0m[0m
+      [31m-[0m[0m arn                                            = "arn:aws:ec2:ap-southeast-6:996992102979:subnet/subnet-0415076d92ef7568e" [90m-> null[0m[0m
       [31m-[0m[0m assign_ipv6_address_on_creation                = false [90m-> null[0m[0m
       [31m-[0m[0m availability_zone                              = "ap-southeast-6b" [90m-> null[0m[0m
       [31m-[0m[0m availability_zone_id                           = "apse6-az2" [90m-> null[0m[0m
@@ -883,7 +990,7 @@ Terraform will perform the following actions:
       [31m-[0m[0m enable_lni_at_device_index                     = 0 [90m-> null[0m[0m
       [31m-[0m[0m enable_resource_name_dns_a_record_on_launch    = false [90m-> null[0m[0m
       [31m-[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false [90m-> null[0m[0m
-      [31m-[0m[0m id                                             = "subnet-041b76f7982de9961" [90m-> null[0m[0m
+      [31m-[0m[0m id                                             = "subnet-0415076d92ef7568e" [90m-> null[0m[0m
       [31m-[0m[0m ipv6_native                                    = false [90m-> null[0m[0m
       [31m-[0m[0m map_customer_owned_ip_on_launch                = false [90m-> null[0m[0m
       [31m-[0m[0m map_public_ip_on_launch                        = true [90m-> null[0m[0m
@@ -899,26 +1006,26 @@ Terraform will perform the following actions:
           [31m-[0m[0m "ManagedBy"   = "terraform"
           [31m-[0m[0m "Name"        = "hantt-main-vpc-public-b"
         } [90m-> null[0m[0m
-      [31m-[0m[0m vpc_id                                         = "vpc-040d8a184db39e4d1" [90m-> null[0m[0m
+      [31m-[0m[0m vpc_id                                         = "vpc-0d7894ac074281692" [90m-> null[0m[0m
         [90m# (4 unchanged attributes hidden)[0m[0m
     }
 
 [1m  # aws_vpc.main[0m will be [1m[31mdestroyed[0m
 [0m  [31m-[0m[0m resource "aws_vpc" "main" {
-      [31m-[0m[0m arn                                  = "arn:aws:ec2:ap-southeast-6:996992102979:vpc/vpc-040d8a184db39e4d1" [90m-> null[0m[0m
+      [31m-[0m[0m arn                                  = "arn:aws:ec2:ap-southeast-6:996992102979:vpc/vpc-0d7894ac074281692" [90m-> null[0m[0m
       [31m-[0m[0m assign_generated_ipv6_cidr_block     = false [90m-> null[0m[0m
       [31m-[0m[0m cidr_block                           = "10.0.0.0/16" [90m-> null[0m[0m
-      [31m-[0m[0m default_network_acl_id               = "acl-0e8109a846ded53ff" [90m-> null[0m[0m
-      [31m-[0m[0m default_route_table_id               = "rtb-06e5aef05572d5082" [90m-> null[0m[0m
-      [31m-[0m[0m default_security_group_id            = "sg-03faf0d2cb8390650" [90m-> null[0m[0m
+      [31m-[0m[0m default_network_acl_id               = "acl-0f183e2c8782ba03c" [90m-> null[0m[0m
+      [31m-[0m[0m default_route_table_id               = "rtb-011548bcb0816e880" [90m-> null[0m[0m
+      [31m-[0m[0m default_security_group_id            = "sg-03096bb15281857ff" [90m-> null[0m[0m
       [31m-[0m[0m dhcp_options_id                      = "dopt-0384145b881898dea" [90m-> null[0m[0m
       [31m-[0m[0m enable_dns_hostnames                 = true [90m-> null[0m[0m
       [31m-[0m[0m enable_dns_support                   = true [90m-> null[0m[0m
       [31m-[0m[0m enable_network_address_usage_metrics = false [90m-> null[0m[0m
-      [31m-[0m[0m id                                   = "vpc-040d8a184db39e4d1" [90m-> null[0m[0m
+      [31m-[0m[0m id                                   = "vpc-0d7894ac074281692" [90m-> null[0m[0m
       [31m-[0m[0m instance_tenancy                     = "default" [90m-> null[0m[0m
       [31m-[0m[0m ipv6_netmask_length                  = 0 [90m-> null[0m[0m
-      [31m-[0m[0m main_route_table_id                  = "rtb-06e5aef05572d5082" [90m-> null[0m[0m
+      [31m-[0m[0m main_route_table_id                  = "rtb-011548bcb0816e880" [90m-> null[0m[0m
       [31m-[0m[0m owner_id                             = "996992102979" [90m-> null[0m[0m
       [31m-[0m[0m tags                                 = {
           [31m-[0m[0m "Environment" = "dev"
@@ -933,158 +1040,170 @@ Terraform will perform the following actions:
         [90m# (4 unchanged attributes hidden)[0m[0m
     }
 
-[1mPlan:[0m [0m0 to add, 0 to change, 26 to destroy.
+[1mPlan:[0m [0m0 to add, 0 to change, 30 to destroy.
 
 Changes to Outputs:
-  [31m-[0m[0m asg_name            = "hantt-main-vpc-nginx-asg" [90m-> null[0m[0m
-  [31m-[0m[0m internet_gateway_id = "igw-0e51d32e3c9067f6b" [90m-> null[0m[0m
-  [31m-[0m[0m nlb_arn             = "arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:loadbalancer/net/hantt-main-vpc-nlb/e4bc246b4bbb994b" [90m-> null[0m[0m
-  [31m-[0m[0m nlb_dns_name        = "hantt-main-vpc-nlb-e4bc246b4bbb994b.elb.ap-southeast-6.amazonaws.com" [90m-> null[0m[0m
-  [31m-[0m[0m private_subnet_a_id = "subnet-01b3a3038cb251ca9" [90m-> null[0m[0m
-  [31m-[0m[0m private_subnet_b_id = "subnet-08b6beb8f7dc1fae0" [90m-> null[0m[0m
-  [31m-[0m[0m public_subnet_a_id  = "subnet-0a65ed10308e374f8" [90m-> null[0m[0m
-  [31m-[0m[0m public_subnet_b_id  = "subnet-041b76f7982de9961" [90m-> null[0m[0m
+  [31m-[0m[0m asg_name            = "hantt-main-vpc-nginx-windows-asg" [90m-> null[0m[0m
+  [31m-[0m[0m internet_gateway_id = "igw-01c1f2c25c56822e0" [90m-> null[0m[0m
+  [31m-[0m[0m nat_gateway_eip     = "3.103.66.215" [90m-> null[0m[0m
+  [31m-[0m[0m nat_gateway_id      = "nat-01c5528c7c543148e" [90m-> null[0m[0m
+  [31m-[0m[0m nlb_arn             = "arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:loadbalancer/net/hantt-main-vpc-nlb/a2b678a5dc3c34f9" [90m-> null[0m[0m
+  [31m-[0m[0m nlb_dns_name        = "hantt-main-vpc-nlb-a2b678a5dc3c34f9.elb.ap-southeast-6.amazonaws.com" [90m-> null[0m[0m
+  [31m-[0m[0m private_subnet_a_id = "subnet-09d429d5904420918" [90m-> null[0m[0m
+  [31m-[0m[0m private_subnet_b_id = "subnet-02cc18cd04b2c5fe2" [90m-> null[0m[0m
+  [31m-[0m[0m public_subnet_a_id  = "subnet-0fce056577e90d209" [90m-> null[0m[0m
+  [31m-[0m[0m public_subnet_b_id  = "subnet-0415076d92ef7568e" [90m-> null[0m[0m
   [31m-[0m[0m vpc_cidr            = "10.0.0.0/16" [90m-> null[0m[0m
-  [31m-[0m[0m vpc_id              = "vpc-040d8a184db39e4d1" [90m-> null[0m[0m
+  [31m-[0m[0m vpc_id              = "vpc-0d7894ac074281692" [90m-> null[0m[0m
+[0m[1maws_route_table_association.private_a: Destroying... [id=rtbassoc-0f34db3d7eacea27e][0m[0m
+[0m[1maws_lb_listener.https: Destroying... [id=arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:listener/net/hantt-main-vpc-nlb/a2b678a5dc3c34f9/0f4c486b035c2028][0m[0m
+[0m[1maws_route_table_association.private_b: Destroying... [id=rtbassoc-0096cf0a4087123e2][0m[0m
+[0m[1maws_route_table_association.public_a: Destroying... [id=rtbassoc-006828a5124188032][0m[0m
 [0m[1maws_autoscaling_policy.scale_out: Destroying... [id=hantt-main-vpc-scale-out][0m[0m
-[0m[1maws_lb_listener.https: Destroying... [id=arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:listener/net/hantt-main-vpc-nlb/e4bc246b4bbb994b/491cf40b7d1bc41e][0m[0m
-[0m[1maws_iam_role_policy_attachment.nginx_vm_s3_read: Destroying... [id=hantt-main-vpc-nginx-vm-role-20260608092158573700000002][0m[0m
+[0m[1maws_iam_role_policy.nginx_vm_secrets: Destroying... [id=hantt-main-vpc-nginx-vm-role:hantt-main-vpc-nginx-vm-secrets][0m[0m
+[0m[1maws_route_table_association.public_b: Destroying... [id=rtbassoc-064755895dd2654f5][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Destroying... [id=hantt-main-vpc-nginx-linux-asg][0m[0m
-[0m[1maws_route_table_association.public_a: Destroying... [id=rtbassoc-06372c930ef185946][0m[0m
-[0m[1maws_route_table_association.public_b: Destroying... [id=rtbassoc-0d3d1eae1816a0aa2][0m[0m
-[0m[1maws_iam_role_policy_attachment.nginx_vm_ssm: Destroying... [id=hantt-main-vpc-nginx-vm-role-20260608092158254300000001][0m[0m
-[0m[1maws_route_table_association.private_a: Destroying... [id=rtbassoc-0c7aed240a92a2873][0m[0m
-[0m[1maws_route_table_association.private_b: Destroying... [id=rtbassoc-0b53ce2740f723e0e][0m[0m
-[0m[1maws_lb_listener.https: Destruction complete after 0s[0m
-[0m[1maws_lb.main: Destroying... [id=arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:loadbalancer/net/hantt-main-vpc-nlb/e4bc246b4bbb994b][0m[0m
-[0m[1maws_route_table_association.public_b: Destruction complete after 0s[0m
-[0m[1maws_route_table_association.private_a: Destruction complete after 0s[0m
-[0m[1maws_route_table_association.public_a: Destruction complete after 0s[0m
-[0m[1maws_route_table.public: Destroying... [id=rtb-04cd66c3fd45c1e8b][0m[0m
-[0m[1maws_route_table_association.private_b: Destruction complete after 0s[0m
-[0m[1maws_route_table.private: Destroying... [id=rtb-0d97933909218d8ed][0m[0m
-[0m[1maws_autoscaling_policy.scale_out: Destruction complete after 0s[0m
-[0m[1maws_autoscaling_group.nginx: Destroying... [id=hantt-main-vpc-nginx-asg][0m[0m
+[0m[1maws_iam_role_policy_attachment.nginx_vm_cloudwatch: Destroying... [id=hantt-main-vpc-nginx-vm-role-20260609015540736100000001][0m[0m
+[0m[1maws_iam_role_policy_attachment.nginx_vm_s3_read: Destroying... [id=hantt-main-vpc-nginx-vm-role-20260609015541403400000003][0m[0m
+[0m[1maws_lb_listener.https: Destruction complete after 1s[0m
+[0m[1maws_iam_role_policy_attachment.nginx_vm_ssm: Destroying... [id=hantt-main-vpc-nginx-vm-role-20260609015541290000000002][0m[0m
+[0m[1maws_route_table_association.public_a: Destruction complete after 1s[0m
+[0m[1maws_route_table_association.private_b: Destruction complete after 1s[0m
+[0m[1maws_route_table_association.public_b: Destruction complete after 1s[0m
+[0m[1maws_lb.main: Destroying... [id=arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:loadbalancer/net/hantt-main-vpc-nlb/a2b678a5dc3c34f9][0m[0m
+[0m[1maws_route_table_association.private_a: Destruction complete after 1s[0m
+[0m[1maws_route_table.public: Destroying... [id=rtb-005946bb868674da5][0m[0m
+[0m[1maws_route_table.private: Destroying... [id=rtb-0c1514070e4f6700f][0m[0m
+[0m[1maws_autoscaling_policy.scale_out: Destruction complete after 1s[0m
+[0m[1maws_autoscaling_group.nginx: Destroying... [id=hantt-main-vpc-nginx-windows-asg][0m[0m
 [0m[1maws_route_table.public: Destruction complete after 0s[0m
-[0m[1maws_internet_gateway.main: Destroying... [id=igw-0e51d32e3c9067f6b][0m[0m
+[0m[1maws_internet_gateway.main: Destroying... [id=igw-01c1f2c25c56822e0][0m[0m
 [0m[1maws_route_table.private: Destruction complete after 0s[0m
+[0m[1maws_nat_gateway.main: Destroying... [id=nat-01c5528c7c543148e][0m[0m
+[0m[1maws_iam_role_policy.nginx_vm_secrets: Destruction complete after 1s[0m
+[0m[1maws_iam_role_policy_attachment.nginx_vm_cloudwatch: Destruction complete after 1s[0m
 [0m[1maws_iam_role_policy_attachment.nginx_vm_s3_read: Destruction complete after 1s[0m
-[0m[1maws_iam_role_policy_attachment.nginx_vm_ssm: Destruction complete after 1s[0m
+[0m[1maws_iam_role_policy_attachment.nginx_vm_ssm: Destruction complete after 0s[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 00m10s elapsed][0m[0m
-[0m[1maws_lb.main: Still destroying... [id=arn:aws:elasticloadbalancing:ap-southea...et/hantt-main-vpc-nlb/e4bc246b4bbb994b, 00m10s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 00m10s elapsed][0m[0m
-[0m[1maws_internet_gateway.main: Still destroying... [id=igw-0e51d32e3c9067f6b, 00m10s elapsed][0m[0m
+[0m[1maws_lb.main: Still destroying... [id=arn:aws:elasticloadbalancing:ap-southea...et/hantt-main-vpc-nlb/a2b678a5dc3c34f9, 00m10s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 00m10s elapsed][0m[0m
+[0m[1maws_internet_gateway.main: Still destroying... [id=igw-01c1f2c25c56822e0, 00m10s elapsed][0m[0m
+[0m[1maws_nat_gateway.main: Still destroying... [id=nat-01c5528c7c543148e, 00m10s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 00m20s elapsed][0m[0m
-[0m[1maws_lb.main: Still destroying... [id=arn:aws:elasticloadbalancing:ap-southea...et/hantt-main-vpc-nlb/e4bc246b4bbb994b, 00m20s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 00m20s elapsed][0m[0m
-[0m[1maws_internet_gateway.main: Still destroying... [id=igw-0e51d32e3c9067f6b, 00m20s elapsed][0m[0m
+[0m[1maws_lb.main: Still destroying... [id=arn:aws:elasticloadbalancing:ap-southea...et/hantt-main-vpc-nlb/a2b678a5dc3c34f9, 00m20s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 00m20s elapsed][0m[0m
+[0m[1maws_internet_gateway.main: Still destroying... [id=igw-01c1f2c25c56822e0, 00m20s elapsed][0m[0m
+[0m[1maws_nat_gateway.main: Still destroying... [id=nat-01c5528c7c543148e, 00m20s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 00m30s elapsed][0m[0m
-[0m[1maws_lb.main: Still destroying... [id=arn:aws:elasticloadbalancing:ap-southea...et/hantt-main-vpc-nlb/e4bc246b4bbb994b, 00m30s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 00m30s elapsed][0m[0m
-[0m[1maws_internet_gateway.main: Still destroying... [id=igw-0e51d32e3c9067f6b, 00m30s elapsed][0m[0m
-[0m[1maws_lb.main: Destruction complete after 37s[0m
-[0m[1maws_subnet.public_b: Destroying... [id=subnet-041b76f7982de9961][0m[0m
-[0m[1maws_subnet.public_a: Destroying... [id=subnet-0a65ed10308e374f8][0m[0m
-[0m[1maws_subnet.public_a: Destruction complete after 0s[0m
+[0m[1maws_lb.main: Still destroying... [id=arn:aws:elasticloadbalancing:ap-southea...et/hantt-main-vpc-nlb/a2b678a5dc3c34f9, 00m30s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 00m30s elapsed][0m[0m
+[0m[1maws_internet_gateway.main: Still destroying... [id=igw-01c1f2c25c56822e0, 00m30s elapsed][0m[0m
+[0m[1maws_nat_gateway.main: Still destroying... [id=nat-01c5528c7c543148e, 00m30s elapsed][0m[0m
+[0m[1maws_lb.main: Destruction complete after 36s[0m
+[0m[1maws_subnet.public_b: Destroying... [id=subnet-0415076d92ef7568e][0m[0m
 [0m[1maws_subnet.public_b: Destruction complete after 0s[0m
-[0m[1maws_internet_gateway.main: Destruction complete after 37s[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 00m40s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 00m40s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 00m40s elapsed][0m[0m
+[0m[1maws_internet_gateway.main: Still destroying... [id=igw-01c1f2c25c56822e0, 00m40s elapsed][0m[0m
+[0m[1maws_nat_gateway.main: Still destroying... [id=nat-01c5528c7c543148e, 00m40s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 00m50s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 00m50s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 00m50s elapsed][0m[0m
+[0m[1maws_internet_gateway.main: Still destroying... [id=igw-01c1f2c25c56822e0, 00m50s elapsed][0m[0m
+[0m[1maws_nat_gateway.main: Still destroying... [id=nat-01c5528c7c543148e, 00m50s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 01m00s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 01m00s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 01m00s elapsed][0m[0m
+[0m[1maws_internet_gateway.main: Still destroying... [id=igw-01c1f2c25c56822e0, 01m00s elapsed][0m[0m
+[0m[1maws_nat_gateway.main: Still destroying... [id=nat-01c5528c7c543148e, 01m00s elapsed][0m[0m
+[0m[1maws_nat_gateway.main: Destruction complete after 1m1s[0m
+[0m[1maws_subnet.public_a: Destroying... [id=subnet-0fce056577e90d209][0m[0m
+[0m[1maws_eip.nat: Destroying... [id=eipalloc-07a05fdf6d3656cde][0m[0m
+[0m[1maws_subnet.public_a: Destruction complete after 0s[0m
+[0m[1maws_eip.nat: Destruction complete after 0s[0m
+[0m[1maws_internet_gateway.main: Destruction complete after 1m7s[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 01m10s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 01m10s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 01m10s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 01m20s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 01m20s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 01m20s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 01m30s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 01m30s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 01m30s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 01m40s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 01m40s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 01m40s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 01m50s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 01m50s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 01m50s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 02m00s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 02m00s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 02m00s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 02m10s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 02m10s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 02m10s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 02m20s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 02m20s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 02m20s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 02m30s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 02m30s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 02m30s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 02m40s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 02m40s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 02m40s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 02m50s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 02m50s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 02m50s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 03m00s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 03m00s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 03m00s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 03m10s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 03m10s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 03m10s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 03m20s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 03m20s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 03m20s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 03m30s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 03m30s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 03m30s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 03m40s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 03m40s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 03m40s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 03m50s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 03m50s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 03m50s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 04m00s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 04m00s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 04m00s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 04m10s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 04m10s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 04m10s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 04m20s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 04m20s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 04m20s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 04m30s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 04m30s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 04m30s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 04m40s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 04m40s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 04m40s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 04m50s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 04m50s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 04m50s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 05m00s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 05m00s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 05m00s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 05m10s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 05m10s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 05m10s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 05m20s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 05m20s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 05m20s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 05m30s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-asg, 05m30s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx: Destruction complete after 5m34s[0m
-[0m[1maws_launch_template.nginx: Destroying... [id=lt-0f423c7b690523801][0m[0m
-[0m[1maws_launch_template.nginx: Destruction complete after 1s[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 05m30s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 05m40s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 05m40s elapsed][0m[0m
 [0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 05m50s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 06m00s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 06m10s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 06m20s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 06m30s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 06m40s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 06m50s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 07m00s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 07m10s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx_linux: Still destroying... [id=hantt-main-vpc-nginx-linux-asg, 07m20s elapsed][0m[0m
-[0m[1maws_autoscaling_group.nginx_linux: Destruction complete after 7m26s[0m
-[0m[1maws_launch_template.nginx_linux: Destroying... [id=lt-06a90e0f580dbdb25][0m[0m
-[0m[1maws_subnet.private_a: Destroying... [id=subnet-01b3a3038cb251ca9][0m[0m
-[0m[1maws_subnet.private_b: Destroying... [id=subnet-08b6beb8f7dc1fae0][0m[0m
-[0m[1maws_lb_target_group.https: Destroying... [id=arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:targetgroup/hantt-main-vpc-tg-443/28a8aefbfdd1e15a][0m[0m
-[0m[1maws_lb_target_group.https: Destruction complete after 0s[0m
+[0m[1maws_autoscaling_group.nginx: Still destroying... [id=hantt-main-vpc-nginx-windows-asg, 05m50s elapsed][0m[0m
+[0m[1maws_autoscaling_group.nginx: Destruction complete after 5m59s[0m
+[0m[1maws_launch_template.nginx: Destroying... [id=lt-0b46aae15952c97f2][0m[0m
+[0m[1maws_autoscaling_group.nginx_linux: Destruction complete after 6m0s[0m
+[0m[1maws_lb_target_group.https: Destroying... [id=arn:aws:elasticloadbalancing:ap-southeast-6:996992102979:targetgroup/hantt-main-vpc-tg-443/68c363934d1b074c][0m[0m
+[0m[1maws_launch_template.nginx_linux: Destroying... [id=lt-0d9032c0fbcada104][0m[0m
+[0m[1maws_subnet.private_a: Destroying... [id=subnet-09d429d5904420918][0m[0m
+[0m[1maws_subnet.private_b: Destroying... [id=subnet-02cc18cd04b2c5fe2][0m[0m
+[0m[1maws_launch_template.nginx: Destruction complete after 0s[0m
 [0m[1maws_launch_template.nginx_linux: Destruction complete after 0s[0m
-[0m[1maws_security_group.private_vm: Destroying... [id=sg-0b88adbdbb3010a64][0m[0m
+[0m[1maws_security_group.private_vm: Destroying... [id=sg-0559bb24d3f7e89a3][0m[0m
 [0m[1maws_iam_instance_profile.nginx_vm: Destroying... [id=hantt-main-vpc-nginx-vm-profile][0m[0m
+[0m[1maws_lb_target_group.https: Destruction complete after 0s[0m
 [0m[1maws_subnet.private_b: Destruction complete after 0s[0m
 [0m[1maws_subnet.private_a: Destruction complete after 0s[0m
 [0m[1maws_security_group.private_vm: Destruction complete after 0s[0m
-[0m[1maws_security_group.nlb: Destroying... [id=sg-0210d7c42b1d4a7eb][0m[0m
+[0m[1maws_security_group.nlb: Destroying... [id=sg-008e546efaae1210b][0m[0m
 [0m[1maws_security_group.nlb: Destruction complete after 1s[0m
-[0m[1maws_vpc.main: Destroying... [id=vpc-040d8a184db39e4d1][0m[0m
+[0m[1maws_vpc.main: Destroying... [id=vpc-0d7894ac074281692][0m[0m
 [0m[1maws_iam_instance_profile.nginx_vm: Destruction complete after 1s[0m
 [0m[1maws_iam_role.nginx_vm: Destroying... [id=hantt-main-vpc-nginx-vm-role][0m[0m
 [0m[1maws_vpc.main: Destruction complete after 0s[0m
 [0m[1maws_iam_role.nginx_vm: Destruction complete after 1s[0m
 [0m[1m[32m
-Destroy complete! Resources: 26 destroyed.[0m
+Destroy complete! Resources: 30 destroyed.[0m
 
 === Result ===
 All infrastructure destroyed
 Log saved: /home/ansible/hantt_company_test/logs/5-terraform-destroy.log
-Done: 2026-06-08 09:34:51 UTC
+Done: 2026-06-09 02:07:01 UTC

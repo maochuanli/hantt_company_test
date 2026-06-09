@@ -8,13 +8,15 @@ Multi-OS HTTPS web service on AWS, built with immutable AMIs via Packer + Ansibl
 
 | Step | Outcome | Duration |
 |------|---------|----------|
-| Generate certificate | Self-signed cert written to `packer/shared/ssl/` | <1s |
-| Packer — Linux AMI | `ami-0518e6dd6cb17839d` built successfully | 7m 52s |
-| Packer — Windows AMI | `ami-03c1519b76d470c78` built successfully | 10m 48s |
-| Terraform apply | 26 resources created | ~4m |
-| HTTPS curl tests | 8 / 8 requests HTTP 200, round-robin across Linux + Windows | ~1m |
-| Terraform destroy | 26 resources destroyed | ~8m |
-| AMI cleanup | Both AMIs deregistered, both EBS snapshots deleted | ~14s |
+| Generate certificate | Self-signed cert written to `packer/shared/ssl/`, uploaded to Secrets Manager | <1m |
+| Packer — Linux AMI | `ami-06d4ac821dd7c2b7c` built successfully | 4m 50s |
+| Packer — Windows AMI | `ami-092825995de360747` built successfully | 11m 56s |
+| Terraform apply | 30 resources created | ~4m |
+| HTTPS curl tests | 8 / 8 requests HTTP 200, round-robin across Linux + Windows | ~2m |
+| Terraform destroy | 30 resources destroyed | ~8m |
+| AMI cleanup | Both AMIs deregistered, both EBS snapshots deleted, Secrets Manager secret deleted | <1m |
+
+Both Packer builds ran in parallel.
 
 All execution output is captured in [`logs/`](logs/).
 
@@ -24,7 +26,8 @@ All execution output is captured in [`logs/`](logs/).
 
 | Tool | Version |
 |------|---------|
-| OpenSSL | system (certificate generation) |
+| OpenSSL | 3.0.17 |
+| Azure CLI | 2.87.0 |
 | Packer | 1.15.4 |
 | Terraform | 1.15.5 |
 | Ansible | core 2.14.18 |
@@ -101,18 +104,17 @@ Packer launches a temporary Amazon Linux 2023 instance, runs the Ansible playboo
 ==> hantt-nginx-linux.amazon-ebs.linux: Connected to SSH!
 ==> hantt-nginx-linux.amazon-ebs.linux: Provisioning with Ansible...
 
-TASK [Install nginx]          changed
-TASK [Create SSL directory]   changed
-TASK [Upload SSL certificate] changed
-TASK [Upload SSL private key] changed
-TASK [Deploy Nginx HTTPS config] changed
-TASK [Deploy welcome page]    changed
-TASK [Enable and start Nginx] changed
+TASK [Install nginx and SSM agent]
+TASK [Enable SSM agent]
+TASK [Deploy Nginx HTTPS config]
+TASK [Remove default Nginx HTTP config]
+TASK [Deploy welcome page]
+TASK [Enable Nginx (cert fetched from Secrets Manager at first boot via user-data)]
 
-PLAY RECAP: ok=9  changed=7  failed=0
+PLAY RECAP: ok=7  changed=4  failed=0
 
-Build 'hantt-nginx-linux.amazon-ebs.linux' finished after 7 minutes 52 seconds.
-AMIs were created — ap-southeast-6: ami-0518e6dd6cb17839d
+Build 'hantt-nginx-linux.amazon-ebs.linux' finished after 4 minutes 50 seconds.
+AMIs were created — ap-southeast-6: ami-06d4ac821dd7c2b7c
 ```
 
 ### 4.2 Packer — Windows AMI (`logs/2-packer-windows.log`)
@@ -123,22 +125,25 @@ Packer launches a Windows Server 2022 instance, waits for WinRM (via the `winrm-
 ==> hantt-nginx-windows.amazon-ebs.windows: WinRM connected.
 ==> hantt-nginx-windows.amazon-ebs.windows: Provisioning with Ansible...
 
-TASK [Install Chocolatey]                                          changed
-TASK [Install Nginx and NSSM]                                      changed
-TASK [Find nginx install directory]                                changed
-TASK [Create SSL directory]                                        changed
-TASK [Upload SSL certificate]                                      changed
-TASK [Upload SSL private key]                                      changed
-TASK [Deploy Nginx HTTPS config]                                   changed
-TASK [Deploy welcome page]                                         changed
-TASK [Register nginx as Windows service via NSSM]                  changed
-TASK [Start nginx service]                                         changed
-TASK [Open firewall for HTTPS]                                     changed
+TASK [Install Chocolatey]
+TASK [Install Nginx, NSSM and AWS CLI]
+TASK [Find nginx install directory]
+TASK [Set nginx dir fact]
+TASK [Create SSL directory]
+TASK [Deploy Nginx HTTPS config]
+TASK [Deploy welcome page]
+TASK [Stop nginx if already running]
+TASK [Register nginx as Windows service via NSSM if not already registered]
+TASK [Start nginx service]
+TASK [Open firewall for HTTPS]
+TASK [Stamp nginx install path into AMI for user-data to consume]
+TASK [Ensure SSM agent is installed and set to auto-start]
+TASK [Reset EC2Launch v2 so user-data runs on first boot from this AMI]
 
-PLAY RECAP: ok=14  changed=12  failed=0
+PLAY RECAP: ok=15  changed=12  failed=0
 
-Build 'hantt-nginx-windows.amazon-ebs.windows' finished after 10 minutes 48 seconds.
-AMIs were created — ap-southeast-6: ami-03c1519b76d470c78
+Build 'hantt-nginx-windows.amazon-ebs.windows' finished after 11 minutes 56 seconds.
+AMIs were created — ap-southeast-6: ami-092825995de360747
 ```
 
 ### 4.3 Terraform Apply (`logs/3-terraform-apply.log`)
@@ -146,11 +151,11 @@ AMIs were created — ap-southeast-6: ami-03c1519b76d470c78
 Deploys the VPC, subnets, NLB, security groups, IAM role, and both ASGs from the two AMIs produced above.
 
 ```
-Apply complete! Resources: 26 added, 0 changed, 0 destroyed.
+Apply complete! Resources: 30 added, 0 changed, 0 destroyed.
 
 Outputs:
-  nlb_dns_name = hantt-main-vpc-nlb-e4bc246b4bbb994b.elb.ap-southeast-6.amazonaws.com
-  vpc_id       = vpc-040d8a184db39e4d1
+  nlb_dns_name = hantt-main-vpc-nlb-a2b678a5dc3c34f9.elb.ap-southeast-6.amazonaws.com
+  vpc_id       = vpc-0d7894ac074281692
 ```
 
 ### 4.4 HTTPS Curl Tests (`logs/4-curl-test.log`)
@@ -160,16 +165,17 @@ Script polls `describe-target-health` until both targets are healthy, then fires
 ```
   [0s]  healthy targets: 0 / 2
   [20s] healthy targets: 0 / 2
-  [40s] healthy targets: 2 / 2  ✓ proceeding
+  [40s] healthy targets: 1 / 2
+  [60s] healthy targets: 2 / 2  ✓ proceeding
 
---- Request 1 ---  Platform: Amazon Linux 2023 | Instance: i-03e553cca71d77f22 | [HTTP 200  0.114s]
---- Request 2 ---  Platform: Windows Server 2022 | Host: EC2AMAZ-29MLP2B       | [HTTP 200  0.096s]
---- Request 3 ---  Platform: Amazon Linux 2023 | Instance: i-03e553cca71d77f22 | [HTTP 200  0.022s]
---- Request 4 ---  Platform: Amazon Linux 2023 | Instance: i-03e553cca71d77f22 | [HTTP 200  0.025s]
---- Request 5 ---  Platform: Windows Server 2022 | Host: EC2AMAZ-29MLP2B       | [HTTP 200  0.032s]
---- Request 6 ---  Platform: Windows Server 2022 | Host: EC2AMAZ-29MLP2B       | [HTTP 200  0.035s]
---- Request 7 ---  Platform: Windows Server 2022 | Host: EC2AMAZ-29MLP2B       | [HTTP 200  0.032s]
---- Request 8 ---  Platform: Amazon Linux 2023 | Instance: i-03e553cca71d77f22 | [HTTP 200  0.020s]
+--- Request 1 ---  Platform: Amazon Linux 2023    | Instance: i-002c41e85a1c05c71 | [HTTP 200  0.127s]
+--- Request 2 ---  Platform: Windows Server 2022  | Instance: i-021896eda6184f089 | [HTTP 200  0.158s]
+--- Request 3 ---  Platform: Amazon Linux 2023    | Instance: i-002c41e85a1c05c71 | [HTTP 200  0.023s]
+--- Request 4 ---  Platform: Windows Server 2022  | Instance: i-021896eda6184f089 | [HTTP 200  0.033s]
+--- Request 5 ---  Platform: Windows Server 2022  | Instance: i-021896eda6184f089 | [HTTP 200  0.032s]
+--- Request 6 ---  Platform: Amazon Linux 2023    | Instance: i-002c41e85a1c05c71 | [HTTP 200  0.022s]
+--- Request 7 ---  Platform: Amazon Linux 2023    | Instance: i-002c41e85a1c05c71 | [HTTP 200  0.021s]
+--- Request 8 ---  Platform: Windows Server 2022  | Instance: i-021896eda6184f089 | [HTTP 200  0.031s]
 
 8 / 8 requests succeeded over HTTPS (self-signed cert, -k flag used)
 ```
@@ -177,19 +183,21 @@ Script polls `describe-target-health` until both targets are healthy, then fires
 ### 4.5 Terraform Destroy (`logs/5-terraform-destroy.log`)
 
 ```
-Destroy complete! Resources: 26 destroyed.
+Destroy complete! Resources: 30 destroyed.
 ```
 
 ### 4.6 AMI Cleanup (`logs/6-ami-cleanup.log`)
 
 ```
-Deregistered: ami-0518e6dd6cb17839d  (Linux)
-Deleted snapshot: snap-0af34046c36402a0f
+Deregistered: ami-06d4ac821dd7c2b7c  (Linux)
+Deleted snapshot: snap-0f3aa5858ae8dc2e4
 
-Deregistered: ami-03c1519b76d470c78  (Windows)
-Deleted snapshot: snap-04ea1458f37c7fdc4
+Deregistered: ami-092825995de360747  (Windows)
+Deleted snapshot: snap-0e21ea211c78b2478
 
-All AMIs and snapshots removed from ap-southeast-6
+Deleted secret: hantt/nginx-ssl-cert
+
+All AMIs, snapshots, and secrets removed from ap-southeast-6
 ```
 
 ---
@@ -198,23 +206,11 @@ All AMIs and snapshots removed from ap-southeast-6
 
 ### 5.1 TLS Certificate Management
 
-The current implementation bakes a self-signed certificate directly into the AMI. This works for a proof-of-concept but has a critical production problem: **certificates expire**. When the certificate expires, the AMI itself becomes invalid — every new instance launched from it will serve a broken HTTPS endpoint, and the fix requires a full AMI rebuild.
+The certificate is stored in **AWS Secrets Manager** (`hantt/nginx-ssl-cert`) and fetched dynamically at instance boot via user-data — it is never baked into the AMI. Both the Linux and Windows launch templates retrieve the cert and key from Secrets Manager on first launch and write them to the nginx `ssl/` directory before starting the service. The IAM instance profile grants `secretsmanager:GetSecretValue` scoped to that secret.
 
-**Option A — AWS Certificate Manager (ACM) with a custom domain**
+This design demonstrates **separation of duty and flexibility**: certificate lifecycle (generation, renewal, rotation) is managed independently of VM launches and AMI builds. Rotating a certificate requires only updating the secret — no AMI rebuild, no redeployment. New instances always boot with the current cert automatically.
 
-ACM issues and auto-renews certificates at no cost. The missing pieces for this implementation are:
-
-1. A registered domain name (e.g. Route 53 or any registrar)
-2. A Route 53 hosted zone with a DNS record pointing to the NLB
-3. An ACM certificate attached to the NLB listener — the NLB terminates TLS; instances receive plain HTTP internally
-
-This means the certificate lives entirely outside the AMI. The AMI never needs to be rebuilt for certificate rotation, and instances can serve plain HTTP on port 80 internally while the NLB handles encryption.
-
-**Option B — Let's Encrypt with auto-renewal**
-
-Let's Encrypt issues free 90-day certificates and provides tooling (`certbot`) to renew them automatically via HTTP-01 or DNS-01 challenges. On Linux this is straightforward. The tradeoff vs ACM is that renewal logic must run on the instance (or in a pipeline), and DNS-01 requires API access to the DNS provider — adding operational complexity that ACM eliminates entirely when already on AWS.
-
-**Recommendation:** Use ACM + Route 53 for AWS-hosted workloads. The only additional resource needed is a domain name. ACM handles all renewal automatically, and TLS termination at the NLB removes the certificate concern from the AMI entirely.
+In production, this foundation makes it straightforward to go a step further with **AWS Certificate Manager (ACM)** (automatic renewal, NLB-native TLS termination) or **Let's Encrypt** (free 90-day certs with `certbot` auto-renewal), depending on whether a custom domain is available.
 
 ---
 
@@ -222,17 +218,17 @@ Let's Encrypt issues free 90-day certificates and provides tooling (`certbot`) t
 
 **Secrets and credentials**
 
-- The self-signed certificate and private key are generated locally by `0-generate-certificate.sh` and excluded from source control via `.gitignore`. In production, certificates and keys should be stored in AWS Secrets Manager or SSM Parameter Store and fetched at instance boot rather than baked into an AMI.
+- The self-signed certificate and private key are generated locally by `0-generate-certificate.sh` and uploaded to AWS Secrets Manager. Instances fetch the cert from Secrets Manager at boot — the private key is never baked into an AMI.
 
 **Networking**
 
-- A NAT Gateway per AZ is needed for instances in private subnets to reach the internet. This has been intentionally omitted to keep the deployment simple; since all software is pre-baked into the AMI, runtime outbound access is not required for this exercise.
 - NLB operates at Layer 4 (TCP) and cannot read or write HTTP headers — `X-Forwarded-For` is not configurable on an NLB. Two paths forward: (1) enable **Proxy Protocol v2** on the target group and configure nginx to parse it, which surfaces the real client IP without changing the load balancer type; (2) switch to an **ALB**, which adds `X-Forwarded-For` natively and also enables path-based routing and HTTP→HTTPS redirect — but ALB requires TLS termination at the load balancer, meaning ACM and a real domain name (the same prerequisite as the certificate improvement above).
 
 
 **Observability**
 
 - No access logging is enabled on the NLB. Enabling NLB access logs to S3 provides a request audit trail at minimal cost.
+- VM instance logging is not configured. The IAM instance profile already has `CloudWatchAgentServerPolicy` attached, so the permission is in place — the next step is installing and configuring the CloudWatch agent on both Linux and Windows AMIs to ship nginx access/error logs and OS-level logs to CloudWatch Logs.
 - No CloudWatch alarms are configured. At minimum, `HealthyHostCount` dropping below 1 should trigger an SNS alert.
 
 **AMI lifecycle**
